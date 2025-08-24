@@ -1,0 +1,104 @@
+---
+import { siteConfig } from "../config";
+
+const hasProjects = siteConfig.projects && siteConfig.projects.length > 0;
+const hasExperience = siteConfig.experience && siteConfig.experience.length > 0;
+const hasEducation = siteConfig.education && siteConfig.education.length > 0;
+---
+
+<header
+  id="header"
+  class="fixed top-0 left-0 right-0 z-50 hidden md:block transition-all duration-300"
+>
+  <nav class="max-w-7xl mx-auto px-8 py-4">
+    <ul class="flex items-center gap-8 justify-center">
+      <li>
+        <a
+          href="#about"
+          class="text-gray-700 transition-colors font-medium hover:text-[var(--accent-color)]"
+          style={`--accent-color: ${siteConfig.accentColor}`}
+        >
+          About
+        </a>
+      </li>
+      {
+        hasProjects && (
+          <li>
+            <a
+              href="#projects"
+              class="text-gray-700 transition-colors font-medium hover:text-[var(--accent-color)]"
+              style={`--accent-color: ${siteConfig.accentColor}`}
+            >
+              Projects
+            </a>
+          </li>
+        )
+      }
+      {
+        hasExperience && (
+          <li>
+            <a
+              href="#experience"
+              class="text-gray-700 transition-colors font-medium hover:text-[var(--accent-color)]"
+              style={`--accent-color: ${siteConfig.accentColor}`}
+            >
+              Experience
+            </a>
+          </li>
+        )
+      }
+      {
+        hasEducation && (
+          <li>
+            <a
+              href="#education"
+              class="text-gray-700 transition-colors font-medium hover:text-[var(--accent-color)]"
+              style={`--accent-color: ${siteConfig.accentColor}`}
+            >
+              Education
+            </a>
+          </li>
+        )
+      }
+    </ul>
+  </nav>
+</header>
+
+<script>
+  const LIGHT_CLASSES = ["bg-white/80", "backdrop-blur-sm", "border-b", "border-gray-200", "shadow-sm"];
+  const DARK_CLASSES = ["backdrop-blur-sm", "border-b", "border-gray-200", "shadow-sm", "bg-[#0b0b10]/70"];
+
+  function getCurrentTheme() {
+    const root = document.documentElement;
+    const forced = root.getAttribute('data-theme');
+    if (forced === 'dark' || forced === 'light') return forced;
+    return matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  }
+
+  function updateHeaderBackground() {
+    const header = document.getElementById('header');
+    if (!header) return;
+    // Clean previous
+    [...LIGHT_CLASSES, ...DARK_CLASSES].forEach(c => header.classList.remove(c));
+
+    if (window.scrollY > 100) {
+      const theme = getCurrentTheme();
+      const classes = theme === 'dark' ? DARK_CLASSES : LIGHT_CLASSES;
+      classes.forEach(c => header.classList.add(c));
+    }
+  }
+
+  window.addEventListener('scroll', updateHeaderBackground, { passive: true });
+  window.addEventListener('resize', updateHeaderBackground);
+  // Update on theme toggle
+  const mo = new MutationObserver(updateHeaderBackground);
+  mo.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+  // Initial
+  updateHeaderBackground();
+</script>
+
+<style>
+  html {
+    scroll-behavior: smooth;
+  }
+</style>

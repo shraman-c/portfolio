@@ -1,0 +1,169 @@
+---
+---
+
+<style>
+.theme-toggle {
+  position: fixed;
+  right: 1.25rem; /* 20px */
+  bottom: 1.25rem;
+  z-index: 60;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 9999px;
+  background: rgba(0,0,0,0.04);
+  border: 1px solid rgba(0,0,0,0.08);
+  backdrop-filter: blur(8px);
+}
+@media (prefers-color-scheme: dark) {
+  .theme-toggle {
+    background: rgba(255,255,255,0.05);
+    border-color: rgba(255,255,255,0.12);
+  }
+}
+.theme-toggle button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 28px;
+  border-radius: 9999px;
+  border: none;
+  background: #e5e7eb;
+  color: #111827;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.12s ease;
+}
+.theme-toggle button:hover {
+  background: #d1d5db;
+}
+.theme-toggle button:active { transform: scale(0.96); }
+.theme-toggle .label {
+  font-size: 0.9rem;
+  color: #374151;
+}
+@media (prefers-color-scheme: dark) {
+  .theme-toggle button { background: #2a2d3a; color: #e5e7eb; }
+  .theme-toggle button:hover { background: #333646; }
+  .theme-toggle .label { color: #cbd5e1; }
+}
+
+/* Icon swap visuals */
+.icon { width: 18px; height: 18px; display: block; }
+.icon { opacity: 0; transform: scale(0.85) rotate(-8deg); transition: opacity .2s ease, transform .2s ease; position: absolute; }
+.icon.visible { opacity: 1; transform: scale(1) rotate(0deg); position: static; }
+
+/* Pulse feedback */
+@keyframes pulseRing { 0% { box-shadow: 0 0 0 0 rgba(59,130,246,.35);} 100% { box-shadow: 0 0 0 10px rgba(59,130,246,0);} }
+.pulse { animation: pulseRing .5s ease-out; }
+</style>
+
+<script>
+(function() {
+  const root = document.documentElement;
+  const STORAGE_KEY = 'theme';
+  const STATES = ['system', 'dark', 'light'];
+
+  function applyTheme(theme) {
+    if (theme === 'dark') {
+      root.setAttribute('data-theme', 'dark');
+    } else if (theme === 'light') {
+      root.setAttribute('data-theme', 'light');
+    } else {
+      root.removeAttribute('data-theme');
+    }
+    updateUI(theme || 'system');
+  }
+
+  function getStoredTheme() {
+    try { return localStorage.getItem(STORAGE_KEY); } catch { return null; }
+  }
+  function setStoredTheme(theme) {
+    try { localStorage.setItem(STORAGE_KEY, theme); } catch {}
+  }
+
+  // Initialize
+  const stored = getStoredTheme();
+  if (stored === 'dark' || stored === 'light' || stored === 'system') {
+    applyTheme(stored === 'system' ? null : stored);
+  } else {
+    applyTheme(null); // follow system
+    setStoredTheme('system');
+  }
+
+  function toggleTheme() {
+    // Determine current state
+    const attr = root.getAttribute('data-theme');
+    const current = attr === 'dark' ? 'dark' : (attr === 'light' ? 'light' : 'system');
+    const next = STATES[(STATES.indexOf(current) + 1) % STATES.length];
+    applyTheme(next === 'system' ? null : next);
+    setStoredTheme(next);
+    // Click feedback
+    try { document.getElementById('theme-toggle-btn')?.classList.add('pulse'); setTimeout(() => document.getElementById('theme-toggle-btn')?.classList.remove('pulse'), 300); } catch {}
+  }
+
+  // Expose to click
+  window.__toggleTheme = toggleTheme;
+
+  // Listen to system changes when in system mode
+  const mq = window.matchMedia('(prefers-color-scheme: dark)');
+  const onChange = () => {
+    const mode = getStoredTheme();
+    if (mode === 'system' || !mode) {
+      applyTheme(null);
+    }
+  };
+  if (mq.addEventListener) mq.addEventListener('change', onChange); else mq.addListener(onChange);
+
+  function updateUI(state) {
+    const container = document.getElementById('theme-toggle');
+    const label = document.getElementById('theme-toggle-label');
+    if (container) container.setAttribute('data-state', state);
+    if (label) label.textContent = state.charAt(0).toUpperCase() + state.slice(1);
+  }
+})();
+</script>
+
+<div id="theme-toggle" class="theme-toggle" role="group" aria-label="Theme toggle" data-state="system">
+  <button id="theme-toggle-btn" type="button" onclick="window.__toggleTheme()" title="Cycle theme (System → Dark → Light)" aria-label="Toggle theme" aria-live="polite" aria-atomic="true" onkeydown="(event.key==='Enter'||event.key===' ')&&window.__toggleTheme()">
+    <!-- Icons stacked; CSS controls visibility based on data-state -->
+    <!-- System (monitor) -->
+    <svg class="icon icon-system visible" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+      <line x1="8" y1="21" x2="16" y2="21"></line>
+      <line x1="12" y1="17" x2="12" y2="21"></line>
+    </svg>
+    <!-- Dark (moon) -->
+    <svg class="icon icon-dark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+    </svg>
+    <!-- Light (sun) -->
+    <svg class="icon icon-light" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="5"></circle>
+      <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path>
+    </svg>
+  </button>
+  <span id="theme-toggle-label" class="label">System</span>
+</div>
+
+<script>
+  // Control icon visibility based on data-state via a MutationObserver
+  (function(){
+    const container = document.getElementById('theme-toggle');
+    if (!container) return;
+    const icons = {
+      system: container.querySelector('.icon-system'),
+      dark: container.querySelector('.icon-dark'),
+      light: container.querySelector('.icon-light'),
+    };
+    function render() {
+      const state = container.getAttribute('data-state') || 'system';
+      Object.values(icons).forEach(el => el && el.classList.remove('visible'));
+      if (icons[state]) icons[state].classList.add('visible');
+    }
+    const mo = new MutationObserver(render);
+    mo.observe(container, { attributes: true, attributeFilter: ['data-state'] });
+    render();
+  })();
+</script>
