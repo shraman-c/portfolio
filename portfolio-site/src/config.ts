@@ -13,7 +13,7 @@ export const siteConfig = {
   social: {
     email: "shramanchaudhuri@gmail.com",
     linkedin: "https://linkedin.com/in/shramanchaudhuri",
-    github: "https://github.com/shramanchaudhuri",
+    github: "https://github.com/shraman-c",
   },
   aboutMe:
     "I’m a curious student developer who enjoys turning ideas into software. With a strong base in Java and C, I contribute to open-source projects, build Android and Windows apps, and explore local networking. I’m always looking for chances to learn, collaborate, and take on challenges.", 
@@ -23,21 +23,21 @@ export const siteConfig = {
       name: "CertifyGo",
       description:
         "CertifyGo is a GUI-based certificate generator that automates the process of creating personalized certificates from a PowerPoint template and Excel data file.",
-      link: "https://github.com/shramanchaudhuri/CertifyGo",
+      link: "https://github.com/shraman-c/CertifyGo",
       skills: ["Python", "Tkinter", "Pillow"],
     },
     {
       name: "30SecPrimeBenchmark",
       description:
         "30 Seconds Prime numbers Benchmark for Arduino and ESP32",
-      link: "https://github.com/shramanchaudhuri/30SecPrimeBenchmark",
+      link: "https://github.com/shraman-c/30SecPrimeBenchmark",
       skills: ["Arduino", "C++", "ESP32"],
     },
     {
       name: "Master-Header-File-for-C",
       description:
         "This master.h file consolidates the most frequently used C standard and platform-specific headers. It is designed for rapid prototyping and general-purpose C development across Linux, macOS, and Windows.",
-      link: "https://github.com/shramanchaudhuri/Master-Header-File-for-C",
+      link: "https://github.com/shraman-c/Master-Header-File-for-C",
       skills: ["C", "Cross-platform"],
     },
   ],
