@@ -1,0 +1,80 @@
+---
+import Header from "../components/Header.astro";
+import ThemeToggle from "../components/ThemeToggle.astro";
+import { siteConfig } from "../config";
+import "../styles/global.css";
+import "../styles/links.css";
+---
+<html class="links-page" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <title>Links - {siteConfig.name}</title>
+    <link rel="icon" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <Header />
+  <main id="hero" class="relative isolate overflow-hidden bg-gray-50 py-24 md:h-screen" style={`--accent-color: ${siteConfig.accentColor}`}>
+  <!-- Optional background image (drop public/images/links-bg.jpg to use) -->
+  <div class="absolute inset-0 -z-20 links-bg" aria-hidden="true" />
+  <div class="absolute inset-0 -z-10 hero-overlay" aria-hidden="true"></div>
+      <svg
+        aria-hidden="true"
+        class="hero-bg-svg absolute inset-0 -z-10 size-full stroke-gray-200 [mask-image:radial-gradient(100%_100%_at_top_right,white,transparent)]"
+      >
+        <defs>
+          <pattern
+            x="50%"
+            y={-1}
+            id="links-coming-soon-pattern"
+            width={200}
+            height={200}
+            patternUnits="userSpaceOnUse"
+          >
+            <path d="M.5 200V.5H200" fill="none"></path>
+          </pattern>
+          <pattern
+            id="links-programming-symbols"
+            x="0"
+            y="0"
+            width="400"
+            height="400"
+            patternUnits="userSpaceOnUse"
+          >
+            <text x="50" y="50" fill={siteConfig.accentColor} font-family="monospace" font-size="24" transform="rotate(-15)">&lt;/&gt;</text>
+          </pattern>
+        </defs>
+        <rect fill="url(#links-programming-symbols)" width="100%" height="100%" opacity="0.12"></rect>
+        <rect fill="url(#links-coming-soon-pattern)" width="100%" height="100%" stroke-width={0}></rect>
+      </svg>
+      <div class="h-full mx-auto p-8 sm:p-12 md:p-24 flex items-center">
+        <div class="card max-w-3xl mx-auto bg-white dark:bg-gray-900/60 backdrop-blur-sm rounded-xl p-8 md:p-12 text-center border border-gray-100 dark:border-gray-800">
+          <img class="avatar avatar--rounded" src="/images/avt.png" srcset="/images/avt.png 2x" alt="Shraman Chaudhuri" />
+          <h1>Shraman Chaudhuri</h1>
+          <p class="lead">Computer Science Engineering Student at Adamas University | Lifelong Learner | Exploring Code, Logic &amp; Innovation.</p>
+
+          <nav class="button-stack" role="navigation">
+            <a class="button button-default" href="https://shramanc.netlify.app/" target="_blank" rel="noopener"><img class="icon site-icon-dark-fix" aria-hidden="true" src="/images/icons/favicon.svg" alt="Homepage Icon" />Visit Portfolio</a>
+            <a class="button button-github" href="https://github.com/shraman-c" target="_blank" rel="noopener"><img class="icon site-icon-dark-fix" aria-hidden="true" src="/images/icons/github.svg" alt="GitHub Logo" />GitHub</a>
+            <a class="button button-instagram" href="https://www.instagram.com/shraman_sc/" target="_blank" rel="noopener"><img class="icon site-icon-dark-fix" aria-hidden="true" src="/images/icons/instagram.svg" alt="Instagram Logo" />Instagram</a>
+            <a class="button button-linked" href="https://www.instagram.com/shraman_sc/" target="_blank" rel="noopener"><img class="icon site-icon-dark-fix" aria-hidden="true" src="/images/icons/linkedin.svg" alt="LinkedIn Logo" />LinkedIn</a>
+            <a class="button button-yt" href="https://www.youtube.com/shramanchaudhuri" target="_blank" rel="noopener"><img class="icon site-icon-dark-fix" aria-hidden="true" src="/images/icons/youtube-alt.svg" alt="YouTube Logo" />YouTube</a>
+          </nav>
+
+          <footer>
+            <p>Copyright © {new Date().getFullYear()} Shraman Chaudhuri</p>
+          </footer>
+        </div>
+      </div>
+    </main>
+
+    <ThemeToggle />
+  </body>
+</html>

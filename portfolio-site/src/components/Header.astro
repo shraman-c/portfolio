@@ -72,7 +72,11 @@ const hasEducation = siteConfig.education && siteConfig.education.length > 0;
     const root = document.documentElement;
     const forced = root.getAttribute('data-theme');
     if (forced === 'dark' || forced === 'light') return forced;
-    return matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    try {
+      const stored = localStorage.getItem('theme');
+      if (stored === 'dark' || stored === 'light') return stored;
+    } catch(e) {}
+    return 'light';
   }
 
   function updateHeaderBackground() {

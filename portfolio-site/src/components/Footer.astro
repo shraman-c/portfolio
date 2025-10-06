@@ -49,10 +49,10 @@ const hasEducation = siteConfig.education && siteConfig.education.length > 0;
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Contact"
-            class="text-gray-600 transition-colors duration-300 hover:text-[var(--accent-color)] border border-[var(--accent-color)] rounded px-3 py-1 text-sm font-medium ml-2"
+            class="text-gray-600 transition-colors duration-300 hover:text-[var(--accent-color)] ml-2 inline-flex items-center gap-2"
             style={`--accent-color: ${siteConfig.accentColor}`}
           >
-            Contact
+            <span role="img" aria-label="Contact" class="contact-icon h-6 w-6 site-icon-dark-fix" />
           </a>
           <a
             href={siteConfig.social.linkedin}

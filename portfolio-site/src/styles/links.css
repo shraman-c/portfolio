@@ -1,0 +1,113 @@
+:root {
+  --link-bg: #111827;
+  --button-radius: 10px;
+}
+
+/* inherit site font from global.css */
+body { background: transparent; }
+
+.links-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 16px;
+  background: transparent;
+}
+
+.column {
+  width: 100%;
+  text-align: center;
+}
+
+.avatar {
+  width: 128px;
+  height: 128px;
+  object-fit: cover;
+  display: block;
+  margin: 0 auto 16px;
+}
+.avatar--rounded { border-radius: 9999px; }
+
+h1 {
+  font-size: 1.5rem;
+  margin: 0 0 8px;
+}
+
+.lead {
+  color: #6b7280;
+  font-size: 0.95rem;
+  margin: 0 0 20px;
+}
+
+.button-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 16px;
+  align-items: center;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 20px;
+  border-radius: 8px;
+  text-decoration: none;
+  color: white;
+  font-weight: 600;
+  min-width: 220px;
+  justify-content: center;
+}
+.button .icon { width: 20px; height: 20px; display: inline-block; }
+.button img { display: inline-block; }
+
+.button-default { background: var(--accent-color, #1d4ed8); }
+.button-github { background: #24292f; }
+.button-instagram { background: #e1306c; }
+.button-linked { background: #0a66c2; }
+.button-yt { background: #ff0000; }
+
+footer { margin-top: 20px; color: #9ca3af; font-size: 0.9rem; }
+
+@media (min-width: 640px) {
+  .button-stack { gap: 14px; }
+  .avatar { width: 140px; height: 140px; }
+}
+
+@media (max-width: 640px) {
+  .avatar { width: 96px; height: 96px; }
+  .button { min-width: 100%; padding: 12px 16px; }
+  .card { padding: 20px; margin: 0 12px; }
+}
+
+/* Allow normal scrolling; hero container handles full height when needed */
+.links-container { overflow: visible; }
+
+/* Theme-specific tweaks to match global.css variables */
+/* Dark theme handled by attribute selector */
+:root[data-theme='dark'] .lead { color: var(--color-gray-300, #cbd5e1); }
+:root[data-theme='dark'] footer { color: var(--color-gray-400, #9ca3af); }
+:root[data-theme='dark'] .button { color: var(--text-white, #f3f4f6); }
+
+:root[data-theme='light'] .lead { color: var(--color-gray-600, #6b7280); }
+:root[data-theme='light'] footer { color: var(--color-gray-500, #9ca3af); }
+
+/* Optional background image layer for /links (place public/images/links-bg.jpg) */
+.links-bg {
+  /* Optional background image layer for /links. If the image is missing, fall back
+     to a neutral hero background color to avoid white gaps on mobile. */
+  background-image: url('/images/links-bg.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: #f9fafb; /* light fallback */
+  filter: brightness(0.95) saturate(0.95);
+}
+
+/* Dark tweaks for links background are handled by attribute selector */
+:root[data-theme='dark'] .links-bg { filter: brightness(0.45) saturate(0.6); }
+/* Dark fallback color when optional image isn't present */
+:root[data-theme='dark'] .links-bg { background-color: #0b0b10; }
+

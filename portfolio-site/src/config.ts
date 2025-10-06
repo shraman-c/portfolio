@@ -4,7 +4,7 @@ export const siteConfig = {
       name: "Basics of C Programming Notes",
       description: "Classroom notes and resources for learning the basics of C programming.",
       link: "https://github.com/shraman-c/Basics-Of-C-Programing"
-    }
+    },
   ],
   name: "Shraman Chaudhuri",
   title: "Student",
@@ -40,6 +40,13 @@ export const siteConfig = {
       link: "https://github.com/shraman-c/Master-Header-File-for-C",
       skills: ["C", "Cross-platform"],
     },
+    {
+      name: "Catalyst: AI-Powered Timetable Generator",
+      description:
+        "Catalyst is a modern, AI-driven platform for generating and managing NEP-compliant timetables for schools and colleges. Save time, reduce errors, and embrace the future of academic scheduling.",
+      link: "/coming-soon",
+      skills: ["Next.js", "Typescript", "SQL", "AI", "TailwindCSS","JavaScript"],
+    }
   ],
   // experience removed
   education: [

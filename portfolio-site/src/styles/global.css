@@ -9,38 +9,28 @@ body {
   color-scheme: light;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    color-scheme: dark;
-  }
+/* System color-scheme handling removed. Theme is now controlled explicitly
+   via [data-theme='dark'] and [data-theme='light'] to avoid automatic system switching. */
 
-  body {
-    background-color: #0b0b10;
-    color: #e5e7eb;
-  }
-
-  /* Common utility overrides to match site palette */
-  .bg-gray-50 { background-color: #23232a !important; }
-  .bg-white { background-color: #23232a !important; }
-  .text-gray-900 { color: #f3f4f6 !important; }
-  .text-gray-800 { color: #f3f4f6 !important; }
-  .text-gray-700 { color: #f3f4f6 !important; }
-  .text-gray-600 { color: #cbd5e1 !important; }
-  .text-gray-500 { color: #9ca3af !important; }
-  .text-gray-100 { color: #1f2937 !important; }
-  .border-gray-200 { border-color: #333646 !important; }
-  .border-gray-100 { border-color: #2a2d3a !important; }
-  .stroke-gray-200 { stroke: #2a2d3a !important; }
-
-  /* Hover/shadow tweaks for cards */
-  .hover\:bg-white:hover { background-color: #2a2d3a !important; }
-  .hover\:shadow-xl:hover { box-shadow: 0 10px 15px -3px #0006, 0 4px 6px -4px #0006 !important; }
-
-  /* Icon badge background (used in links on cards) */
-  .bg-gray-900 { background-color: #111827 !important; }
-  .bg-gray-800 { background-color: #1f2937 !important; }
-  .text-white { color: #f3f4f6 !important; }
+/* Hero overlay tweaks to match index visuals in both themes */
+.hero-overlay {
+  background: radial-gradient(ellipse 800px 1200px at 0% 0%, color-mix(in srgb, var(--accent-color) 25%, transparent) 0%, color-mix(in srgb, var(--accent-color) 15%, transparent) 20%, color-mix(in srgb, var(--accent-color) 8%, transparent) 40%, rgba(255, 255, 255, 0.3) 70%, rgba(255, 255, 255, 0.8) 90%, white 100%);
 }
+
+/* Dark/light hero-overlay handled by attribute selectors below. */
+
+:root[data-theme='dark'] .hero-overlay {
+  background: radial-gradient(ellipse 800px 1200px at 0% 0%, color-mix(in srgb, var(--accent-color) 22%, transparent) 0%, color-mix(in srgb, var(--accent-color) 14%, transparent) 20%, color-mix(in srgb, var(--accent-color) 7%, transparent) 40%, rgba(0, 0, 0, 0.45) 70%, rgba(0, 0, 0, 0.75) 90%, #0b0b10 100%) !important;
+}
+
+/* Light hero overlay handled by attribute selectors below. */
+
+:root[data-theme='light'] .hero-overlay {
+  background: radial-gradient(ellipse 800px 1200px at 0% 0%, color-mix(in srgb, var(--accent-color) 25%, transparent) 0%, color-mix(in srgb, var(--accent-color) 15%, transparent) 20%, color-mix(in srgb, var(--accent-color) 8%, transparent) 40%, rgba(255, 255, 255, 0.3) 70%, rgba(255, 255, 255, 0.8) 90%, white 100%) !important;
+}
+
+/* Raster icon dark-mode filter is controlled by the data-theme attribute */
+:root[data-theme='dark'] img.site-icon-dark-fix { filter: invert(1) grayscale(1) contrast(0.9); }
 
 /* Header + chips dark-mode fine-tuning via attribute overrides */
 :root[data-theme='dark'] #header a { color: #e5e7eb; }
@@ -53,12 +43,7 @@ body {
 :root[data-theme='dark'] .text-gray-800 { color: #e5e7eb !important; }
 :root[data-theme='dark'] .border-gray-200 { border-color: #333646 !important; }
 
-@media (prefers-color-scheme: dark) {
-  .hover\:bg-gray-200:hover { background-color: #333646 !important; }
-  .bg-gray-100 { background-color: #2a2d3a !important; }
-  .text-gray-800 { color: #e5e7eb !important; }
-  .border-gray-200 { border-color: #333646 !important; }
-}
+/* Attribute-driven dark tweaks below replace system media queries. */
 
 /* Forced dark mode via attribute (overrides system) */
 :root[data-theme='dark'] {
@@ -104,3 +89,76 @@ body {
 :root[data-theme='light'] .bg-gray-900 { background-color: #111827 !important; }
 :root[data-theme='light'] .bg-gray-800 { background-color: #1f2937 !important; }
 :root[data-theme='light'] .text-white { color: #ffffff !important; }
+
+/* Responsive tweaks for hero overlay and SVG pattern on small screens */
+@media (max-width: 640px) {
+  /* Smaller radial so overlay doesn't dominate on phones */
+  /* Smaller radial so overlay doesn't dominate on phones and fade to transparent at edges
+     to avoid bright white bands when space is narrow. */
+  .hero-overlay {
+    background: radial-gradient(ellipse 360px 560px at 10% 0%, color-mix(in srgb, var(--accent-color) 25%, transparent) 0%, color-mix(in srgb, var(--accent-color) 15%, transparent) 18%, color-mix(in srgb, var(--accent-color) 8%, transparent) 36%, rgba(255,255,255,0.25) 65%, rgba(255,255,255,0.75) 85%, rgba(255,255,255,0) 100%) !important;
+  }
+
+  /* Reduce visibility of the large background SVG pattern on small screens only. */
+  #hero > svg.hero-bg-svg { opacity: 0.06; pointer-events: none; }
+
+  /* Make the bottom icon/button row wrap and center on phones so icons are larger
+    and easier to tap and won't be squashed to the left. */
+  #hero .hero-action-row { flex-wrap: wrap; justify-content: center; gap: 0.75rem; padding-bottom: 2.5rem; }
+  #hero .hero-action-row a { padding: 0.35rem; }
+}
+
+/* Improve tap targets and provide a fallback for the contact icon in case the mask SVG
+   is not available (older browsers or missing asset). */
+#hero .hero-action-row a { display: inline-flex; align-items: center; justify-content: center; border-radius: 0.5rem; }
+.contact-icon.fallback {
+  /* simple circular fallback using a small inline SVG background encoded as data URI */
+  --c: currentColor;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'><circle cx='12' cy='12' r='10' fill='%23ffffff' opacity='0.0'/><path d='M4 7h16v10H4z' fill='none' stroke='%23CCCCCC' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 20px 20px;
+}
+
+/* Ensure small SVG icons inside hero-action-row have normal opacity (not dimmed by hero-bg-svg rule) */
+#hero .hero-action-row svg { opacity: 1 !important; }
+
+/* Slightly larger icons on mobile for easier tapping */
+@media (max-width: 640px) {
+  #hero .hero-action-row svg { width: 28px; height: 28px; }
+}
+
+/* Coming-soon page: make hero cover full viewport on mobile and center the card */
+@media (max-width: 640px) {
+  /* Ensure hero takes full viewport height and centers content */
+  #hero.min-h-screen, #hero { min-height: 100vh !important; display: flex; align-items: center; }
+  /* Reduce header visibility on very small screens so the hero appears centered */
+  #header { display: none; }
+  /* Tighten padding so the card sits centered visually */
+  #hero > main { padding-top: 8px; padding-bottom: 8px; }
+}
+
+/* Contact icon as mask so it inherits color and adapts to theme */
+.contact-icon {
+  display: inline-block;
+  width: 1.5rem; /* 24px */
+  height: 1.5rem;
+  vertical-align: middle;
+  background-color: currentColor; /* inherit color to tint icon */
+  -webkit-mask: url('/contact-icon.svg') center / contain no-repeat;
+  mask: url('/contact-icon.svg') center / contain no-repeat;
+}
+
+/* Raster icon dark-mode filter is applied above via attribute selector */
+
+/* Skill chip styling with explicit light-mode colors to avoid accidental overrides */
+.skill-chip {
+  background-color: #f3f4f6; /* gray-100 */
+  color: #111827; /* gray-900 */
+  border: 1px solid #e5e7eb; /* gray-200 */
+}
+
+/* Dark-mode overrides for skill chips (attribute-driven) */
+:root[data-theme='dark'] .skill-chip { background-color: transparent; color: #f3f4f6; border-color: #333646; }
+
+:root[data-theme='light'] .skill-chip { background-color: #f3f4f6; color: #111827; border-color: #e5e7eb; }
