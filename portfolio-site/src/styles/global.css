@@ -162,3 +162,24 @@ body {
 :root[data-theme='dark'] .skill-chip { background-color: transparent; color: #f3f4f6; border-color: #333646; }
 
 :root[data-theme='light'] .skill-chip { background-color: #f3f4f6; color: #111827; border-color: #e5e7eb; }
+
+/* Prevent fixed header from covering anchored sections by adding a scroll margin.
+   Adjust value to match header height (desktop) and smaller value for mobile where header is hidden. */
+[id] { scroll-margin-top: 5.5rem; }
+@media (max-width: 640px) {
+  [id] { scroll-margin-top: 1.25rem; }
+}
+
+/* Footer nav separators: insert a middle dot between links for better readability */
+.footer-nav a { position: relative; padding: 0 0.5rem; }
+.footer-nav a:not(:last-child)::after {
+  content: '·';
+  position: absolute;
+  right: -0.5rem;
+  color: rgba(156,163,175,0.85); /* slightly lighter gray-400 */
+}
+@media (max-width: 640px) {
+  /* hide separators on small screens to reduce clutter */
+  .footer-nav a:not(:last-child)::after { content: ''; }
+  .footer-nav a { padding: 0 0.25rem; }
+}

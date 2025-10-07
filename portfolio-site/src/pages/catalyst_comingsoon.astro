@@ -1,0 +1,87 @@
+---
+import { siteConfig } from "../config";
+import Header from "../components/Header.astro";
+import ThemeToggle from "../components/ThemeToggle.astro";
+import "../styles/global.css";
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="icon" href="/favicon.svg" />
+    <title>Coming Soon - {siteConfig.name}</title>
+  </head>
+  <body class="bg-white text-gray-800 dark:bg-[#0b0b10]">
+    <Header />
+
+    <div
+  id="hero"
+  class="relative isolate overflow-hidden bg-white dark:bg-[#0b0b10] py-12 md:h-screen"
+      style={`--accent-color: ${siteConfig.accentColor}`}
+    >
+      <!-- Gradient overlay -->
+      <div
+        class="absolute inset-0 -z-10 hero-overlay"
+        style={`background: radial-gradient(ellipse 800px 1200px at 0% 0%, color-mix(in srgb, var(--accent-color) 25%, transparent) 0%, color-mix(in srgb, var(--accent-color) 15%, transparent) 20%, color-mix(in srgb, var(--accent-color) 8%, transparent) 40%, rgba(255, 255, 255, 0.3) 70%, rgba(255, 255, 255, 0.8) 90%, white 100%)`}
+      ></div>
+
+      <svg
+        aria-hidden="true"
+        class="hero-bg-svg absolute inset-0 -z-10 size-full stroke-gray-200 [mask-image:radial-gradient(100%_100%_at_top_right,white,transparent)]"
+      >
+        <defs>
+          <pattern
+            x="50%"
+            y={-1}
+            id="coming-soon-pattern"
+            width={200}
+            height={200}
+            patternUnits="userSpaceOnUse"
+          >
+            <path d="M.5 200V.5H200" fill="none"></path>
+          </pattern>
+          <pattern
+            id="programming-symbols-coming-soon"
+            x="0"
+            y="0"
+            width="400"
+            height="400"
+            patternUnits="userSpaceOnUse"
+          >
+            <text x="50" y="50" fill={siteConfig.accentColor} font-family="monospace" font-size="24" transform="rotate(-15)">&lt;/&gt;</text>
+          </pattern>
+        </defs>
+        <rect fill="url(#programming-symbols-coming-soon)" width="100%" height="100%" opacity="0.12"></rect>
+        <rect fill="url(#coming-soon-pattern)" width="100%" height="100%" stroke-width={0}></rect>
+      </svg>
+
+      <main class="min-h-screen md:h-full mx-auto p-8 sm:p-12 md:p-24 flex items-center justify-center">
+        <div class="w-full px-4">
+          <div class="max-w-3xl mx-auto bg-white dark:bg-gray-900/60 backdrop-blur-sm rounded-xl p-8 md:p-12 text-center border border-gray-100 dark:border-gray-800">
+            <h1 class="text-4xl sm:text-6xl font-bold mb-4" style={`color: ${siteConfig.accentColor}`}>
+              Coming Soon!
+            </h1>
+            <p class="text-lg sm:text-xl text-gray-700 dark:text-gray-300 mb-8">
+              We're working on something awesome. Stay tuned!.
+            </p>
+            <p class="text-lg sm:text-xl text-gray-700 dark:text-gray-300 mb-8">
+              Catalyst is on its way to revolutionize the way to help educators to generate no-conflict Timetables.
+            </p>
+
+            <p class="text-sm text-gray-500 dark:text-gray-400 mt-8">© {new Date().getFullYear()} {siteConfig.name}</p>
+            <p class="text-sm text-gray-500 dark:text-gray-400 mt-4">© {new Date().getFullYear()} Catalyst</p>
+          </div>
+        </div>
+        
+      </main>
+
+      <!-- removed internal CTA strip; button moved just below the hero -->
+    </div>
+
+    <!-- Back to home button removed as requested -->
+
+    <ThemeToggle />
+  </body>
+</html>

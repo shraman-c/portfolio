@@ -2,7 +2,7 @@
 import { siteConfig } from "../config";
 
 const hasProjects = siteConfig.projects && siteConfig.projects.length > 0;
-const hasExperience = siteConfig.experience && siteConfig.experience.length > 0;
+const hasExperience = (siteConfig as any).experience && (siteConfig as any).experience.length > 0;
 const hasEducation = siteConfig.education && siteConfig.education.length > 0;
 ---
 
@@ -14,52 +14,59 @@ const hasEducation = siteConfig.education && siteConfig.education.length > 0;
     <ul class="flex items-center gap-8 justify-center">
       <li>
         <a
-          href="/index#about"
+          href="/#about"
           class="text-gray-700 transition-colors font-medium hover:text-[var(--accent-color)]"
           style={`--accent-color: ${siteConfig.accentColor}`}
         >
           About
         </a>
       </li>
-      {
-        hasProjects && (
-          <li>
-            <a
-              href="/index#projects"
-              class="text-gray-700 transition-colors font-medium hover:text-[var(--accent-color)]"
-              style={`--accent-color: ${siteConfig.accentColor}`}
-            >
-              Projects
-            </a>
-          </li>
-        )
-      }
-      {
-        hasExperience && (
-          <li>
-            <a
-              href="/index#experience"
-              class="text-gray-700 transition-colors font-medium hover:text-[var(--accent-color)]"
-              style={`--accent-color: ${siteConfig.accentColor}`}
-            >
-              Experience
-            </a>
-          </li>
-        )
-      }
-      {
-        hasEducation && (
-          <li>
-            <a
-              href="/index#education"
-              class="text-gray-700 transition-colors font-medium hover:text-[var(--accent-color)]"
-              style={`--accent-color: ${siteConfig.accentColor}`}
-            >
-              Education
-            </a>
-          </li>
-        )
-      }
+
+      { hasProjects && (
+        <li>
+          <a
+            href="/#projects"
+            class="text-gray-700 transition-colors font-medium hover:text-[var(--accent-color)]"
+            style={`--accent-color: ${siteConfig.accentColor}`}
+          >
+            Projects
+          </a>
+        </li>
+      ) }
+
+      { hasExperience && (
+        <li>
+          <a
+            href="/#experience"
+            class="text-gray-700 transition-colors font-medium hover:text-[var(--accent-color)]"
+            style={`--accent-color: ${siteConfig.accentColor}`}
+          >
+            Experience
+          </a>
+        </li>
+      ) }
+
+      { hasEducation && (
+        <li>
+          <a
+            href="/#education"
+            class="text-gray-700 transition-colors font-medium hover:text-[var(--accent-color)]"
+            style={`--accent-color: ${siteConfig.accentColor}`}
+          >
+            Education
+          </a>
+        </li>
+      ) }
+
+      <li>
+        <a
+          href="/connect"
+          class="text-gray-700 transition-colors font-medium hover:text-[var(--accent-color)]"
+          style={`--accent-color: ${siteConfig.accentColor}`}
+        >
+          Connect
+        </a>
+      </li>
     </ul>
   </nav>
 </header>

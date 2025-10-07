@@ -42,6 +42,17 @@
 :root[data-theme='dark'] .theme-toggle button:hover { background: #333646; }
 :root[data-theme='dark'] .theme-toggle .label { color: #cbd5e1; }
 
+/* Responsive: smaller toggle on mobile, hide label on small screens, and hide entire control on very small viewports */
+@media (max-width: 640px) {
+  .theme-toggle { padding: 0.25rem 0.5rem; right: 0.75rem; bottom: 0.75rem; }
+  .theme-toggle button { width: 44px; height: 22px; }
+  .theme-toggle .label { display: none; }
+}
+@media (max-width: 380px) {
+  /* hide entirely on very small phones to avoid covering content */
+  .theme-toggle { display: none !important; }
+}
+
 /* Icon swap visuals */
 .icon { width: 18px; height: 18px; display: block; }
 .icon { opacity: 0; transform: scale(0.85) rotate(-8deg); transition: opacity .2s ease, transform .2s ease; position: absolute; }
@@ -53,10 +64,12 @@
 </style>
 
 <script>
+/* @ts-nocheck */
 (function() {
   const root = document.documentElement;
   const STORAGE_KEY = 'theme';
 
+  /** @param {'dark'|'light'|string} theme */
   function applyTheme(theme) {
     if (theme === 'dark') root.setAttribute('data-theme', 'dark');
     else if (theme === 'light') root.setAttribute('data-theme', 'light');
@@ -67,6 +80,7 @@
   function getStoredTheme() {
     try { return localStorage.getItem(STORAGE_KEY); } catch { return null; }
   }
+  /** @param {string} theme */
   function setStoredTheme(theme) {
     try { localStorage.setItem(STORAGE_KEY, theme); } catch {}
   }
@@ -96,6 +110,7 @@
   /** Assign to window with a safe cast to avoid type errors in strict environments */
   try { Object.defineProperty(window, '__toggleTheme', { value: toggleTheme, configurable: true }); } catch(e) {}
 
+  /** @param {string} state */
   function updateUI(state) {
     const container = document.getElementById('theme-toggle');
     const label = document.getElementById('theme-toggle-label');
@@ -129,6 +144,7 @@
 </div>
 
 <script>
+/* @ts-nocheck */
   // Control icon visibility based on data-state via a MutationObserver
   (function(){
     const container = document.getElementById('theme-toggle');
