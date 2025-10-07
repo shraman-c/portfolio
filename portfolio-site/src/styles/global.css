@@ -183,3 +183,56 @@ body {
   .footer-nav a:not(:last-child)::after { content: ''; }
   .footer-nav a { padding: 0 0.25rem; }
 }
+
+/* Mobile-specific footer optimizations */
+@media (max-width: 640px) {
+  /* Use a responsive two-column layout on small screens to reduce vertical length
+     while keeping links large enough to tap. Fall back to a single column on very
+     small devices (<=380px) where two columns would be too cramped. */
+  .footer-nav {
+    width: 100%;
+    display: block;
+  }
+
+  /* Three-column footer columns (JS will populate these). Centered grid that
+     visually balances columns; hidden on larger screens. */
+  .footer-columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 6px 12px;
+    width: 100%;
+    max-width: 36rem;
+    margin: 0 auto;
+    align-items: start;
+    justify-items: center;
+  }
+
+  .footer-col {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    width: 100%;
+    align-items: center;
+  }
+
+  /* The original inline list will be hidden on mobile and the column layout shown */
+  .footer-items { display: none; }
+
+  .footer-columns a { font-size: 0.9rem; color: inherit; text-decoration: none; }
+  .footer-columns a:hover { color: var(--accent-color); }
+  /* Make the made-with line less prominent and hide on very small screens */
+  .footer-made-with { font-size: 0.75rem; opacity: 0.9; }
+}
+
+@media (max-width: 380px) {
+  .footer-made-with { display: none; }
+  /* On the smallest screens, switch footer nav back to a single column to
+     avoid cramped columns and ensure readability. */
+  .footer-nav {
+    /* On very small screens, keep the columns but stack them vertically by making
+       the columns grid a single column — effectively a single column of items. */
+    width: 100%;
+  }
+  .footer-columns { grid-template-columns: 1fr; }
+  .footer-col { align-items: flex-start; padding-left: 0.25rem; }
+}

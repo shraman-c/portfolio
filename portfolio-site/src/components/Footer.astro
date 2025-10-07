@@ -12,16 +12,89 @@ const hasEducation = siteConfig.education && siteConfig.education.length > 0;
       <h3 class="text-xl font-semibold text-gray-800">{siteConfig.name}</h3>
       <p class="text-sm text-gray-600">{siteConfig.title}</p>
 
-  <nav class="footer-nav flex flex-wrap justify-center gap-3 mt-1">
-        <a href="/#about" class="text-sm text-gray-600 hover:text-[var(--accent-color)]" style={`--accent-color: ${siteConfig.accentColor}`}>About</a>
-        <a href="/classroom-notes" class="text-sm text-gray-600 hover:text-[var(--accent-color)]" style={`--accent-color: ${siteConfig.accentColor}`}>Classroom Notes</a>
-        <a href="/#projects" class="text-sm text-gray-600 hover:text-[var(--accent-color)]" style={`--accent-color: ${siteConfig.accentColor}`}>Projects</a>
-        <a href="/#experience" class="text-sm text-gray-600 hover:text-[var(--accent-color)]" style={`--accent-color: ${siteConfig.accentColor}`}>Experience</a>
-        <a href="/#education" class="text-sm text-gray-600 hover:text-[var(--accent-color)]" style={`--accent-color: ${siteConfig.accentColor}`}>Education</a>
-        <a href="/connect" class="text-sm text-gray-600 hover:text-[var(--accent-color)]" style={`--accent-color: ${siteConfig.accentColor}`}>Connect</a>
+    <nav class="footer-nav mt-1">
+        <div class="footer-items">
+          <a href="/#about" class="text-sm text-gray-600 hover:text-[var(--accent-color)]" style={`--accent-color: ${siteConfig.accentColor}`}>About</a>
+          <a href="/classroom-notes" class="text-sm text-gray-600 hover:text-[var(--accent-color)]" style={`--accent-color: ${siteConfig.accentColor}`}>Notes</a>
+          <a href="/#projects" class="text-sm text-gray-600 hover:text-[var(--accent-color)]" style={`--accent-color: ${siteConfig.accentColor}`}>Projects</a>
+          <a href="/#education" class="text-sm text-gray-600 hover:text-[var(--accent-color)]" style={`--accent-color: ${siteConfig.accentColor}`}>Education</a>
+          <a href="/connect" class="text-sm text-gray-600 hover:text-[var(--accent-color)]" style={`--accent-color: ${siteConfig.accentColor}`}>Connect</a>
+        </div>
+
+        <div class="footer-columns" aria-hidden="true">
+          <div class="footer-col footer-col-left"></div>
+          <div class="footer-col footer-col-center"></div>
+          <div class="footer-col footer-col-right"></div>
+        </div>
       </nav>
 
-      <p class="text-sm text-gray-500 mt-3">Made with ❤️ with <a class="underline hover:text-[var(--accent-color)]" style={`--accent-color: ${siteConfig.accentColor}`} href="https://astro.build" target="_blank" rel="noopener noreferrer">Astro</a> · <a class="underline hover:text-[var(--accent-color)]" style={`--accent-color: ${siteConfig.accentColor}`} href="https://tailwindcss.com" target="_blank" rel="noopener noreferrer">Tailwind CSS</a> · <a class="underline hover:text-[var(--accent-color)]" style={`--accent-color: ${siteConfig.accentColor}`} href="https://react.dev" target="_blank" rel="noopener noreferrer">React</a> · <a class="underline hover:text-[var(--accent-color)]" style={`--accent-color: ${siteConfig.accentColor}`} href="https://www.typescriptlang.org" target="_blank" rel="noopener noreferrer">TypeScript</a> · <a class="underline hover:text-[var(--accent-color)]" style={`--accent-color: ${siteConfig.accentColor}`} href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank" rel="noopener noreferrer">JavaScript</a></p>
+      <!-- JS: on small screens distribute footer items into three columns so side columns fill first
+           and a single leftover is placed in the center column for visual balance. -->
+      <script type="module">
+      /* @ts-nocheck */
+      (function(){
+        const BREAKPOINT = 640; // px - match CSS mobile breakpoint
+        const arrange = () => {
+          const nav = document.querySelector('.footer-nav');
+          if (!nav) return;
+          const itemsContainer = nav.querySelector('.footer-items');
+          const cols = {
+            left: nav.querySelector('.footer-col-left'),
+            center: nav.querySelector('.footer-col-center'),
+            right: nav.querySelector('.footer-col-right')
+          };
+          if (!itemsContainer || !cols.left || !cols.center || !cols.right) return;
+
+          const anchors = Array.from(itemsContainer.querySelectorAll('a'));
+          // On large screens show the inline items and hide the columns
+          if (window.innerWidth > BREAKPOINT) {
+            itemsContainer.style.display = '';
+            nav.querySelector('.footer-columns').style.display = 'none';
+            // move any anchors back into the itemsContainer in original order
+            anchors.concat(Array.from(cols.left.children), Array.from(cols.center.children), Array.from(cols.right.children)).forEach(a => {
+              if (a && a.tagName === 'A') itemsContainer.appendChild(a);
+            });
+            return;
+          }
+
+          // Mobile: hide the original inline list and use the three columns
+          itemsContainer.style.display = 'none';
+          nav.querySelector('.footer-columns').style.display = '';
+
+          // Clear columns
+          cols.left.innerHTML = '';
+          cols.center.innerHTML = '';
+          cols.right.innerHTML = '';
+
+          const n = anchors.length;
+          if (n === 0) return;
+
+          if (n % 2 === 1) {
+            // odd count: assign all except last to left/right alternating, last -> center
+            for (let i = 0; i < n - 1; i++) {
+              const a = anchors[i];
+              if (i % 2 === 0) cols.left.appendChild(a);
+              else cols.right.appendChild(a);
+            }
+            cols.center.appendChild(anchors[n - 1]);
+          } else {
+            // even: alternate left/right
+            for (let i = 0; i < n; i++) {
+              const a = anchors[i];
+              if (i % 2 === 0) cols.left.appendChild(a);
+              else cols.right.appendChild(a);
+            }
+          }
+        };
+
+        if (typeof window !== 'undefined') {
+          window.addEventListener('DOMContentLoaded', arrange);
+          window.addEventListener('resize', () => { requestAnimationFrame(arrange); });
+        }
+      })();
+      </script>
+
+  <p class="text-sm text-gray-500 mt-3 footer-made-with">Made with ❤️ with <a class="underline hover:text-[var(--accent-color)]" style={`--accent-color: ${siteConfig.accentColor}`} href="https://astro.build" target="_blank" rel="noopener noreferrer">Astro</a> · <a class="underline hover:text-[var(--accent-color)]" style={`--accent-color: ${siteConfig.accentColor}`} href="https://tailwindcss.com" target="_blank" rel="noopener noreferrer">Tailwind CSS</a> · <a class="underline hover:text-[var(--accent-color)]" style={`--accent-color: ${siteConfig.accentColor}`} href="https://react.dev" target="_blank" rel="noopener noreferrer">React</a> · <a class="underline hover:text-[var(--accent-color)]" style={`--accent-color: ${siteConfig.accentColor}`} href="https://www.typescriptlang.org" target="_blank" rel="noopener noreferrer">TypeScript</a> · <a class="underline hover:text-[var(--accent-color)]" style={`--accent-color: ${siteConfig.accentColor}`} href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank" rel="noopener noreferrer">JavaScript</a></p>
       <p class="text-sm text-gray-500 mt-1">© {new Date().getFullYear()} {siteConfig.name}. All rights reserved.</p>
     </div>
   </div>
