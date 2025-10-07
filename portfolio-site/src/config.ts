@@ -7,7 +7,7 @@ export const siteConfig = {
     },
   ],
   name: "Shraman Chaudhuri",
-  title: "Student",
+  title: "Student || Developer",
   description: "Portfolio website of Shraman Chaudhuri",
   accentColor: "#1d4ed8",
   social: {
