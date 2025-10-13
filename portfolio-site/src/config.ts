@@ -10,6 +10,12 @@ export const siteConfig = {
   title: "Student || Developer",
   description: "Portfolio website of Shraman Chaudhuri",
   accentColor: "#1d4ed8",
+  // Typewriter phrases shown before the real name in the hero.
+  // Edit these strings to change what appears in the typewriter effect.
+  typewriterPhrases: [
+    "a Student",
+    "a Developer",
+  ],
   social: {
     email: "shramanchaudhuri@gmail.com",
     linkedin: "https://linkedin.com/in/shramanchaudhuri",

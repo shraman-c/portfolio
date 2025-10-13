@@ -1,5 +1,8 @@
 ---
+// @ts-nocheck
 import { siteConfig } from "../config";
+// Encode the typewriter phrases on the server so we can safely inject into the client script
+const __typewriterEncoded = encodeURIComponent(JSON.stringify(siteConfig.typewriterPhrases ?? []));
 ---
 
 <div
@@ -139,10 +142,14 @@ import { siteConfig } from "../config";
       <h1
         class="mt-6 sm:mt-8 md:mt-10 text-pretty text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-bold tracking-tight text-gray-800 animate-fade-in animation-delay-200"
       >
-        I'm <span style={{ color: siteConfig.accentColor }}
-          >{siteConfig.name}</span
-        >
+        I'm
+        <span id="typewriter-root" class="ml-3 inline-block" aria-live="polite" data-phrases={JSON.stringify(siteConfig.typewriterPhrases ?? [])}>
+          <span id="typewriter-text" style={`color: ${siteConfig.accentColor}`}>{siteConfig.name}</span>
+          <span id="typewriter-cursor" aria-hidden="true">▌</span>
+        </span>
       </h1>
+
+      <!-- Typewriter controls removed; phrases are hardcoded in the script below -->
       <p
         class="mt-4 sm:mt-6 md:mt-8 text-pretty text-base sm:text-lg md:text-xl/8 font-medium text-gray-600 animate-fade-in animation-delay-400"
       >
@@ -253,6 +260,84 @@ import { siteConfig } from "../config";
     }
   </div>
 </div>
+
+  <script type="module">
+  /* @ts-nocheck */
+  (function(){
+    // Defensive initializer for the typewriter. Reads phrases injected into the DOM via
+    // data-attributes (from siteConfig at build time). Works whether the script runs
+    // before or after DOMContentLoaded.
+
+    function initTypewriter(){
+      let phrases = [];
+      const rootEl = document.getElementById('typewriter-root');
+      if (!rootEl) {
+        // Nothing to do if the DOM node isn't present
+        // console.debug('typewriter: root element not found');
+        return;
+      }
+
+      try {
+        const raw = rootEl.dataset && rootEl.dataset.phrases ? rootEl.dataset.phrases : '[]';
+        phrases = JSON.parse(raw);
+      } catch (e) {
+        // malformed JSON -> ignore
+        // console.warn('typewriter: failed to parse phrases', e);
+        phrases = [];
+      }
+
+      const textEl = document.getElementById('typewriter-text');
+      const cursor = document.getElementById('typewriter-cursor');
+      if (!textEl || !cursor) return;
+
+      const realName = (textEl.textContent || '').trim();
+      const cycle = [...(Array.isArray(phrases) ? phrases : []), realName];
+
+      let idx = 0;
+      let char = 0;
+      let typing = true;
+
+      // Slower typing/backspace settings
+      const TYPING_SPEED = 120; // ms per char (slower)
+      const PAUSE_AFTER = 1400; // ms after full phrase
+
+      function wait(ms){ return new Promise(r => setTimeout(r, ms)); }
+
+      async function tick(){
+        const phrase = cycle[idx] || '';
+        if (typing){
+          char = Math.min(char + 1, phrase.length);
+          textEl.textContent = phrase.slice(0, char);
+          if (char >= phrase.length){
+            typing = false;
+            await wait(PAUSE_AFTER);
+          }
+        } else {
+          char = Math.max(char - 1, 0);
+          textEl.textContent = phrase.slice(0, char);
+          if (char <= 0){
+            idx = (idx + 1) % cycle.length;
+            typing = true;
+          }
+        }
+        cursor.style.opacity = (cursor.style.opacity === '0' ? '1' : '0');
+        setTimeout(tick, typing ? TYPING_SPEED : Math.max(TYPING_SPEED/1.2, 40));
+      }
+
+      // reset and start
+      textEl.textContent = '';
+      idx = 0; char = 0; typing = true;
+      tick();
+    }
+
+    if (document.readyState === 'loading') {
+      window.addEventListener('DOMContentLoaded', initTypewriter);
+    } else {
+      // DOM already ready
+      initTypewriter();
+    }
+  })();
+  </script>
 
 <style>
   @keyframes fadeIn {

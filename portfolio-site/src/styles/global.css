@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+@plugin "tailwindcss-animate";
+
+@custom-variant dark (&:is(.dark *));
+
 body {
   font-family: 'IBM Plex Mono', monospace;
 }
@@ -7,6 +11,38 @@ body {
 /* System dark mode support */
 :root {
   color-scheme: light;
+  --radius: 0.625rem;
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: oklch(0.205 0 0);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.708 0 0);
+  --chart-1: oklch(0.646 0.222 41.116);
+  --chart-2: oklch(0.6 0.118 184.704);
+  --chart-3: oklch(0.398 0.07 227.392);
+  --chart-4: oklch(0.828 0.189 84.429);
+  --chart-5: oklch(0.769 0.188 70.08);
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: oklch(0.205 0 0);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.708 0 0);
 }
 
 /* System color-scheme handling removed. Theme is now controlled explicitly
@@ -31,6 +67,13 @@ body {
 
 /* Raster icon dark-mode filter is controlled by the data-theme attribute */
 :root[data-theme='dark'] img.site-icon-dark-fix { filter: invert(1) grayscale(1) contrast(0.9); }
+
+/* Keep the official Drive logo colors intact in dark mode. Some images use the
+   general `site-icon-dark-fix` class; explicitly unset the filter for the Drive
+   SVG so it doesn't get color-inverted. */
+:root[data-theme='dark'] img.site-icon-dark-fix[src$="/images/icons/drive.svg"] {
+  filter: none !important;
+}
 
 /* Header + chips dark-mode fine-tuning via attribute overrides */
 :root[data-theme='dark'] #header a { color: #e5e7eb; }
@@ -236,3 +279,148 @@ body {
   .footer-columns { grid-template-columns: 1fr; }
   .footer-col { align-items: flex-start; padding-left: 0.25rem; }
 }
+
+/* Aceternity-style glowing card effect (used for Education / Projects / Classroom Notes)
+   The effect uses a CSS variable --accent-color which components set from siteConfig.accentColor.
+   It's designed to be subtle on light mode and more pronounced on dark mode. */
+.aceternity-glow {
+  position: relative;
+  z-index: 0;
+  transition: transform 0.28s ease, box-shadow 0.28s ease;
+  overflow: visible; /* allow the halo to show outside rounded corners */
+}
+.aceternity-glow::before {
+  content: '';
+  position: absolute;
+  inset: -10px; /* expand beyond the element to create a soft halo */
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: -1;
+  background: radial-gradient(closest-side, color-mix(in srgb, var(--accent-color) 60%, transparent) 0%, transparent 45%);
+  filter: blur(28px) saturate(140%);
+  background-clip: padding-box; /* ensure the gradient respects the rounded corners */
+  opacity: 0.85; /* stronger glow */
+  transition: opacity 0.28s ease, transform 0.28s ease;
+}
+.aceternity-glow:hover {
+  transform: translateY(-4px);
+}
+.aceternity-glow:hover::before {
+  filter: blur(34px) saturate(160%);
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+/* Slightly reduce glow intensity in dark mode to keep contrast pleasant */
+:root[data-theme='dark'] .aceternity-glow::before {
+  opacity: 0.5;
+  filter: blur(20px) saturate(160%);
+}
+
+/* Fallback box-shadow for environments where pseudo-element blending is limited */
+.aceternity-glow.fallback-shadow {
+  box-shadow: 0 10px 40px color-mix(in srgb, var(--accent-color) 26%, transparent), 0 4px 18px color-mix(in srgb, var(--accent-color) 14%, transparent);
+}
+
+/* Add a crisper inner rim that follows the rounded corners. The ::after sits behind the element
+   but inside the border so it creates a sharper edge glow. */
+.aceternity-glow::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: -1;
+  /* Slight inner halo using box-shadow and a faint gradient for a rim effect */
+  background: transparent;
+  box-shadow: 0 0 6px 1px color-mix(in srgb, var(--accent-color) 40%, transparent) inset, 0 0 10px color-mix(in srgb, var(--accent-color) 18%, transparent) inset;
+  opacity: 0.9;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+.aceternity-glow:hover::after {
+  box-shadow: 0 0 10px 2px color-mix(in srgb, var(--accent-color) 56%, transparent) inset, 0 0 18px color-mix(in srgb, var(--accent-color) 30%, transparent) inset;
+  transform: scale(1.01);
+  opacity: 1;
+}
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.205 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.205 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.922 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.556 0 0);
+  --chart-1: oklch(0.488 0.243 264.376);
+  --chart-2: oklch(0.696 0.17 162.48);
+  --chart-3: oklch(0.769 0.188 70.08);
+  --chart-4: oklch(0.627 0.265 303.9);
+  --chart-5: oklch(0.645 0.246 16.439);
+  --sidebar: oklch(0.205 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.556 0 0);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+

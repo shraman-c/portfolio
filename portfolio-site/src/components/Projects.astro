@@ -1,6 +1,9 @@
 ---
+// @ts-nocheck
 import { siteConfig } from "../config";
+import { GlowingEffect } from "@/components/ui/glowing-effect";
 const hasProjects = siteConfig.projects && siteConfig.projects.length > 0;
+---
 ---
 
 {
@@ -33,13 +36,15 @@ const hasProjects = siteConfig.projects && siteConfig.projects.length > 0;
                 return (
                   <div class="group relative">
                     <Component
-                      {...linkProps}
-                      class={`block relative p-4 sm:p-6 md:p-8 bg-gray-50 rounded-xl sm:rounded-2xl border border-gray-200 transition-all duration-300 ${
-                        project.link
-                          ? "hover:bg-white hover:shadow-xl hover:border-gray-300 hover:-translate-y-1"
-                          : ""
-                      }`}
-                    >
+                        {...linkProps}
+                        class={`block relative overflow-visible p-4 sm:p-6 md:p-8 bg-gray-50 rounded-xl sm:rounded-2xl border border-gray-200 transition-all duration-300 aceternity-glow ${
+                          project.link
+                            ? "hover:bg-white hover:shadow-xl hover:border-gray-300 hover:-translate-y-1 fallback-shadow"
+                            : ""
+                        }`}
+                        style={`--accent-color: ${siteConfig.accentColor}`}
+                      >
+                      <GlowingEffect client:idle glow={true} disabled={false} />
                       {project.link && (
                         <div class="absolute top-4 right-4 sm:top-6 sm:right-6 md:top-8 md:right-8 w-10 h-10 sm:w-11 sm:h-11 md:w-12 md:h-12 flex items-center justify-center bg-gray-900 rounded-full text-white transition-all duration-300 group-hover:bg-gray-700">
                           <svg

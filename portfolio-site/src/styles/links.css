@@ -41,11 +41,14 @@ h1 {
 }
 
 .button-stack {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+  /* Use grid so we can easily switch between 1 and 2 columns responsively */
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px 12px;
   margin-top: 16px;
-  align-items: center;
+  align-items: start;
+  justify-items: stretch; /* make buttons fill their grid cell for consistent sizing */
+  grid-auto-rows: min-content;
 }
 
 .button {
@@ -57,11 +60,17 @@ h1 {
   text-decoration: none;
   color: white;
   font-weight: 600;
-  min-width: 220px;
+  width: 100%; /* fill the grid cell */
+  max-width: none; /* allow grid to control sizing */
   justify-content: center;
+  box-sizing: border-box;
+  white-space: normal; /* allow wrapping */
+  word-break: break-word; /* prevent one long token from breaking layout */
+  hyphens: auto;
+  text-align: center;
 }
-.button .icon { width: 20px; height: 20px; display: inline-block; }
-.button img { display: inline-block; }
+.button .icon { width: 20px; height: 20px; display: inline-flex; flex-shrink: 0; align-items: center; justify-content: center; }
+.button img { display: inline-block; max-width: 20px; height: auto; }
 
 .button-default { background: var(--accent-color, #1d4ed8); }
 .button-github { background: #24292f; }
@@ -72,13 +81,13 @@ h1 {
 footer { margin-top: 20px; color: #9ca3af; font-size: 0.9rem; }
 
 @media (min-width: 640px) {
-  .button-stack { gap: 14px; }
+  .button-stack { gap: 14px 16px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .avatar { width: 140px; height: 140px; }
 }
 
 @media (max-width: 640px) {
   .avatar { width: 96px; height: 96px; }
-  .button { min-width: 100%; padding: 12px 16px; }
+  .button { width: 100%; padding: 12px 16px; }
   .card { padding: 20px; margin: 0 12px; }
 }
 
