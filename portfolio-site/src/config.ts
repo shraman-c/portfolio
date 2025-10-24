@@ -16,6 +16,14 @@ export const siteConfig = {
     "a Student",
     "a Developer",
   ],
+  achievements: [
+    {
+      title: "Adamas University - Smart India Hackathon 2025 (Internal) - Runner Up (Software Edition)",
+      date: "2025",
+      description: "Secured the Runner Up position in the Smart India Hackathon (Internal) 2025 held at Adamas University, showcasing innovative problem-solving skills and teamwork.",
+      link: ""
+    },
+  ],
   social: {
     email: "shramanchaudhuri@gmail.com",
     linkedin: "https://linkedin.com/in/shramanchaudhuri",
@@ -23,7 +31,7 @@ export const siteConfig = {
   },
   aboutMe:
     "I’m a curious student developer who enjoys turning ideas into software. With a strong base in Java and C, I contribute to open-source projects, build Android and Windows apps, and explore local networking. I’m always looking for chances to learn, collaborate, and take on challenges.", 
-  skills: ["Java", "C", "Arduino IDE", "Python", "Android"],
+  skills: ["Java", "C", "C++", "Arduino IDE", "Python", "Android", "Node.js", "Astro", "Next.js", "TypeScript", "SQL", "AI", "TailwindCSS", "JavaScript","Linux"],
   projects: [
     {
       name: "CertifyGo",
