@@ -343,6 +343,70 @@ body {
   opacity: 1;
 }
 
+/* Reduce / remove the strong blue "under" shadow for cards displayed inside
+   the Bento-style grid. This preserves a subtle inner rim but removes the
+   prominent outer halo that created the blue under-shadow in the design.
+   Targets only `.bento-grid` children so other contexts keep the original
+   aceternity glow behavior. */
+.bento-grid .aceternity-glow::before {
+  /* remove outer halo */
+  background: transparent !important;
+  filter: none !important;
+  box-shadow: none !important;
+  opacity: 0 !important;
+  transform: none !important;
+}
+.bento-grid .aceternity-glow:hover::before {
+  background: transparent !important;
+  filter: none !important;
+  box-shadow: none !important;
+  opacity: 0 !important;
+  transform: none !important;
+}
+
+/* Keep a subtle inner rim to define the card edge but tone it down */
+.bento-grid .aceternity-glow::after {
+  box-shadow: 0 0 4px 1px color-mix(in srgb, var(--accent-color) 18%, transparent) inset;
+  opacity: 0.9;
+}
+.bento-grid .aceternity-glow:hover::after {
+  box-shadow: 0 0 6px 1px color-mix(in srgb, var(--accent-color) 24%, transparent) inset;
+  transform: none;
+  opacity: 1;
+}
+
+/* Also suppress the strong outer halo for Education and Classroom Notes
+   sections (they use a vertical stack wrapper rather than .bento-grid).
+   Target by section id so the effect remains scoped to those areas. */
+#education .aceternity-glow::before,
+#classroom-notes .aceternity-glow::before {
+  background: transparent !important;
+  filter: none !important;
+  box-shadow: none !important;
+  opacity: 0 !important;
+  transform: none !important;
+}
+#education .aceternity-glow:hover::before,
+#classroom-notes .aceternity-glow:hover::before {
+  background: transparent !important;
+  filter: none !important;
+  box-shadow: none !important;
+  opacity: 0 !important;
+  transform: none !important;
+}
+
+#education .aceternity-glow::after,
+#classroom-notes .aceternity-glow::after {
+  box-shadow: 0 0 4px 1px color-mix(in srgb, var(--accent-color) 18%, transparent) inset;
+  opacity: 0.9;
+}
+#education .aceternity-glow:hover::after,
+#classroom-notes .aceternity-glow:hover::after {
+  box-shadow: 0 0 6px 1px color-mix(in srgb, var(--accent-color) 24%, transparent) inset;
+  transform: none;
+  opacity: 1;
+}
+
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
@@ -423,4 +487,38 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+/* Simple local implementation of a 'Bento Grid' inspired layout used where
+   the Aceternity Bento Grid would be used. This provides a responsive,
+   dense grid that places cards in compact rows on larger screens while
+   falling back to a single-column stack on small screens. */
+.bento-grid {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 1.25rem; /* 20px */
+  grid-auto-rows: minmax(0, auto);
+  grid-auto-flow: row dense;
+}
+
+@media (min-width: 640px) {
+  .bento-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .bento-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.75rem;
+  }
+}
+
+/* Modifier to make a card span both columns on medium/large screens
+   (useful for feature items). Components can add `bento-span-2` to
+   prefer a wider card. */
+.bento-span-2 { grid-column: 1 / -1; }
+
+/* Ensure the individual items don't collapse their padding when inside grid */
+.bento-grid > * { display: block; }
 

@@ -1,0 +1,43 @@
+---
+// @ts-nocheck
+import { siteConfig } from "../config";
+import { GlowingEffect } from "@/components/ui/glowing-effect";
+const hasCerts = siteConfig.certifications && siteConfig.certifications.length > 0;
+---
+
+{
+  hasCerts && (
+    <section id="certifications" class="p-8 sm:p-12 md:p-16 lg:p-24">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-start">
+        <div class="lg:col-span-3">
+          <h2 class="text-3xl sm:text-4xl md:text-5xl xl:text-5xl font-bold text-gray-900 max-w-lg">Certifications</h2>
+          <div class="w-[75px] h-[5px] mt-2 rounded-full" style={`background-color: ${siteConfig.accentColor}`} />
+        </div>
+
+        <div class="lg:col-span-9">
+          <div class="bento-grid">
+            {siteConfig.certifications.map((c, idx) => (
+              <div class="group relative">
+                <div class={`block relative overflow-visible p-4 sm:p-6 md:p-8 bg-gray-50 rounded-xl sm:rounded-2xl border border-gray-200 transition-all duration-300 aceternity-glow`} style={`--accent-color: ${siteConfig.accentColor}`}>
+                  <GlowingEffect client:idle glow={true} disabled={false} />
+                  <div class="space-y-3">
+                    <div class="flex items-baseline justify-between">
+                      <span class="text-sm font-mono" style={{ color: siteConfig.accentColor }}>{`0${idx + 1}`}</span>
+                      {c.date && <span class="text-xs text-gray-500">{c.date}</span>}
+                    </div>
+                    <h3 class="text-xl sm:text-2xl font-bold text-gray-900">{c.title}</h3>
+                    {c.issuer && <div class="text-sm text-gray-600">{c.issuer}</div>}
+                    {c.description && <p class="text-gray-600">{c.description}</p>}
+                    {c.link && (
+                      <a class="text-sm text-blue-600 underline" href={c.link} target="_blank" rel="noopener noreferrer">View certificate</a>
+                    )}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}

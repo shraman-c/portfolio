@@ -21,8 +21,24 @@ export const siteConfig = {
       title: "Adamas University - Smart India Hackathon 2025 (Internal) - Runner Up (Software Edition)",
       date: "2025",
       description: "Secured the Runner Up position in the Smart India Hackathon (Internal) 2025 held at Adamas University, showcasing innovative problem-solving skills and teamwork.",
-      link: ""
+      link: "https://www.linkedin.com/posts/shramanchaudhuri_hackathon-adamasuniversity-sih2025-activity-7372674776747683840-Dyl9?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFvcptoBW5fEMZP9j-81CM4wmS5dnGeuMHo"
     },
+  ],
+  certifications: [
+    {
+      title: "Introduction to Retrieval Augmented Generation",
+      issuer: "IBM - SkillsBuild",
+      date: "September 2025",
+      description: "Completed the IBM course on Retrieval Augmented Generation.",
+      link: "https://www.linkedin.com/in/shramanchaudhuri/overlay/1756739405508/single-media-viewer/?type=DOCUMENT&profileId=ACoAAFvcptoBW5fEMZP9j-81CM4wmS5dnGeuMHo"
+    },
+    {
+      title: "Ethical Considerations for Generative AI",
+      issuer: "IBM - SkillsBuild",
+      date: "September 2025",
+      description: "Completed the IBM course on Ethical Considerations for Generative AI.",
+      link: "https://www.linkedin.com/in/shramanchaudhuri/overlay/1756739369776/single-media-viewer/?profileId=ACoAAFvcptoBW5fEMZP9j-81CM4wmS5dnGeuMHo"
+    }
   ],
   social: {
     email: "shramanchaudhuri@gmail.com",
