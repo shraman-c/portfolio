@@ -2,7 +2,41 @@
 import { siteConfig } from "../config";
 import Header from "../components/Header.astro";
 import ThemeToggle from "../components/ThemeToggle.astro";
+import Footer from "../components/Footer.astro";
 import "../styles/global.css";
+
+const features = [
+  {
+    icon: "🤖",
+    title: "AI-Powered Intelligence",
+    description: "Advanced algorithms automatically resolve scheduling conflicts and optimize timetables for maximum efficiency."
+  },
+  {
+    icon: "📚",
+    title: "NEP 2020 Compliant",
+    description: "Built with National Education Policy guidelines in mind, ensuring your schedules meet modern educational standards."
+  },
+  {
+    icon: "⚡",
+    title: "Lightning Fast",
+    description: "Generate complex timetables in seconds, not hours. Save valuable time for what really matters - education."
+  },
+  {
+    icon: "🎯",
+    title: "Conflict-Free Scheduling",
+    description: "Intelligent constraint handling ensures zero conflicts between teachers, rooms, and student groups."
+  },
+  {
+    icon: "📊",
+    title: "Visual Analytics",
+    description: "Beautiful, interactive dashboards to visualize schedules, track utilization, and identify optimization opportunities."
+  },
+  {
+    icon: "🔄",
+    title: "Easy Modifications",
+    description: "Make changes on the fly with automatic conflict detection and instant schedule adjustments."
+  }
+];
 ---
 
 <html lang="en">
@@ -11,77 +45,188 @@ import "../styles/global.css";
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="color-scheme" content="light dark" />
     <link rel="icon" href="/favicon.svg" />
-    <title>Coming Soon - {siteConfig.name}</title>
+    <meta name="description" content="Catalyst - AI-powered timetable generator for schools and colleges. Create NEP-compliant, conflict-free schedules in seconds." />
+    <title>Catalyst - AI-Powered Timetable Generator</title>
   </head>
-  <body class="bg-white text-gray-800 dark:bg-[#0b0b10]">
-    <Header />
-
-    <div
-  id="hero"
-  class="relative isolate overflow-hidden bg-white dark:bg-[#0b0b10] py-12 md:h-screen"
-      style={`--accent-color: ${siteConfig.accentColor}`}
-    >
+  <body>
+    <div class="relative isolate overflow-hidden bg-white dark:bg-[#0b0b10] min-h-screen" style={`--accent-color: ${siteConfig.accentColor}`}>
       <!-- Gradient overlay -->
       <div
-        class="absolute inset-0 -z-10 hero-overlay"
-        style={`background: radial-gradient(ellipse 800px 1200px at 0% 0%, color-mix(in srgb, var(--accent-color) 25%, transparent) 0%, color-mix(in srgb, var(--accent-color) 15%, transparent) 20%, color-mix(in srgb, var(--accent-color) 8%, transparent) 40%, rgba(255, 255, 255, 0.3) 70%, rgba(255, 255, 255, 0.8) 90%, white 100%)`}
+        class="fixed inset-0 -z-10 hero-overlay"
+        style={`background: radial-gradient(ellipse 800px 1200px at 50% 0%, color-mix(in srgb, var(--accent-color) 25%, transparent) 0%, color-mix(in srgb, var(--accent-color) 15%, transparent) 20%, color-mix(in srgb, var(--accent-color) 8%, transparent) 40%, rgba(255, 255, 255, 0.3) 70%, rgba(255, 255, 255, 0.8) 90%, white 100%)`}
       ></div>
 
       <svg
         aria-hidden="true"
-        class="hero-bg-svg absolute inset-0 -z-10 size-full stroke-gray-200 [mask-image:radial-gradient(100%_100%_at_top_right,white,transparent)]"
+        class="hero-bg-svg fixed inset-0 -z-10 size-full stroke-gray-200 dark:stroke-gray-800 [mask-image:radial-gradient(100%_100%_at_top_center,white,transparent)]"
       >
         <defs>
           <pattern
             x="50%"
             y={-1}
-            id="coming-soon-pattern"
+            id="catalyst-pattern"
             width={200}
             height={200}
             patternUnits="userSpaceOnUse"
           >
             <path d="M.5 200V.5H200" fill="none"></path>
           </pattern>
-          <pattern
-            id="programming-symbols-coming-soon"
-            x="0"
-            y="0"
-            width="400"
-            height="400"
-            patternUnits="userSpaceOnUse"
-          >
-            <text x="50" y="50" fill={siteConfig.accentColor} font-family="monospace" font-size="24" transform="rotate(-15)">&lt;/&gt;</text>
-          </pattern>
         </defs>
-        <rect fill="url(#programming-symbols-coming-soon)" width="100%" height="100%" opacity="0.12"></rect>
-        <rect fill="url(#coming-soon-pattern)" width="100%" height="100%" stroke-width={0}></rect>
+        <rect fill="url(#catalyst-pattern)" width="100%" height="100%" stroke-width={0}></rect>
       </svg>
 
-      <main class="min-h-screen md:h-full mx-auto p-8 sm:p-12 md:p-24 flex items-center justify-center">
-        <div class="w-full px-4">
-          <div class="max-w-3xl mx-auto bg-white dark:bg-gray-900/60 backdrop-blur-sm rounded-xl p-8 md:p-12 text-center border border-gray-100 dark:border-gray-800">
-            <h1 class="text-4xl sm:text-6xl font-bold mb-4" style={`color: ${siteConfig.accentColor}`}>
-              Coming Soon!
-            </h1>
-            <p class="text-lg sm:text-xl text-gray-700 dark:text-gray-300 mb-8">
-              We're working on something awesome. Stay tuned!.
-            </p>
-            <p class="text-lg sm:text-xl text-gray-700 dark:text-gray-300 mb-8">
-              Catalyst is on its way to revolutionize the way to help educators to generate no-conflict Timetables.
-            </p>
+    <Header />
 
-            <p class="text-sm text-gray-500 dark:text-gray-400 mt-8">© {new Date().getFullYear()} {siteConfig.name}</p>
-            <p class="text-sm text-gray-500 dark:text-gray-400 mt-4">© {new Date().getFullYear()} Catalyst</p>
+    <!-- Hero Section -->
+    <div id="hero" class="relative py-24 md:py-32">
+
+      <main class="mx-auto max-w-7xl px-6 lg:px-8">
+        <div class="mx-auto max-w-4xl text-center">
+          <div class="inline-flex items-center gap-2 px-4 py-2 bg-blue-50 dark:bg-gray-800 border border-blue-200 dark:border-gray-600 rounded-full mb-8">
+            <span class="relative flex h-2 w-2">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
+            </span>
+            <span class="text-sm font-medium text-blue-900 dark:text-white">Launched December 25, 2025</span>
+          </div>
+          
+          <h1 class="text-5xl sm:text-6xl md:text-7xl font-bold mb-6 text-gray-900 dark:text-white">
+            <span style={`color: ${siteConfig.accentColor}`}>Catalyst</span>
+            <br />
+            <span class="text-gray-900 dark:text-gray-100">AI-Powered Timetables</span>
+          </h1>
+          
+          <p class="text-xl sm:text-2xl text-gray-600 dark:text-gray-300 mb-12 leading-relaxed">
+            Revolutionize academic scheduling with intelligent, conflict-free timetable generation. 
+            Save hours of manual work and eliminate scheduling headaches.
+          </p>
+
+          <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <a 
+              href="https://catalyst-demo.vercel.app" 
+              target="_blank"
+              rel="noopener noreferrer"
+              class="px-8 py-4 rounded-xl font-semibold text-white transition-all duration-300 hover:shadow-xl hover:-translate-y-1 flex items-center gap-2"
+              style={`background-color: ${siteConfig.accentColor}`}
+            >
+              View Live Demo
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+              </svg>
+            </a>
+            <a 
+              href="#features" 
+              class="px-8 py-4 bg-gray-100 dark:bg-gray-800 rounded-xl font-semibold text-gray-900 dark:text-gray-100 hover:bg-gray-200 dark:hover:bg-gray-700 transition-all duration-300"
+            >
+              Explore Features
+            </a>
           </div>
         </div>
-        
       </main>
-
-      <!-- removed internal CTA strip; button moved just below the hero -->
     </div>
 
-    <!-- Back to home button removed as requested -->
+    <!-- Features Section -->
+    <section id="features" class="relative p-8 sm:p-12 md:p-16 lg:p-24">
+      <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-16">
+          <h2 class="text-4xl sm:text-5xl md:text-6xl font-bold text-gray-900 dark:text-white mb-4">
+            Powerful Features
+          </h2>
+          <div 
+            class="w-24 h-1.5 mx-auto rounded-full" 
+            style={`background-color: ${siteConfig.accentColor}`}
+          ></div>
+          <p class="text-xl text-gray-600 dark:text-gray-300 mt-6 max-w-3xl mx-auto">
+            Everything you need to create perfect timetables for schools and colleges
+          </p>
+        </div>
 
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {features.map((feature) => (
+            <div class="group bg-white dark:bg-gray-900/60 p-8 rounded-2xl border border-gray-200 dark:border-gray-800 hover:border-gray-300 dark:hover:border-gray-700 transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+              <div class="text-5xl mb-4">{feature.icon}</div>
+              <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-3">
+                {feature.title}
+              </h3>
+              <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                {feature.description}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Tech Stack Section -->
+    <section class="relative p-8 sm:p-12 md:p-16 lg:p-24">
+      <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-16">
+          <h2 class="text-4xl sm:text-5xl md:text-6xl font-bold text-gray-900 dark:text-white mb-4">
+            Built With Modern Tech
+          </h2>
+          <div 
+            class="w-24 h-1.5 mx-auto rounded-full" 
+            style={`background-color: ${siteConfig.accentColor}`}
+          ></div>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+          {["Next.js", "TypeScript", "JavaScript", "SQL", "AI", "TailwindCSS"].map((tech) => (
+            <div class="bg-gray-50 dark:bg-gray-900/60 p-6 rounded-xl border border-gray-200 dark:border-gray-800 text-center hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+              <p class="font-semibold text-gray-900 dark:text-white">{tech}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="relative p-8 sm:p-12 md:p-16 lg:p-24">
+      <div class="max-w-4xl mx-auto text-center">
+        <div class="bg-white dark:bg-gray-900/60 backdrop-blur-sm rounded-2xl p-12 border border-gray-200 dark:border-gray-800">
+          <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">
+            Ready to Transform Your Scheduling?
+          </h2>
+          <p class="text-xl text-gray-600 dark:text-gray-300 mb-8">
+            Join the future of academic timetable management with Catalyst
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a 
+              href={siteConfig.social.email ? `mailto:${siteConfig.social.email}?subject=Catalyst Inquiry` : "#"}
+              class="px-8 py-4 rounded-xl font-semibold text-white transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
+              style={`background-color: ${siteConfig.accentColor}`}
+            >
+              Get in Touch
+            </a>
+            <a 
+              href="/" 
+              class="px-8 py-4 bg-gray-100 dark:bg-gray-800 rounded-xl font-semibold text-gray-900 dark:text-gray-100 hover:bg-gray-200 dark:hover:bg-gray-700 transition-all duration-300"
+            >
+              Back to Portfolio
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+    </div>
+
+    <Footer />
     <ThemeToggle />
   </body>
 </html>
+
+<style>
+  /* Override global CSS conflicts for dark mode on this page */
+  :root[data-theme='dark'] .dark\:text-gray-100 { color: #f3f4f6 !important; }
+  :root[data-theme='dark'] .dark\:text-white { color: #ffffff !important; }
+  :root[data-theme='dark'] .dark\:text-gray-300 { color: #d1d5db !important; }
+  :root[data-theme='dark'] .dark\:bg-\[\#0b0b10\] { background-color: #0b0b10 !important; }
+  :root[data-theme='dark'] .dark\:bg-gray-800 { background-color: #1f2937 !important; }
+  :root[data-theme='dark'] .dark\:bg-gray-900\/60 { background-color: rgba(17, 24, 39, 0.6) !important; }
+  :root[data-theme='dark'] .dark\:border-gray-800 { border-color: #1f2937 !important; }
+  :root[data-theme='dark'] .dark\:border-gray-700 { border-color: #374151 !important; }
+  :root[data-theme='dark'] .dark\:border-gray-600 { border-color: #4b5563 !important; }
+  :root[data-theme='dark'] .dark\:hover\:border-gray-700:hover { border-color: #374151 !important; }
+  :root[data-theme='dark'] .dark\:hover\:bg-gray-700:hover { background-color: #374151 !important; }
+  :root[data-theme='dark'] .dark\:stroke-gray-800 { stroke: #1f2937 !important; }
+</style>
