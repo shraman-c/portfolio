@@ -74,7 +74,7 @@ export const siteConfig = {
       name: "Catalyst: AI-Powered Timetable Generator",
       description:
         "Catalyst is a modern, AI-driven platform for generating and managing NEP-compliant timetables for schools and colleges. Save time, reduce errors, and embrace the future of academic scheduling.",
-      link: "/catalyst_comingsoon",
+      link: "/catalyst",
       skills: ["Next.js", "Typescript", "SQL", "AI", "TailwindCSS","JavaScript"],
     }
   ],
