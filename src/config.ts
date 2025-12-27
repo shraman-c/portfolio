@@ -76,6 +76,13 @@ export const siteConfig = {
         "Catalyst is a modern, AI-driven platform for generating and managing NEP-compliant timetables for schools and colleges. Save time, reduce errors, and embrace the future of academic scheduling.",
       link: "/catalyst",
       skills: ["Next.js", "Typescript", "SQL", "AI", "TailwindCSS","JavaScript"],
+    },
+    {
+      name: "Watcher: Automated file organiser",
+      description:
+        "Watcher automatically organizes your files by type in real-time, keeping your folders neat and tidy without any manual effort.",
+      link: "/watcher",
+      skills: ["Python 3.9+", "Watchdog", "Tkinter", "PyInstaller", "Cross-platform"],
     }
   ],
   // experience removed
