@@ -5,6 +5,11 @@ export const siteConfig = {
       description: "Classroom notes and resources for learning the basics of C programming.",
       link: "https://github.com/shraman-c/Basics-Of-C-Programing"
     },
+    {
+      name: "Basics of C++ Programming Notes",
+      description: "Classroom notes and resources for learning the basics of C++ programming.",
+      link: "https://github.com/shraman-c/Basic-CPP-Programming"
+    },
   ],
   name: "Shraman Chaudhuri",
   title: "Student || Developer",
