@@ -31,6 +31,12 @@ export const siteConfig = {
   ],
   certifications: [
     {
+      title: "Cybersecurity Fundamentals",
+      issuer: "IBM - SkillsBuild",
+      date: "January 2026",
+      description: "Completed the IBM course on Cybersecurity Fundamentals.",
+      link: "https://www.credly.com/badges/2e6dc5e8-7f2c-4e3b-97b9-c1a9a593547a/linked_in_profile"
+    },{
       title: "Introduction to Retrieval Augmented Generation",
       issuer: "IBM - SkillsBuild",
       date: "September 2025",
