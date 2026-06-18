@@ -8,31 +8,129 @@ const hasProjects = siteConfig.projects && siteConfig.projects.length > 0;
   id="header"
   class="fixed top-0 left-0 right-0 z-50 flex justify-center pt-6"
 >
-  <nav class="flex items-center gap-6 pl-6 pr-2 py-2 bg-[#1f1f1f] text-white rounded-navcapsule font-inter text-body-sm transition-all duration-300 ease-in-out shadow-none border border-white/10">
-    <!-- Icon Glyph -->
-    <div class="flex items-center justify-center">
-      <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-3 h-3">
-        <circle cx="6" cy="6" r="5" stroke="white" stroke-width="1"/>
-      </svg>
-    </div>
-    
-    <!-- Nav Links -->
-    <ul class="flex items-center gap-6">
-      { hasProjects && <li><a href="/#projects" class="hover:text-solar-beam transition-colors font-medium">Work</a></li> }
-      <li><a href="/#about" class="hover:text-solar-beam transition-colors font-medium">Story</a></li>
-      <li><a href="/#classroom-notes" class="hover:text-solar-beam transition-colors font-medium">Process</a></li>
-      <li><a href="/connect" class="hover:text-solar-beam transition-colors font-medium">Connect</a></li>
+  <nav class="flex items-center p-1.5 bg-[#1f1f1f] text-white rounded-navcapsule font-inter text-body-sm transition-all duration-300 ease-in-out shadow-none border border-white/10">
+    <!-- Nav Links with premium hover states -->
+    <ul class="flex items-center gap-1.5">
+      <li>
+        <a 
+          href="/" 
+          class="px-3 py-1.5 rounded-buttons text-gray-300 hover:text-solar-beam hover:bg-white/10 transition-all duration-200 font-medium cursor-pointer"
+          id="nav-link-home"
+        >
+          Home
+        </a>
+      </li>
+      { hasProjects && 
+        <li>
+          <a 
+            href="/#projects" 
+            class="px-3 py-1.5 rounded-buttons text-gray-300 hover:text-solar-beam hover:bg-white/10 transition-all duration-200 font-medium cursor-pointer"
+            id="nav-link-projects"
+          >
+            Work
+          </a>
+        </li> 
+      }
+      <li>
+        <a 
+          href="/#about" 
+          class="px-3 py-1.5 rounded-buttons text-gray-300 hover:text-solar-beam hover:bg-white/10 transition-all duration-200 font-medium cursor-pointer"
+          id="nav-link-about"
+        >
+          Story
+        </a>
+      </li>
+      <li>
+        <a 
+          href="/#classroom-notes" 
+          class="px-3 py-1.5 rounded-buttons text-gray-300 hover:text-solar-beam hover:bg-white/10 transition-all duration-200 font-medium cursor-pointer"
+          id="nav-link-classroom-notes"
+        >
+          Process
+        </a>
+      </li>
+      <li>
+        <a 
+          href="/connect" 
+          class="px-3 py-1.5 rounded-buttons text-gray-300 hover:text-solar-beam hover:bg-white/10 transition-all duration-200 font-medium cursor-pointer"
+          id="nav-link-connect"
+        >
+          Connect
+        </a>
+      </li>
     </ul>
-
-    <!-- Highlight Button -->
-    <a 
-      href="/#projects" 
-      class="px-5 py-2 bg-solar-beam text-black rounded-buttons font-inter text-body-sm font-medium hover:bg-white hover:text-black transition-colors duration-200"
-    >
-      View Work
-    </a>
   </nav>
 </header>
+
+<script>
+  // @ts-nocheck
+  (function() {
+    const links = document.querySelectorAll('header nav ul li a');
+    const sections = [
+      document.getElementById('projects'),
+      document.getElementById('about'),
+      document.getElementById('classroom-notes')
+    ].filter(Boolean);
+
+    function updateActiveLink() {
+      const isHomePage = window.location.pathname === '/' || window.location.pathname === '/index.html';
+      
+      // Don't run scroll detection if we are on a separate page
+      if (!isHomePage) {
+        links.forEach(link => {
+          const href = link.getAttribute('href');
+          if (href && href.includes('connect') && window.location.pathname.includes('connect')) {
+            link.classList.add('text-solar-beam', 'bg-white/10');
+            link.classList.remove('text-gray-300');
+          } else {
+            link.classList.remove('text-solar-beam', 'bg-white/10');
+            link.classList.add('text-gray-300');
+          }
+        });
+        return;
+      }
+
+      let currentSectionId = '';
+      let maxVisibleArea = 0;
+
+      sections.forEach(section => {
+        const rect = section.getBoundingClientRect();
+        const visibleHeight = Math.max(0, Math.min(rect.bottom, window.innerHeight) - Math.max(rect.top, 0));
+        if (visibleHeight > maxVisibleArea) {
+          maxVisibleArea = visibleHeight;
+          currentSectionId = section.getAttribute('id');
+        }
+      });
+
+      // Special case: if at the top of the page, highlight Home
+      if (window.scrollY < 120) {
+        currentSectionId = 'home';
+      }
+
+      links.forEach(link => {
+        const id = link.getAttribute('id');
+        const href = link.getAttribute('href');
+        const isHomeMatch = id === 'nav-link-home' && currentSectionId === 'home';
+        const isSectionMatch = currentSectionId !== 'home' && href && href.endsWith(`#${currentSectionId}`);
+        
+        if (isHomeMatch || isSectionMatch) {
+          link.classList.add('text-solar-beam', 'bg-white/10');
+          link.classList.remove('text-gray-300');
+        } else {
+          link.classList.remove('text-solar-beam', 'bg-white/10');
+          link.classList.add('text-gray-300');
+        }
+      });
+    }
+
+    if (typeof window !== 'undefined') {
+      window.addEventListener('scroll', updateActiveLink);
+      window.addEventListener('resize', updateActiveLink);
+      // Run once on load
+      setTimeout(updateActiveLink, 100);
+    }
+  })();
+</script>
 
 <style>
   html {
