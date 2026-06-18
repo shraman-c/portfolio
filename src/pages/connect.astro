@@ -10,8 +10,26 @@ import "../styles/links.css";
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Links - {siteConfig.name}</title>
+    <meta name="description" content={`Social links and contact endpoints for ${siteConfig.name}. Connect via GitHub, LinkedIn, and more.`} />
+    <meta name="color-scheme" content="light dark" />
     <link rel="icon" href="/favicon.svg" />
+    <link rel="canonical" href="https://shramanc.pages.dev/connect" />
+    <title>Links - {siteConfig.name}</title>
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://shramanc.pages.dev/connect" />
+    <meta property="og:title" content={`Links - ${siteConfig.name}`} />
+    <meta property="og:description" content={`Social links and contact endpoints for ${siteConfig.name}. Connect via GitHub, LinkedIn, and more.`} />
+    <meta property="og:image" content="https://shramanc.pages.dev/images/avt.png" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://shramanc.pages.dev/connect" />
+    <meta property="twitter:title" content={`Links - ${siteConfig.name}`} />
+    <meta property="twitter:description" content={`Social links and contact endpoints for ${siteConfig.name}. Connect via GitHub, LinkedIn, and more.`} />
+    <meta property="twitter:image" content="https://shramanc.pages.dev/images/avt.png" />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
