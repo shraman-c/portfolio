@@ -1,4 +1,4 @@
-/* links.css — adapted for Daniel Sun Style Guide */
+/* links.css — adapted for Daniel Sun Style Guide with Dark Mode support */
 
 body {
   background-color: var(--color-concrete) !important;
@@ -69,7 +69,7 @@ h1 {
   font-family: var(--font-inter), sans-serif;
   font-weight: 500;
   font-size: var(--text-body-sm);
-  color: var(--color-obsidian) !important;
+  color: var(--color-obsidian); /* dynamic: black in light, white in dark */
   width: 100%;
   justify-content: center;
   box-sizing: border-box;
@@ -88,34 +88,57 @@ h1 {
   justify-content: center;
 }
 
-.button-default {
-  background: var(--color-solar-beam);
-  border-color: var(--color-solar-beam);
-}
-
-.button:hover {
-  background: var(--color-solar-beam);
-  border-color: var(--color-solar-beam);
-}
-
-.button-default:hover {
-  background: var(--color-obsidian);
-  border-color: var(--color-obsidian);
-  color: var(--color-paper-white) !important;
-}
-
-/* Override standard network icons to remain flat monochrome or solar beam */
+/* Icon filters for standard button */
 .button img {
   filter: grayscale(1) brightness(0);
 }
+/* In dark mode, invert standard button icon to be white */
+:root[data-theme='dark'] .button img {
+  filter: grayscale(1) brightness(0) invert(1);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) .button img {
+    filter: grayscale(1) brightness(0) invert(1);
+  }
+}
+
+/* Default button (Solar Beam background) */
+.button-default {
+  background: var(--color-solar-beam);
+  border-color: var(--color-solar-beam);
+  color: #000000 !important; /* always black text for legibility */
+}
 .button-default img {
-  filter: none;
+  filter: grayscale(1) brightness(0) !important; /* always black icon */
+}
+
+/* Hover standard button (becomes Solar Beam) */
+.button:hover {
+  background: var(--color-solar-beam);
+  border-color: var(--color-solar-beam);
+  color: #000000 !important; /* always black text */
 }
 .button:hover img {
-  filter: grayscale(1) brightness(0);
+  filter: grayscale(1) brightness(0) !important; /* always black icon */
 }
+
+/* Hover default button (becomes Obsidian background) */
+.button-default:hover {
+  background: var(--color-obsidian);
+  border-color: var(--color-obsidian);
+  color: var(--color-paper-white) !important; /* dynamic: white in light, charcoal in dark */
+}
+/* Icon on hover default button should match the text */
 .button-default:hover img {
-  filter: invert(1) brightness(2);
+  filter: grayscale(1) brightness(0) invert(1) !important; /* white in light mode */
+}
+:root[data-theme='dark'] .button-default:hover img {
+  filter: grayscale(1) brightness(0) !important; /* charcoal/black in dark mode */
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) .button-default:hover img {
+    filter: grayscale(1) brightness(0) !important;
+  }
 }
 
 .card {

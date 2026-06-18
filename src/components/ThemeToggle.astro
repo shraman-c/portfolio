@@ -1,0 +1,81 @@
+---
+---
+
+<button
+  id="theme-switcher"
+  class="fixed bottom-8 right-8 z-50 flex items-center bg-[#1f1f1f] border border-silver/20 rounded-buttons h-10 w-[76px] cursor-pointer shadow-subtle select-none p-0.5 transition-all duration-300"
+  aria-label="Toggle Theme"
+>
+  <div class="relative w-full h-full flex items-center justify-between px-2.5 text-[#ffffff] pointer-events-none">
+    <!-- Sliding indicator background -->
+    <div 
+      id="theme-indicator" 
+      class="absolute top-0.5 left-0.5 w-[32px] h-[30px] bg-solar-beam rounded-buttons transition-all duration-300 ease-out -z-10"
+    ></div>
+    
+    <!-- Sun icon -->
+    <span 
+      class="flex items-center justify-center w-[26px] h-[26px] text-obsidian transition-colors duration-300" 
+      id="sun-icon-span"
+    >
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="5"></circle>
+        <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path>
+      </svg>
+    </span>
+
+    <!-- Moon icon -->
+    <span 
+      class="flex items-center justify-center w-[26px] h-[26px] text-graphite transition-colors duration-300" 
+      id="moon-icon-span"
+    >
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+      </svg>
+    </span>
+  </div>
+</button>
+
+<script>
+  // @ts-nocheck
+  (function() {
+    const root = document.documentElement;
+    const switcher = document.getElementById('theme-switcher');
+    const indicator = document.getElementById('theme-indicator');
+    const sunSpan = document.getElementById('sun-icon-span');
+    const moonSpan = document.getElementById('moon-icon-span');
+    const STORAGE_KEY = 'theme-daniel-sun';
+
+    function getTheme() {
+      const stored = localStorage.getItem(STORAGE_KEY);
+      if (stored === 'dark' || stored === 'light') return stored;
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+
+    function applyTheme(theme) {
+      if (theme === 'dark') {
+        root.setAttribute('data-theme', 'dark');
+        indicator.style.transform = 'translateX(37px)';
+        sunSpan.style.color = '#808080';
+        moonSpan.style.color = '#000000';
+      } else {
+        root.setAttribute('data-theme', 'light');
+        indicator.style.transform = 'translateX(0)';
+        sunSpan.style.color = '#000000';
+        moonSpan.style.color = '#808080';
+      }
+      localStorage.setItem(STORAGE_KEY, theme);
+    }
+
+    // Toggle logic
+    switcher?.addEventListener('click', () => {
+      const current = root.getAttribute('data-theme') || 'light';
+      const nextTheme = current === 'dark' ? 'light' : 'dark';
+      applyTheme(nextTheme);
+    });
+
+    // Initialize state
+    const initialTheme = getTheme();
+    applyTheme(initialTheme);
+  })();
+</script>

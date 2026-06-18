@@ -2,23 +2,73 @@
 
 @plugin "tailwindcss-animate";
 
+:root {
+  /* Dynamic style guide variables (Light mode defaults) */
+  --bg-canvas: #f5f5f5;
+  --bg-surface: #ffffff;
+  --text-primary: #000000;
+  --text-secondary: #808080;
+  --text-tertiary: #a6a6a6;
+  --text-tertiary-fog: #999999;
+  --border-color: #b8b8b8;
+  --shadow-val: rgba(0, 0, 0, 0.12) -2px 3px 3px 0px;
+}
+
+/* System preferences auto-detection */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-canvas: #0a0a0a;
+    --bg-surface: #161616;
+    --text-primary: #ffffff;
+    --text-secondary: #a6a6a6;
+    --text-tertiary: #808080;
+    --text-tertiary-fog: #8c8c8c;
+    --border-color: #262626;
+    --shadow-val: rgba(0, 0, 0, 0.4) -2px 3px 6px 0px;
+  }
+}
+
+/* Force Light Theme override */
+:root[data-theme='light'] {
+  --bg-canvas: #f5f5f5;
+  --bg-surface: #ffffff;
+  --text-primary: #000000;
+  --text-secondary: #808080;
+  --text-tertiary: #a6a6a6;
+  --text-tertiary-fog: #999999;
+  --border-color: #b8b8b8;
+  --shadow-val: rgba(0, 0, 0, 0.12) -2px 3px 3px 0px;
+}
+
+/* Force Dark Theme override */
+:root[data-theme='dark'] {
+  --bg-canvas: #0a0a0a;
+  --bg-surface: #161616;
+  --text-primary: #ffffff;
+  --text-secondary: #a6a6a6;
+  --text-tertiary: #808080;
+  --text-tertiary-fog: #8c8c8c;
+  --border-color: #262626;
+  --shadow-val: rgba(0, 0, 0, 0.4) -2px 3px 6px 0px;
+}
+
 @theme {
-  /* Colors */
+  /* Colors - mapped dynamically to root theme variables */
   --color-solar-beam: #ffd500;
-  --color-obsidian: #000000;
-  --color-paper-white: #ffffff;
-  --color-concrete: #f5f5f5;
-  --color-graphite: #808080;
-  --color-ash: #a6a6a6;
-  --color-fog: #999999;
-  --color-silver: #b8b8b8;
+  --color-obsidian: var(--text-primary);
+  --color-paper-white: var(--bg-surface);
+  --color-concrete: var(--bg-canvas);
+  --color-graphite: var(--text-secondary);
+  --color-ash: var(--text-tertiary);
+  --color-fog: var(--text-tertiary-fog);
+  --color-silver: var(--border-color);
   --color-soft-shadow: #cfcfcf;
 
   /* Surfaces */
-  --color-gallery-canvas: #f5f5f5;
-  --color-paper-surface: #ffffff;
+  --color-gallery-canvas: var(--bg-canvas);
+  --color-paper-surface: var(--bg-surface);
   --color-nav-capsule: #1f1f1f;
-  --color-obsidian-mass: #000000;
+  --color-obsidian-mass: var(--text-primary);
 
   /* Typography Families */
   --font-sans-serif: 'sans-serif', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -60,42 +110,35 @@
   --radius-navcapsule: 110px;
 
   /* Shadows */
-  --shadow-subtle: rgba(0, 0, 0, 0.12) -2px 3px 3px 0px;
+  --shadow-subtle: var(--shadow-val);
 }
 
 body {
   font-family: var(--font-inter), sans-serif;
-  background-color: var(--color-concrete);
-  color: var(--color-obsidian);
+  background-color: var(--bg-canvas) !important;
+  color: var(--text-primary) !important;
 }
 
 :root {
-  --background: var(--color-concrete);
-  --foreground: var(--color-obsidian);
-  --card: var(--color-paper-white);
-  --card-foreground: var(--color-obsidian);
-  --primary: var(--color-obsidian);
-  --primary-foreground: var(--color-paper-white);
+  --background: var(--bg-canvas);
+  --foreground: var(--text-primary);
+  --card: var(--bg-surface);
+  --card-foreground: var(--text-primary);
+  --primary: var(--text-primary);
+  --primary-foreground: var(--bg-canvas);
   --accent: var(--color-solar-beam);
-  --accent-foreground: var(--color-obsidian);
-  --border: var(--color-silver);
-}
-
-/* Force light mode style variables globally, ignoring system preference/class to support achromatic monolith theme */
-:root,
-[data-theme='dark'],
-[data-theme='light'] {
-  background-color: var(--color-concrete) !important;
-  color: var(--color-obsidian) !important;
+  --accent-foreground: var(--text-primary);
+  --border: var(--border-color);
 }
 
 @layer base {
   * {
-    @apply border-silver;
+    border-color: var(--border-color);
   }
   body {
-    background-color: var(--color-concrete) !important;
-    color: var(--color-obsidian) !important;
+    background-color: var(--bg-canvas) !important;
+    color: var(--text-primary) !important;
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
 }
 
