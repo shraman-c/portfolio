@@ -1,7 +1,6 @@
 ---
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
-import ThemeToggle from "../components/ThemeToggle.astro";
 import { siteConfig } from "../config";
 import "../styles/global.css";
 ---
@@ -10,132 +9,111 @@ import "../styles/global.css";
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="color-scheme" content="light dark" />
     <link rel="icon" href="/favicon.svg" />
     <meta
       name="description"
       content="Simple Caesar Cipher tool to encrypt and decrypt text using a shift value."
     />
     <title>Caesar Cipher - {siteConfig.name}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Inter:wght@500&family=Reddit+Sans+Condensed:wght@900&display=swap"
+      rel="stylesheet"
+    />
   </head>
 
-  <body>
-    <div
-      class="relative isolate overflow-hidden bg-white min-h-screen"
-      style={`--accent-color: ${siteConfig.accentColor}; background-color: white;`}
-    >
-      <div class="fixed inset-0 -z-10 hero-overlay" aria-hidden="true"></div>
+  <body class="bg-concrete text-obsidian">
+    <Header />
 
-      <svg
-        aria-hidden="true"
-        class="hero-bg-svg fixed inset-0 -z-10 size-full stroke-gray-200 dark:stroke-gray-800"
-        style="mask-image: radial-gradient(100% 100% at top center, white, transparent);"
-      >
-        <defs>
-          <pattern
-            x="50%"
-            y={-1}
-            id="caesar-pattern"
-            width={200}
-            height={200}
-            patternUnits="userSpaceOnUse"
-          >
-            <path d="M.5 200V.5H200" fill="none"></path>
-          </pattern>
-        </defs>
-        <rect fill="url(#caesar-pattern)" width="100%" height="100%" stroke-width={0}></rect>
-      </svg>
+    <main class="min-h-screen py-32 flex items-center justify-center">
+      <section class="w-full max-w-4xl px-6 lg:px-8">
+        <!-- Section Title Block -->
+        <div class="text-center mb-12 flex flex-col items-center">
+          <span class="font-caveat text-graphite text-[28px] tracking-tight mb-2 select-none">
+            Text Encryption Tool
+          </span>
+          <h1 class="text-obsidian font-reddit-sans-condensed font-black text-display leading-none tracking-tighter uppercase select-none mb-4">
+            CAESAR CIPHER
+          </h1>
+        </div>
 
-      <Header />
+        <div class="bg-paper-white rounded-cards border border-silver/50 p-8 sm:p-10 shadow-subtle">
+          <div class="space-y-6">
+            <div>
+              <label for="inputText" class="block mb-2 font-inter font-medium text-body-sm text-obsidian select-none">
+                Input Text
+              </label>
+              <textarea
+                id="inputText"
+                rows="4"
+                class="w-full rounded-cards border border-silver/50 bg-concrete px-4 py-3 font-inter-display font-medium text-body text-obsidian focus:outline-none focus:border-silver transition-colors"
+                placeholder="Type text to encrypt or decrypt..."
+              ></textarea>
+            </div>
 
-      <main id="hero" class="relative py-24 md:py-32 min-h-screen">
-        <section class="mx-auto max-w-4xl px-6 lg:px-8">
-          <div class="text-center mb-10">
-            <h1 class="text-4xl sm:text-5xl font-bold text-gray-900 dark:text-white">
-              Caesar Cipher Tool
-            </h1>
-            <p class="mt-4 text-gray-600 dark:text-gray-300 text-lg">
-              Encrypt or decrypt text with a simple shift value.
-            </p>
-          </div>
-
-          <div class="bg-white dark:bg-gray-900/60 backdrop-blur-sm rounded-2xl border border-gray-200 dark:border-gray-800 p-6 sm:p-8 shadow-sm">
-            <div class="space-y-5">
-              <div>
-                <label for="inputText" class="block mb-2 text-sm font-medium text-gray-700 dark:text-gray-200">
-                  Input Text
-                </label>
-                <textarea
-                  id="inputText"
-                  rows="5"
-                  class="w-full rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 px-4 py-3 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-[var(--accent-color)]"
-                  placeholder="Type text to encrypt or decrypt..."
-                ></textarea>
-              </div>
-
-              <div>
-                <label for="shiftValue" class="block mb-2 text-sm font-medium text-gray-700 dark:text-gray-200">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div class="w-full sm:w-auto">
+                <label for="shiftValue" class="block mb-2 font-inter font-medium text-body-sm text-obsidian select-none">
                   Shift Value
                 </label>
                 <input
                   id="shiftValue"
                   type="number"
                   value="3"
-                  class="w-full sm:w-56 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 px-4 py-3 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-[var(--accent-color)]"
+                  class="w-full sm:w-48 rounded-cards border border-silver/50 bg-concrete px-4 py-2 font-inter-display font-medium text-body text-obsidian focus:outline-none focus:border-silver transition-colors"
                 />
               </div>
 
-              <div class="flex flex-wrap gap-3">
+              <div class="flex flex-wrap gap-3 self-end w-full sm:w-auto justify-end">
                 <button
                   id="encryptBtn"
-                  class="px-5 py-2.5 rounded-xl font-semibold text-white transition-all hover:opacity-90"
-                  style={`background-color: ${siteConfig.accentColor};`}
+                  class="px-5 py-2.5 rounded-buttons font-inter font-medium text-body-sm bg-solar-beam text-obsidian border border-solar-beam hover:bg-obsidian hover:text-paper-white hover:border-obsidian transition-colors cursor-pointer"
                 >
                   Encrypt
                 </button>
                 <button
                   id="decryptBtn"
-                  class="px-5 py-2.5 rounded-xl font-semibold text-white transition-all hover:opacity-90"
-                  style={`background-color: ${siteConfig.accentColor};`}
+                  class="px-5 py-2.5 rounded-buttons font-inter font-medium text-body-sm bg-solar-beam text-obsidian border border-solar-beam hover:bg-obsidian hover:text-paper-white hover:border-obsidian transition-colors cursor-pointer"
                 >
                   Decrypt
                 </button>
                 <button
                   id="swapBtn"
-                  class="px-5 py-2.5 rounded-xl font-semibold bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100 hover:bg-gray-200 dark:hover:bg-gray-700 transition-all"
+                  class="px-5 py-2.5 rounded-buttons font-inter font-medium text-body-sm bg-concrete text-obsidian border border-silver/50 hover:bg-solar-beam hover:border-solar-beam transition-colors cursor-pointer"
                 >
                   Swap
                 </button>
                 <button
                   id="clearBtn"
-                  class="px-5 py-2.5 rounded-xl font-semibold bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100 hover:bg-gray-200 dark:hover:bg-gray-700 transition-all"
+                  class="px-5 py-2.5 rounded-buttons font-inter font-medium text-body-sm bg-concrete text-obsidian border border-silver/50 hover:bg-solar-beam hover:border-solar-beam transition-colors cursor-pointer"
                 >
                   Clear
                 </button>
               </div>
+            </div>
 
-              <div>
-                <label for="outputText" class="block mb-2 text-sm font-medium text-gray-700 dark:text-gray-200">
-                  Output
-                </label>
-                <textarea
-                  id="outputText"
-                  rows="5"
-                  readonly
-                  class="w-full rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900 px-4 py-3 text-gray-900 dark:text-gray-100 focus:outline-none"
-                  placeholder="Result will appear here..."
-                ></textarea>
-              </div>
+            <div>
+              <label for="outputText" class="block mb-2 font-inter font-medium text-body-sm text-obsidian select-none">
+                Output
+              </label>
+              <textarea
+                id="outputText"
+                rows="4"
+                readonly
+                class="w-full rounded-cards border border-silver/50 bg-concrete px-4 py-3 font-inter-display font-medium text-body text-obsidian focus:outline-none cursor-default select-all"
+                placeholder="Result will appear here..."
+              ></textarea>
             </div>
           </div>
-        </section>
-      </main>
+        </div>
+      </section>
+    </main>
 
-      <Footer />
-      <ThemeToggle />
-    </div>
+    <Footer />
 
     <script>
+      // @ts-nocheck
       function caesarCipher(text, shift) {
         let result = "";
         for (let i = 0; i < text.length; i++) {

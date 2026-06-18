@@ -1,10 +1,9 @@
-:root {
-  --link-bg: #111827;
-  --button-radius: 10px;
-}
+/* links.css — adapted for Daniel Sun Style Guide */
 
-/* inherit site font from global.css */
-body { background: transparent; }
+body {
+  background-color: var(--color-concrete) !important;
+  color: var(--color-obsidian) !important;
+}
 
 .links-container {
   min-height: 100vh;
@@ -12,7 +11,6 @@ body { background: transparent; }
   align-items: center;
   justify-content: center;
   padding: 48px 16px;
-  background: transparent;
 }
 
 .column {
@@ -25,98 +23,120 @@ body { background: transparent; }
   height: 128px;
   object-fit: cover;
   display: block;
-  margin: 0 auto 16px;
+  margin: 0 auto 24px;
 }
-.avatar--rounded { border-radius: 9999px; }
+.avatar--rounded {
+  border-radius: 9999px;
+  border: 2px solid var(--color-obsidian);
+}
 
 h1 {
-  font-size: 1.5rem;
-  margin: 0 0 8px;
+  font-family: var(--font-reddit-sans-condensed), sans-serif;
+  font-weight: 900;
+  font-size: var(--text-heading-lg);
+  color: var(--color-obsidian);
+  text-transform: uppercase;
+  letter-spacing: -1px;
+  margin: 0 0 12px;
 }
 
 .lead {
-  color: #6b7280;
-  font-size: 0.95rem;
-  margin: 0 0 20px;
+  font-family: var(--font-inter-display), sans-serif;
+  font-weight: 500;
+  color: var(--color-graphite);
+  font-size: var(--text-body);
+  line-height: 1.4;
+  margin: 0 auto 24px;
+  max-width: 540px;
 }
 
 .button-stack {
-  /* Use grid so we can easily switch between 1 and 2 columns responsively */
   display: grid;
   grid-template-columns: 1fr;
-  gap: 12px 12px;
-  margin-top: 16px;
+  gap: 12px;
+  margin-top: 24px;
   align-items: start;
-  justify-items: stretch; /* make buttons fill their grid cell for consistent sizing */
-  grid-auto-rows: min-content;
+  justify-items: stretch;
 }
 
 .button {
   display: inline-flex;
   align-items: center;
   gap: 12px;
-  padding: 12px 20px;
-  border-radius: 8px;
+  padding: 12px 24px;
+  border-radius: var(--radius-buttons);
   text-decoration: none;
-  color: white;
-  font-weight: 600;
-  width: 100%; /* fill the grid cell */
-  max-width: none; /* allow grid to control sizing */
+  font-family: var(--font-inter), sans-serif;
+  font-weight: 500;
+  font-size: var(--text-body-sm);
+  color: var(--color-obsidian) !important;
+  width: 100%;
   justify-content: center;
   box-sizing: border-box;
-  white-space: normal; /* allow wrapping */
-  word-break: break-word; /* prevent one long token from breaking layout */
-  hyphens: auto;
   text-align: center;
+  border: 1px solid var(--color-silver);
+  background: var(--color-concrete);
+  transition: all 0.2s ease;
 }
-.button .icon { width: 20px; height: 20px; display: inline-flex; flex-shrink: 0; align-items: center; justify-content: center; }
-.button img { display: inline-block; max-width: 20px; height: auto; }
 
-.button-default { background: var(--accent-color, #1d4ed8); }
-.button-github { background: #24292f; }
-.button-instagram { background: #e1306c; }
-.button-linked { background: #0a66c2; }
-.button-yt { background: #ff0000; }
+.button .icon {
+  width: 18px;
+  height: 18px;
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+}
 
-footer { margin-top: 20px; color: #9ca3af; font-size: 0.9rem; }
+.button-default {
+  background: var(--color-solar-beam);
+  border-color: var(--color-solar-beam);
+}
+
+.button:hover {
+  background: var(--color-solar-beam);
+  border-color: var(--color-solar-beam);
+}
+
+.button-default:hover {
+  background: var(--color-obsidian);
+  border-color: var(--color-obsidian);
+  color: var(--color-paper-white) !important;
+}
+
+/* Override standard network icons to remain flat monochrome or solar beam */
+.button img {
+  filter: grayscale(1) brightness(0);
+}
+.button-default img {
+  filter: none;
+}
+.button:hover img {
+  filter: grayscale(1) brightness(0);
+}
+.button-default:hover img {
+  filter: invert(1) brightness(2);
+}
+
+.card {
+  background: var(--color-paper-white) !important;
+  border-radius: var(--radius-cards) !important;
+  border: 1px solid var(--color-silver) !important;
+  box-shadow: var(--shadow-subtle) !important;
+  padding: 40px !important;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+footer {
+  margin-top: 32px;
+  color: var(--color-ash);
+  font-family: var(--font-system-sans), sans-serif;
+  font-size: var(--text-caption);
+}
 
 @media (min-width: 640px) {
-  .button-stack { gap: 14px 16px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .avatar { width: 140px; height: 140px; }
+  .button-stack {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
-
-@media (max-width: 640px) {
-  .avatar { width: 96px; height: 96px; }
-  .button { width: 100%; padding: 12px 16px; }
-  .card { padding: 20px; margin: 0 12px; }
-}
-
-/* Allow normal scrolling; hero container handles full height when needed */
-.links-container { overflow: visible; }
-
-/* Theme-specific tweaks to match global.css variables */
-/* Dark theme handled by attribute selector */
-:root[data-theme='dark'] .lead { color: var(--color-gray-300, #cbd5e1); }
-:root[data-theme='dark'] footer { color: var(--color-gray-400, #9ca3af); }
-:root[data-theme='dark'] .button { color: var(--text-white, #f3f4f6); }
-
-:root[data-theme='light'] .lead { color: var(--color-gray-600, #6b7280); }
-:root[data-theme='light'] footer { color: var(--color-gray-500, #9ca3af); }
-
-/* Optional background image layer for /links (place public/images/links-bg.jpg) */
-.links-bg {
-  /* Optional background image layer for /links. If the image is missing, fall back
-     to a neutral hero background color to avoid white gaps on mobile. */
-  background-image: url('/images/links-bg.jpg');
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-color: #f9fafb; /* light fallback */
-  filter: brightness(0.95) saturate(0.95);
-}
-
-/* Dark tweaks for links background are handled by attribute selector */
-:root[data-theme='dark'] .links-bg { filter: brightness(0.45) saturate(0.6); }
-/* Dark fallback color when optional image isn't present */
-:root[data-theme='dark'] .links-bg { background-color: #0b0b10; }
-

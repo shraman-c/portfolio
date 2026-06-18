@@ -2,153 +2,37 @@
 import { siteConfig } from "../config";
 
 const hasProjects = siteConfig.projects && siteConfig.projects.length > 0;
-const hasExperience = (siteConfig as any).experience && (siteConfig as any).experience.length > 0;
-const hasEducation = siteConfig.education && siteConfig.education.length > 0;
 ---
 
 <header
   id="header"
-  class="fixed top-0 left-0 right-0 z-50 hidden md:block transition-all duration-200 ease-in-out"
+  class="fixed top-0 left-0 right-0 z-50 flex justify-center pt-6"
 >
-  <nav class="max-w-7xl mx-auto px-8 py-4">
-    <ul class="flex items-center gap-8 justify-center">
-      <li>
-        <a
-          href="/#about"
-          class="text-gray-700 transition-colors font-medium hover:text-[var(--accent-color)]"
-          style={`--accent-color: ${siteConfig.accentColor}`}
-        >
-          About
-        </a>
-      </li>
-
-      { hasProjects && (
-        <li>
-          <a
-            href="/#projects"
-            class="text-gray-700 transition-colors font-medium hover:text-[var(--accent-color)]"
-            style={`--accent-color: ${siteConfig.accentColor}`}
-          >
-            Projects
-          </a>
-        </li>
-      ) }
-
-      { hasExperience && (
-        <li>
-          <a
-            href="/#experience"
-            class="text-gray-700 transition-colors font-medium hover:text-[var(--accent-color)]"
-            style={`--accent-color: ${siteConfig.accentColor}`}
-          >
-            Experience
-          </a>
-        </li>
-      ) }
-
-      { hasEducation && (
-        <li>
-          <a
-            href="/#education"
-            class="text-gray-700 transition-colors font-medium hover:text-[var(--accent-color)]"
-            style={`--accent-color: ${siteConfig.accentColor}`}
-          >
-            Education
-          </a>
-        </li>
-      ) }
-
-      <li>
-        <a
-          href="/#achievements"
-          class="text-gray-700 transition-colors font-medium hover:text-[var(--accent-color)]"
-          style={`--accent-color: ${siteConfig.accentColor}`}
-        >
-        Achievements
-        </a>
-        
-      <li>
-        <a
-          href="/#certifications"
-          class="text-gray-700 transition-colors font-medium hover:text-[var(--accent-color)]"
-          style={`--accent-color: ${siteConfig.accentColor}`}
-        >
-        Certifications
-        </a>
-        
-      </li>
-      <li>
-        <a
-          href="/connect"
-          class="text-gray-700 transition-colors font-medium hover:text-[var(--accent-color)]"
-          style={`--accent-color: ${siteConfig.accentColor}`}
-        >
-          Connect
-        </a>
-        
-      </li>
-      <li>
-        <a
-          href="/caesar-cipher"
-          class="text-gray-700 transition-colors font-medium hover:text-[var(--accent-color)]"
-          style={`--accent-color: ${siteConfig.accentColor}`}
-        >
-          Caesar Cipher
-        </a>
-        
-      </li>
-      <li>
-        <a
-          href="/#classroom-notes"
-          class="text-gray-700 transition-colors font-medium hover:text-[var(--accent-color)]"
-          style={`--accent-color: ${siteConfig.accentColor}`}
-        >
-          Classroom Notes
-        </a>
-        
-      </li>
-
-
+  <nav class="flex items-center gap-6 pl-6 pr-2 py-2 bg-[#1f1f1f] text-paper-white rounded-navcapsule font-inter text-body-sm transition-all duration-300 ease-in-out shadow-none border-none">
+    <!-- Icon Glyph -->
+    <div class="flex items-center justify-center">
+      <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-3 h-3">
+        <circle cx="6" cy="6" r="5" stroke="white" stroke-width="1"/>
+      </svg>
+    </div>
+    
+    <!-- Nav Links -->
+    <ul class="flex items-center gap-6">
+      { hasProjects && <li><a href="/#projects" class="hover:text-solar-beam transition-colors font-medium">Work</a></li> }
+      <li><a href="/#about" class="hover:text-solar-beam transition-colors font-medium">Story</a></li>
+      <li><a href="/#classroom-notes" class="hover:text-solar-beam transition-colors font-medium">Process</a></li>
+      <li><a href="/connect" class="hover:text-solar-beam transition-colors font-medium">Connect</a></li>
     </ul>
+
+    <!-- Highlight Button -->
+    <a 
+      href="/#projects" 
+      class="px-5 py-2 bg-solar-beam text-obsidian rounded-buttons font-inter text-body-sm font-medium hover:bg-white hover:text-obsidian transition-colors duration-200"
+    >
+      View Work
+    </a>
   </nav>
 </header>
-
-<script>
-  const LIGHT_CLASSES = ["bg-white/80", "backdrop-blur-sm", "border-b", "border-gray-200", "shadow-sm"];
-  const DARK_CLASSES = ["backdrop-blur-sm", "border-b", "border-gray-200", "shadow-sm", "bg-[#0b0b10]/70"];
-
-  function getCurrentTheme() {
-    const root = document.documentElement;
-    const forced = root.getAttribute('data-theme');
-    if (forced === 'dark' || forced === 'light') return forced;
-    try {
-      const stored = localStorage.getItem('theme');
-      if (stored === 'dark' || stored === 'light') return stored;
-    } catch(e) {}
-    return 'light';
-  }
-
-  function updateHeaderBackground() {
-    const header = document.getElementById('header');
-    if (!header) return;
-    // Clean previous
-    [...LIGHT_CLASSES, ...DARK_CLASSES].forEach(c => header.classList.remove(c));
-
-    if (window.scrollY > 100) {
-      const theme = getCurrentTheme();
-      const classes = theme === 'dark' ? DARK_CLASSES : LIGHT_CLASSES;
-      classes.forEach(c => header.classList.add(c));
-    }
-  }
-
-  window.addEventListener('scroll', updateHeaderBackground, { passive: true });
-  window.addEventListener('resize', updateHeaderBackground);
-  // Update on theme toggle
-  const mo = new MutationObserver(updateHeaderBackground);
-  mo.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
-  // Initial
-  updateHeaderBackground();
-</script>
 
 <style>
   html {

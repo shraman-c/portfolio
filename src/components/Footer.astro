@@ -2,30 +2,32 @@
 import { siteConfig } from "../config";
 
 const hasProjects = siteConfig.projects && siteConfig.projects.length > 0;
-const hasExperience = (siteConfig as any).experience && (siteConfig as any).experience.length > 0;
 const hasEducation = siteConfig.education && siteConfig.education.length > 0;
 ---
 
-<footer class="relative bg-gray-50 border-t border-gray-200">
-  <div class="mx-auto max-w-6xl px-4 py-4 lg:px-8">
-    <div class="flex flex-col items-center text-center gap-2">
-      <h3 class="text-xl font-semibold text-gray-800">{siteConfig.name}</h3>
-      <p class="text-sm text-gray-600">{siteConfig.title}</p>
+<footer class="bg-concrete border-t border-silver py-12 px-6 sm:px-12 md:px-24">
+  <div class="mx-auto max-w-[1200px]">
+    <div class="flex flex-col items-center text-center gap-6">
+      <div class="space-y-1">
+        <h3 class="font-reddit-sans-condensed font-black text-heading text-obsidian tracking-tight uppercase">{siteConfig.name}</h3>
+        <p class="font-inter-display font-medium text-body-sm text-graphite">{siteConfig.title}</p>
+      </div>
 
-    <nav class="footer-nav mt-1">
-        <div class="footer-items">
-          <a href="/#about" class="text-sm text-gray-600 hover:text-[var(--accent-color)]" style={`--accent-color: ${siteConfig.accentColor}`}>About</a>
-          <a href="/classroom-notes" class="text-sm text-gray-600 hover:text-[var(--accent-color)]" style={`--accent-color: ${siteConfig.accentColor}`}>Notes</a>
-          <a href="/#projects" class="text-sm text-gray-600 hover:text-[var(--accent-color)]" style={`--accent-color: ${siteConfig.accentColor}`}>Projects</a>
-          <a href="/#education" class="text-sm text-gray-600 hover:text-[var(--accent-color)]" style={`--accent-color: ${siteConfig.accentColor}`}>Education</a>
-          <a href="/caesar-cipher" class="text-sm text-gray-600 hover:text-[var(--accent-color)]" style={`--accent-color: ${siteConfig.accentColor}`}>Caesar Cipher</a>
-          <a href="/connect" class="text-sm text-gray-600 hover:text-[var(--accent-color)]" style={`--accent-color: ${siteConfig.accentColor}`}>Connect</a>
+      <!-- Navigation Links -->
+      <nav class="footer-nav w-full">
+        <div class="footer-items flex flex-wrap justify-center gap-x-8 gap-y-3 font-inter font-medium text-body-sm text-graphite">
+          <a href="/#about" class="hover:text-obsidian transition-colors">Story</a>
+          { hasProjects && <a href="/#projects" class="hover:text-obsidian transition-colors">Work</a> }
+          <a href="/#classroom-notes" class="hover:text-obsidian transition-colors">Process</a>
+          { hasEducation && <a href="/#education" class="hover:text-obsidian transition-colors">Education</a> }
+          <a href="/caesar-cipher" class="hover:text-obsidian transition-colors">Caesar Cipher</a>
+          <a href="/connect" class="hover:text-obsidian transition-colors">Connect</a>
         </div>
 
-        <div class="footer-columns" aria-hidden="true">
-          <div class="footer-col footer-col-left"></div>
-          <div class="footer-col footer-col-center"></div>
-          <div class="footer-col footer-col-right"></div>
+        <div class="footer-columns hidden sm:hidden" aria-hidden="true">
+          <div class="footer-col footer-col-left flex flex-col gap-2"></div>
+          <div class="footer-col footer-col-center flex flex-col gap-2"></div>
+          <div class="footer-col footer-col-right flex flex-col gap-2"></div>
         </div>
       </nav>
 
@@ -44,13 +46,14 @@ const hasEducation = siteConfig.education && siteConfig.education.length > 0;
             center: nav.querySelector('.footer-col-center'),
             right: nav.querySelector('.footer-col-right')
           };
-          if (!itemsContainer || !cols.left || !cols.center || !cols.right) return;
+          const footerColsContainer = nav.querySelector('.footer-columns');
+          if (!itemsContainer || !cols.left || !cols.center || !cols.right || !footerColsContainer) return;
 
           const anchors = Array.from(itemsContainer.querySelectorAll('a'));
           // On large screens show the inline items and hide the columns
           if (window.innerWidth > BREAKPOINT) {
-            itemsContainer.style.display = '';
-            nav.querySelector('.footer-columns').style.display = 'none';
+            itemsContainer.style.display = 'flex';
+            footerColsContainer.style.display = 'none';
             // move any anchors back into the itemsContainer in original order
             anchors.concat(Array.from(cols.left.children), Array.from(cols.center.children), Array.from(cols.right.children)).forEach(a => {
               if (a && a.tagName === 'A') itemsContainer.appendChild(a);
@@ -60,7 +63,8 @@ const hasEducation = siteConfig.education && siteConfig.education.length > 0;
 
           // Mobile: hide the original inline list and use the three columns
           itemsContainer.style.display = 'none';
-          nav.querySelector('.footer-columns').style.display = '';
+          footerColsContainer.style.display = 'grid';
+          footerColsContainer.className = 'footer-columns grid grid-cols-3 gap-4 font-inter font-medium text-body-sm text-graphite';
 
           // Clear columns
           cols.left.innerHTML = '';
@@ -91,37 +95,22 @@ const hasEducation = siteConfig.education && siteConfig.education.length > 0;
         if (typeof window !== 'undefined') {
           window.addEventListener('DOMContentLoaded', arrange);
           window.addEventListener('resize', () => { requestAnimationFrame(arrange); });
+          arrange(); // run immediately
         }
       })();
       </script>
 
-  <p class="text-sm text-gray-500 mt-3 footer-made-with">Powered by <a class="underline hover:text-[var(--accent-color)]" style={`--accent-color: ${siteConfig.accentColor}`} href="https://astro.build" target="_blank" rel="noopener noreferrer">Astro</a> · <a class="underline hover:text-[var(--accent-color)]" style={`--accent-color: ${siteConfig.accentColor}`} href="https://tailwindcss.com" target="_blank" rel="noopener noreferrer">Tailwind CSS</a> · <a class="underline hover:text-[var(--accent-color)]" style={`--accent-color: ${siteConfig.accentColor}`} href="https://react.dev" target="_blank" rel="noopener noreferrer">React</a> · <a class="underline hover:text-[var(--accent-color)]" style={`--accent-color: ${siteConfig.accentColor}`} href="https://www.typescriptlang.org" target="_blank" rel="noopener noreferrer">TypeScript</a> · <a class="underline hover:text-[var(--accent-color)]" style={`--accent-color: ${siteConfig.accentColor}`} href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank" rel="noopener noreferrer">JavaScript</a></p>
-      <p class="text-sm text-gray-500 mt-1">© {new Date().getFullYear()} {siteConfig.name}. All rights reserved.</p>
-    </div>
-  </div>
+      <div class="w-full h-[1px] bg-silver/50 my-2"></div>
 
-  <!-- Decorative pattern -->
-  <div class="absolute inset-0 -z-10 overflow-hidden">
-    <svg
-      aria-hidden="true"
-      class="absolute bottom-0 left-0 w-full h-8 text-gray-100"
-    >
-      <pattern
-        id="footer-pattern"
-        x="0"
-        y="0"
-        width="100"
-        height="100"
-        patternUnits="userSpaceOnUse"
-      >
-        <path
-          d="M0 50 Q 25 40, 50 50 T 100 50"
-          stroke="currentColor"
-          stroke-width="0.5"
-          fill="none"
-          opacity="0.4"></path>
-      </pattern>
-      <rect width="100%" height="100%" fill="url(#footer-pattern)"></rect>
-    </svg>
+      <div class="flex flex-col sm:flex-row sm:justify-between w-full font-system-sans text-caption text-ash gap-2">
+        <p>© {new Date().getFullYear()} {siteConfig.name}. All rights reserved.</p>
+        <p class="footer-made-with">
+          Powered by 
+          <a class="hover:text-obsidian underline transition-colors" href="https://astro.build" target="_blank" rel="noopener noreferrer">Astro</a> · 
+          <a class="hover:text-obsidian underline transition-colors" href="https://tailwindcss.com" target="_blank" rel="noopener noreferrer">Tailwind CSS</a> · 
+          <a class="hover:text-obsidian underline transition-colors" href="https://react.dev" target="_blank" rel="noopener noreferrer">React</a>
+        </p>
+      </div>
+    </div>
   </div>
 </footer>

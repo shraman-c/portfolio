@@ -1,7 +1,6 @@
 ---
 import { siteConfig } from "../config";
 import Header from "../components/Header.astro";
-import ThemeToggle from "../components/ThemeToggle.astro";
 import Footer from "../components/Footer.astro";
 import "../styles/global.css";
 
@@ -45,276 +44,240 @@ const techStack = ["Python 3.9+", "Watchdog", "Tkinter", "PyInstaller", "Cross-p
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="color-scheme" content="light dark" />
     <link rel="icon" href="/favicon.svg" />
     <meta name="description" content="Watcher - Auto-organize your downloads and folders by file type in real-time. Works on Windows, macOS, and Linux." />
     <title>Watcher - Auto-Organize Files by Type</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Inter:wght@500&family=Reddit+Sans+Condensed:wght@900&display=swap"
+      rel="stylesheet"
+    />
   </head>
-  <body>
-    <div class="relative isolate overflow-hidden bg-white min-h-screen" style={`--accent-color: #3b82f6; background-color: white;`} data-dark-bg="#0b0b10">
-      <!-- Gradient overlay -->
+  <body class="bg-concrete text-obsidian">
+    <Header />
+
+    <!-- Hero Section -->
+    <main class="relative py-32 flex items-center justify-center min-h-[70vh]">
+      <!-- Diagonal wash of light -->
       <div
-        class="fixed inset-0 -z-10 hero-overlay"
-        style={`background: radial-gradient(ellipse 800px 1200px at 50% 0%, color-mix(in srgb, var(--accent-color) 25%, transparent) 0%, color-mix(in srgb, var(--accent-color) 15%, transparent) 20%, color-mix(in srgb, var(--accent-color) 8%, transparent) 40%, rgba(255, 255, 255, 0.3) 70%, rgba(255, 255, 255, 0.8) 90%, white 100%)`}
+        class="absolute top-0 right-0 w-[60%] h-full -z-10 pointer-events-none"
+        style="background: radial-gradient(circle at 100% 0%, var(--color-solar-beam) 0%, transparent 60%); opacity: 0.25; filter: blur(40px);"
       ></div>
 
-      <svg
-        aria-hidden="true"
-        class="hero-bg-svg fixed inset-0 -z-10 size-full stroke-gray-200 dark:stroke-gray-800"
-        style="mask-image: radial-gradient(100% 100% at top center, white, transparent);"
-      >
-        <defs>
-          <pattern
-            x="50%"
-            y={-1}
-            id="watcher-pattern"
-            width={200}
-            height={200}
-            patternUnits="userSpaceOnUse"
+      <div class="mx-auto max-w-4xl px-6 lg:px-8 text-center flex flex-col items-center">
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 bg-paper-white border border-silver/50 rounded-buttons mb-8 select-none shadow-subtle">
+          <span class="relative flex h-2 w-2">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-solar-beam opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-solar-beam"></span>
+          </span>
+          <span class="font-inter font-medium text-caption text-graphite">v1.0.0.1a Now Available</span>
+        </div>
+        
+        <h1 class="text-obsidian font-reddit-sans-condensed font-black text-display leading-none tracking-tighter uppercase select-none mb-6">
+          WATCHER
+        </h1>
+        
+        <p class="font-inter-display font-medium text-body text-graphite mb-10 leading-relaxed max-w-2xl">
+          Stop managing messy download folders. Automatically organize files by type in real-time with intelligent categorization.
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+          <a 
+            href="https://github.com/shraman-c/watcher/releases" 
+            target="_blank"
+            rel="noopener noreferrer"
+            class="px-8 py-3 bg-solar-beam text-obsidian border border-solar-beam rounded-buttons font-inter font-medium text-body-sm hover:bg-obsidian hover:text-paper-white hover:border-obsidian transition-colors duration-200 cursor-pointer flex items-center gap-2"
           >
-            <path d="M.5 200V.5H200" fill="none"></path>
-          </pattern>
-        </defs>
-        <rect fill="url(#watcher-pattern)" width="100%" height="100%" stroke-width={0}></rect>
-      </svg>
-
-      <Header />
-
-      <!-- Hero Section -->
-      <div id="hero" class="relative py-24 md:py-32">
-        <main class="mx-auto max-w-7xl px-6 lg:px-8">
-          <div class="mx-auto max-w-4xl text-center">
-            <div class="inline-flex items-center gap-2 px-4 py-2 bg-blue-50 dark:bg-gray-800 border border-blue-200 dark:border-gray-600 rounded-full mb-8">
-              <span class="relative flex h-2 w-2">
-                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
-                <span class="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
-              </span>
-              <span class="text-sm font-medium text-blue-900 dark:text-white">v1.0.0.1a Now Available</span>
-            </div>
-            
-            <h1 class="text-5xl sm:text-6xl md:text-7xl font-bold mb-6 text-gray-900 dark:text-white">
-              <span style="color: #3b82f6">Watcher</span>
-              <br />
-              <span class="text-gray-900 dark:text-gray-100">Auto-Organize Your Files</span>
-            </h1>
-            
-            <p class="text-xl sm:text-2xl text-gray-600 dark:text-gray-300 mb-12 leading-relaxed">
-              Stop managing messy download folders. Automatically organize files by type in real-time with intelligent categorization.
-            </p>
-
-            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <a 
-                href="https://github.com/shraman-c/watcher/releases" 
-                target="_blank"
-                rel="noopener noreferrer"
-                class="px-8 py-4 rounded-xl font-semibold text-white transition-all duration-300 hover:shadow-xl hover:-translate-y-1 flex items-center gap-2 bg-blue-600 hover:bg-blue-700"
-              >
-                Download Now
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-                </svg>
-              </a>
-              <a 
-                href="#features" 
-                class="px-8 py-4 bg-gray-100 dark:bg-gray-800 rounded-xl font-semibold text-gray-900 dark:text-gray-100 hover:bg-gray-200 dark:hover:bg-gray-700 transition-all duration-300"
-              >
-                Learn More
-              </a>
-              <a 
-                href="https://github.com/shraman-c/watcher" 
-                target="_blank"
-                rel="noopener noreferrer"
-                class="px-8 py-4 bg-gray-100 dark:bg-gray-800 rounded-xl font-semibold text-gray-900 dark:text-gray-100 hover:bg-gray-200 dark:hover:bg-gray-700 transition-all duration-300 flex items-center gap-2"
-              >
-                View on GitHub
-                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
-                </svg>
-              </a>
-            </div>
-          </div>
-        </main>
+            <span>Download Now</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+            </svg>
+          </a>
+          <a 
+            href="#features" 
+            class="px-8 py-3 bg-concrete text-obsidian border border-silver/50 rounded-buttons font-inter font-medium text-body-sm hover:bg-solar-beam hover:border-solar-beam transition-colors duration-200 cursor-pointer"
+          >
+            Learn More
+          </a>
+          <a 
+            href="https://github.com/shraman-c/watcher" 
+            target="_blank"
+            rel="noopener noreferrer"
+            class="px-8 py-3 bg-concrete text-obsidian border border-silver/50 rounded-buttons font-inter font-medium text-body-sm hover:bg-solar-beam hover:border-solar-beam transition-colors duration-200 cursor-pointer flex items-center gap-2"
+          >
+            <span>GitHub</span>
+          </a>
+        </div>
       </div>
+    </main>
 
-      <!-- Features Section -->
-      <section id="features" class="relative p-8 sm:p-12 md:p-16 lg:p-24">
-        <div class="max-w-7xl mx-auto">
-          <div class="text-center mb-16">
-            <h2 class="text-4xl sm:text-5xl md:text-6xl font-bold text-gray-900 dark:text-white mb-4">
-              Powerful Features
-            </h2>
-            <div class="w-24 h-1.5 mx-auto rounded-full bg-blue-600"></div>
-            <p class="text-xl text-gray-600 dark:text-gray-300 mt-6 max-w-3xl mx-auto">
-              Everything you need to automatically organize your files with precision and ease
+    <!-- Features Section -->
+    <section id="features" class="py-24 px-8 sm:px-12 md:px-24 border-t border-silver/30 bg-concrete flex flex-col items-center text-center">
+      <div class="w-full max-w-[1200px] flex flex-col items-center">
+        <!-- Section Title Block -->
+        <div class="flex flex-col items-center mb-16">
+          <span class="font-caveat text-graphite text-[28px] tracking-tight mb-2 select-none">
+            Auto-organize Folders
+          </span>
+          <h2 class="text-obsidian font-reddit-sans-condensed font-black text-display leading-none tracking-tighter uppercase select-none">
+            FEATURES
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full text-left">
+          {features.map((feature) => (
+            <div class="group bg-paper-white p-8 sm:p-10 rounded-cards border border-silver/50 shadow-subtle hover:border-silver transition-all duration-300">
+              <div class="text-5xl mb-4 select-none">{feature.icon}</div>
+              <h3 class="font-inter font-medium text-subheading text-obsidian mb-3">
+                {feature.title}
+              </h3>
+              <p class="font-inter-display font-medium text-body text-graphite leading-relaxed">
+                {feature.description}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Built for Everyone Section -->
+    <section class="py-24 px-8 sm:px-12 md:px-24 border-t border-silver/30 bg-concrete flex flex-col items-center text-center">
+      <div class="w-full max-w-[1200px] flex flex-col items-center">
+        <!-- Section Title Block -->
+        <div class="flex flex-col items-center mb-16">
+          <span class="font-caveat text-graphite text-[28px] tracking-tight mb-2 select-none">
+            Accessible & Lightweight
+          </span>
+          <h2 class="text-obsidian font-reddit-sans-condensed font-black text-display leading-none tracking-tighter uppercase select-none">
+            VERSATILE
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 w-full text-left">
+          <div class="bg-paper-white p-8 sm:p-10 rounded-cards border border-silver/50 shadow-subtle hover:border-silver transition-colors duration-300">
+            <div class="text-4xl mb-4 select-none">🖥️</div>
+            <h3 class="font-inter font-medium text-subheading text-obsidian mb-3">Modern GUI</h3>
+            <p class="font-inter-display font-medium text-body text-graphite leading-relaxed">
+              Intuitive tkinter interface with drag-and-drop folder management, inline rules editor, and real-time status monitoring.
             </p>
           </div>
 
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {features.map((feature) => (
-              <div class="group bg-white dark:bg-gray-900/60 p-8 rounded-2xl border border-gray-200 dark:border-gray-800 hover:border-gray-300 dark:hover:border-gray-700 transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
-                <div class="text-5xl mb-4">{feature.icon}</div>
-                <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-3">
-                  {feature.title}
-                </h3>
-                <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
-                  {feature.description}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <!-- Key Highlights Section -->
-      <section class="relative p-8 sm:p-12 md:p-16 lg:p-24">
-        <div class="max-w-7xl mx-auto">
-          <div class="text-center mb-16">
-            <h2 class="text-4xl sm:text-5xl md:text-6xl font-bold text-gray-900 dark:text-white mb-4">
-              Built for Everyone
-            </h2>
-            <div class="w-24 h-1.5 mx-auto rounded-full bg-blue-600"></div>
-          </div>
-
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div class="bg-white dark:bg-gray-900/60 p-8 rounded-2xl border border-gray-200 dark:border-gray-800">
-              <div class="text-4xl mb-4">🖥️</div>
-              <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Modern GUI</h3>
-              <p class="text-gray-600 dark:text-gray-300">
-                Intuitive tkinter interface with drag-and-drop folder management, inline rules editor, and real-time status monitoring.
-              </p>
-            </div>
-
-            <div class="bg-white dark:bg-gray-900/60 p-8 rounded-2xl border border-gray-200 dark:border-gray-800">
-              <div class="text-4xl mb-4">⚡</div>
-              <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Powerful CLI</h3>
-              <p class="text-gray-600 dark:text-gray-300">
-                Full-featured command-line interface with custom rules, batch operations, and automation support for advanced users.
-              </p>
-            </div>
-
-            <div class="bg-white dark:bg-gray-900/60 p-8 rounded-2xl border border-gray-200 dark:border-gray-800">
-              <div class="text-4xl mb-4">🌍</div>
-              <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Cross-Platform</h3>
-              <p class="text-gray-600 dark:text-gray-300">
-                Runs seamlessly on Windows, macOS, and Linux. Single executable or Python script - your choice.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Tech Stack Section -->
-      <section class="relative p-8 sm:p-12 md:p-16 lg:p-24">
-        <div class="max-w-7xl mx-auto">
-          <div class="text-center mb-16">
-            <h2 class="text-4xl sm:text-5xl md:text-6xl font-bold text-gray-900 dark:text-white mb-4">
-              Built With Modern Tech
-            </h2>
-            <div class="w-24 h-1.5 mx-auto rounded-full bg-blue-600"></div>
-          </div>
-
-          <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
-            {techStack.map((tech) => (
-              <div class="bg-gray-50 dark:bg-gray-900/60 p-6 rounded-xl border border-gray-200 dark:border-gray-800 text-center hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
-                <p class="font-semibold text-gray-900 dark:text-white">{tech}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <!-- Quick Start Section -->
-      <section class="relative p-8 sm:p-12 md:p-16 lg:p-24">
-        <div class="max-w-4xl mx-auto">
-          <div class="bg-white dark:bg-gray-900/60 backdrop-blur-sm rounded-2xl p-12 border border-gray-200 dark:border-gray-800">
-            <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">
-              Get Started in 30 Seconds
-            </h2>
-            <div class="space-y-6 text-gray-600 dark:text-gray-300">
-              <div class="flex gap-4">
-                <div class="flex-shrink-0">
-                  <div class="flex items-center justify-center h-12 w-12 rounded-md bg-blue-600 text-white font-bold">1</div>
-                </div>
-                <div>
-                  <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Download</h3>
-                  <p>Grab the latest release from GitHub - no installation needed for Windows users</p>
-                </div>
-              </div>
-              <div class="flex gap-4">
-                <div class="flex-shrink-0">
-                  <div class="flex items-center justify-center h-12 w-12 rounded-md bg-blue-600 text-white font-bold">2</div>
-                </div>
-                <div>
-                  <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Add Folders</h3>
-                  <p>Select the folders you want Watcher to monitor (Downloads, Desktop, etc.)</p>
-                </div>
-              </div>
-              <div class="flex gap-4">
-                <div class="flex-shrink-0">
-                  <div class="flex items-center justify-center h-12 w-12 rounded-md bg-blue-600 text-white font-bold">3</div>
-                </div>
-                <div>
-                  <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Start Watching</h3>
-                  <p>Click Start and watch as your files are organized automatically in real-time</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- CTA Section -->
-      <section class="relative p-8 sm:p-12 md:p-16 lg:p-24">
-        <div class="max-w-4xl mx-auto text-center">
-          <div class="bg-white dark:bg-gray-900/60 backdrop-blur-sm rounded-2xl p-12 border border-gray-200 dark:border-gray-800">
-            <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">
-              Never Sort Files Manually Again
-            </h2>
-            <p class="text-xl text-gray-600 dark:text-gray-300 mb-8">
-              Join developers and students who've already automated their file organization
+          <div class="bg-paper-white p-8 sm:p-10 rounded-cards border border-silver/50 shadow-subtle hover:border-silver transition-colors duration-300">
+            <div class="text-4xl mb-4 select-none">⚡</div>
+            <h3 class="font-inter font-medium text-subheading text-obsidian mb-3">Powerful CLI</h3>
+            <p class="font-inter-display font-medium text-body text-graphite leading-relaxed">
+              Full-featured command-line interface with custom rules, batch operations, and automation support for advanced users.
             </p>
-            <div class="flex flex-col sm:flex-row gap-4 justify-center">
-              <a 
-                href="https://github.com/shraman-c/watcher/releases" 
-                target="_blank"
-                rel="noopener noreferrer"
-                class="px-8 py-4 rounded-xl font-semibold text-white transition-all duration-300 hover:shadow-xl hover:-translate-y-1 bg-blue-600 hover:bg-blue-700 flex items-center justify-center gap-2"
-              >
-                Download Latest Release
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                </svg>
-              </a>
-              <a 
-                href="/" 
-                class="px-8 py-4 bg-gray-100 dark:bg-gray-800 rounded-xl font-semibold text-gray-900 dark:text-gray-100 hover:bg-gray-200 dark:hover:bg-gray-700 transition-all duration-300"
-              >
-                Back to Portfolio
-              </a>
+          </div>
+
+          <div class="bg-paper-white p-8 sm:p-10 rounded-cards border border-silver/50 shadow-subtle hover:border-silver transition-colors duration-300">
+            <div class="text-4xl mb-4 select-none">🌍</div>
+            <h3 class="font-inter font-medium text-subheading text-obsidian mb-3">Cross-Platform</h3>
+            <p class="font-inter-display font-medium text-body text-graphite leading-relaxed">
+              Runs seamlessly on Windows, macOS, and Linux. Single executable or Python script - your choice.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tech Stack Section -->
+    <section class="py-24 px-8 sm:px-12 md:px-24 border-t border-silver/30 bg-concrete flex flex-col items-center text-center">
+      <div class="w-full max-w-[1200px] flex flex-col items-center">
+        <!-- Section Title Block -->
+        <div class="flex flex-col items-center mb-16">
+          <span class="font-caveat text-graphite text-[28px] tracking-tight mb-2 select-none">
+            Technologies Utilized
+          </span>
+          <h2 class="text-obsidian font-reddit-sans-condensed font-black text-display leading-none tracking-tighter uppercase select-none">
+            TECH STACK
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 w-full">
+          {techStack.map((tech) => (
+            <div class="bg-paper-white p-6 rounded-cards border border-silver/50 text-center shadow-subtle hover:border-silver transition-colors duration-300">
+              <p class="font-inter font-medium text-body-sm text-obsidian select-none">{tech}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Quick Start Section -->
+    <section class="py-24 px-8 sm:px-12 md:px-24 border-t border-silver/30 bg-concrete flex flex-col items-center text-center">
+      <div class="w-full max-w-4xl flex flex-col items-center">
+        <div class="bg-paper-white p-12 rounded-cards border border-silver/50 w-full shadow-subtle text-left">
+          <h2 class="font-reddit-sans-condensed font-black text-heading-lg text-obsidian uppercase select-none text-center mb-12">
+            Get Started in 30 Seconds
+          </h2>
+          <div class="space-y-8 max-w-2xl mx-auto">
+            <div class="flex gap-5">
+              <div class="flex-shrink-0">
+                <div class="flex items-center justify-center h-10 w-10 rounded-full bg-solar-beam text-obsidian font-bold select-none">1</div>
+              </div>
+              <div>
+                <h3 class="font-inter font-medium text-body text-obsidian mb-1">Download</h3>
+                <p class="font-inter-display font-medium text-body-sm text-graphite">Grab the latest release from GitHub - no installation needed for Windows users.</p>
+              </div>
+            </div>
+            <div class="flex gap-5">
+              <div class="flex-shrink-0">
+                <div class="flex items-center justify-center h-10 w-10 rounded-full bg-solar-beam text-obsidian font-bold select-none">2</div>
+              </div>
+              <div>
+                <h3 class="font-inter font-medium text-body text-obsidian mb-1">Add Folders</h3>
+                <p class="font-inter-display font-medium text-body-sm text-graphite">Select the folders you want Watcher to monitor (Downloads, Desktop, etc.).</p>
+              </div>
+            </div>
+            <div class="flex gap-5">
+              <div class="flex-shrink-0">
+                <div class="flex items-center justify-center h-10 w-10 rounded-full bg-solar-beam text-obsidian font-bold select-none">3</div>
+              </div>
+              <div>
+                <h3 class="font-inter font-medium text-body text-obsidian mb-1">Start Watching</h3>
+                <p class="font-inter-display font-medium text-body-sm text-graphite">Click Start and watch as your files are organized automatically in real-time.</p>
+              </div>
             </div>
           </div>
         </div>
-      </section>
-    </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-24 px-8 sm:px-12 md:px-24 border-t border-silver/30 bg-concrete flex flex-col items-center text-center">
+      <div class="w-full max-w-4xl flex flex-col items-center">
+        <div class="bg-paper-white p-12 rounded-cards border border-silver/50 w-full shadow-subtle">
+          <h2 class="font-reddit-sans-condensed font-black text-heading-lg text-obsidian uppercase select-none mb-6">
+            Never Sort Files Manually Again
+          </h2>
+          <p class="font-inter-display font-medium text-body text-graphite mb-10 leading-relaxed max-w-xl mx-auto">
+            Join developers and students who've already automated their file organization.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a 
+              href="https://github.com/shraman-c/watcher/releases" 
+              target="_blank"
+              rel="noopener noreferrer"
+              class="px-8 py-3 bg-solar-beam text-obsidian border border-solar-beam rounded-buttons font-inter font-medium text-body-sm hover:bg-obsidian hover:text-paper-white hover:border-obsidian transition-colors duration-200 cursor-pointer flex items-center justify-center gap-2"
+            >
+              <span>Download Release</span>
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+              </svg>
+            </a>
+            <a 
+              href="/" 
+              class="px-8 py-3 bg-concrete text-obsidian border border-silver/50 rounded-buttons font-inter font-medium text-body-sm hover:bg-solar-beam hover:border-solar-beam transition-colors duration-200 cursor-pointer"
+            >
+              Back to Portfolio
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <Footer />
-    <ThemeToggle />
   </body>
 </html>
-
-<style>
-  /* Override global CSS conflicts for dark mode on this page */
-  :root[data-theme='dark'] .dark\:text-gray-100 { color: #f3f4f6 !important; }
-  :root[data-theme='dark'] .dark\:text-white { color: #ffffff !important; }
-  :root[data-theme='dark'] .dark\:text-gray-300 { color: #d1d5db !important; }
-  :root[data-theme='dark'] [data-dark-bg='#0b0b10'] { background-color: #0b0b10 !important; }
-  :root[data-theme='dark'] .dark\:bg-gray-800 { background-color: #1f2937 !important; }
-  :root[data-theme='dark'] .dark\:bg-gray-900\/60 { background-color: rgba(17, 24, 39, 0.6) !important; }
-  :root[data-theme='dark'] .dark\:border-gray-800 { border-color: #1f2937 !important; }
-  :root[data-theme='dark'] .dark\:border-gray-700 { border-color: #374151 !important; }
-  :root[data-theme='dark'] .dark\:border-gray-600 { border-color: #4b5563 !important; }
-  :root[data-theme='dark'] .dark\:hover\:border-gray-700:hover { border-color: #374151 !important; }
-  :root[data-theme='dark'] .dark\:hover\:bg-gray-700:hover { background-color: #374151 !important; }
-  :root[data-theme='dark'] .dark\:stroke-gray-800 { stroke: #1f2937 !important; }
-</style>
-

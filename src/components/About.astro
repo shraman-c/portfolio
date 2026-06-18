@@ -2,37 +2,34 @@
 import { siteConfig } from "../config";
 ---
 
-<section id="about" class="p-8 sm:p-12 md:p-16 lg:p-24">
-  <div>
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-start">
-      <div class="lg:col-span-4">
-        <h2
-          class="text-3xl sm:text-4xl md:text-5xl xl:text-7xl font-bold text-gray-900"
-        >
-          About Me
-        </h2>
-        <div
-          class="w-[75px] h-[5px] mt-2 rounded-full"
-          style={`background-color: ${siteConfig.accentColor}`}
-        >
-        </div>
-      </div>
+<section id="about" class="py-24 px-8 sm:px-12 md:px-24 bg-concrete flex flex-col items-center text-center">
+  <div class="w-full max-w-[1200px] flex flex-col items-center">
+    <!-- Section Title Block -->
+    <div class="flex flex-col items-center mb-16">
+      <span class="font-caveat text-graphite text-[28px] tracking-tight mb-2 select-none">
+        From 2020 til today
+      </span>
+      <h2 class="text-obsidian font-reddit-sans-condensed font-black text-display leading-none tracking-tighter uppercase select-none">
+        STORY
+      </h2>
+    </div>
 
-  <div class="lg:col-span-8 space-y-6 sm:space-y-8">
-        <p class="text-lg sm:text-xl md:text-2xl leading-relaxed text-gray-600">
-          {siteConfig.aboutMe}
-        </p>
+    <!-- Content Block -->
+    <div class="max-w-3xl flex flex-col items-center gap-10">
+      <p class="font-inter-display font-medium text-subheading leading-relaxed text-graphite text-center">
+        {siteConfig.aboutMe}
+      </p>
 
-        <div class="pt-4">
-      <div class="flex flex-wrap gap-x-2.5 sm:gap-x-3 md:gap-x-4 gap-y-2.5 sm:gap-y-3 md:gap-y-4">
-            {
-              siteConfig.skills.map((skill) => (
-        <span class="skill-chip inline-flex items-center px-3 sm:px-3.5 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm md:text-base font-medium leading-none whitespace-nowrap transition-colors duration-200">
-                  {skill}
-                </span>
-              ))
-            }
-          </div>
+      <!-- Skills Chips -->
+      <div class="pt-6">
+        <div class="flex flex-wrap justify-center gap-3">
+          {
+            siteConfig.skills.map((skill) => (
+              <span class="inline-flex items-center px-4 py-2 bg-paper-white text-graphite rounded-buttons text-body-sm font-inter-display font-medium border border-silver select-none transition-all duration-200 hover:bg-solar-beam hover:text-obsidian hover:border-solar-beam">
+                {skill}
+              </span>
+            ))
+          }
         </div>
       </div>
     </div>

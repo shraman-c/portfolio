@@ -1,7 +1,7 @@
 ---
 import { siteConfig } from "../config";
 import Header from "../components/Header.astro";
-import ThemeToggle from "../components/ThemeToggle.astro";
+import Footer from "../components/Footer.astro";
 import "../styles/global.css";
 ---
 
@@ -9,74 +9,33 @@ import "../styles/global.css";
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="color-scheme" content="light dark" />
     <link rel="icon" href="/favicon.svg" />
     <title>Coming Soon - {siteConfig.name}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Inter:wght@500&family=Reddit+Sans+Condensed:wght@900&display=swap"
+      rel="stylesheet"
+    />
   </head>
-  <body class="bg-white text-gray-800 dark:bg-[#0b0b10]">
+  <body class="bg-concrete">
     <Header />
 
-    <div
-  id="hero"
-  class="relative isolate overflow-hidden bg-white dark:bg-[#0b0b10] py-12 md:h-screen"
-      style={`--accent-color: ${siteConfig.accentColor}`}
-    >
-      <!-- Gradient overlay -->
-      <div
-        class="absolute inset-0 -z-10 hero-overlay"
-        style={`background: radial-gradient(ellipse 800px 1200px at 0% 0%, color-mix(in srgb, var(--accent-color) 25%, transparent) 0%, color-mix(in srgb, var(--accent-color) 15%, transparent) 20%, color-mix(in srgb, var(--accent-color) 8%, transparent) 40%, rgba(255, 255, 255, 0.3) 70%, rgba(255, 255, 255, 0.8) 90%, white 100%)`}
-      ></div>
+    <main class="min-h-screen py-32 flex items-center justify-center">
+      <div class="w-full px-6">
+        <div class="max-w-2xl mx-auto bg-paper-white rounded-cards border border-silver/50 p-8 sm:p-12 text-center shadow-subtle">
+          <h1 class="font-reddit-sans-condensed font-black text-display text-obsidian tracking-tighter uppercase select-none mb-4">
+            Coming Soon!
+          </h1>
+          <p class="font-inter-display font-medium text-body text-graphite mb-8 leading-relaxed">
+            I'm working on something awesome. Stay tuned!
+          </p>
 
-      <svg
-        aria-hidden="true"
-        class="hero-bg-svg absolute inset-0 -z-10 size-full stroke-gray-200 [mask-image:radial-gradient(100%_100%_at_top_right,white,transparent)]"
-      >
-        <defs>
-          <pattern
-            x="50%"
-            y={-1}
-            id="coming-soon-pattern"
-            width={200}
-            height={200}
-            patternUnits="userSpaceOnUse"
-          >
-            <path d="M.5 200V.5H200" fill="none"></path>
-          </pattern>
-          <pattern
-            id="programming-symbols-coming-soon"
-            x="0"
-            y="0"
-            width="400"
-            height="400"
-            patternUnits="userSpaceOnUse"
-          >
-            <text x="50" y="50" fill={siteConfig.accentColor} font-family="monospace" font-size="24" transform="rotate(-15)">&lt;/&gt;</text>
-          </pattern>
-        </defs>
-        <rect fill="url(#programming-symbols-coming-soon)" width="100%" height="100%" opacity="0.12"></rect>
-        <rect fill="url(#coming-soon-pattern)" width="100%" height="100%" stroke-width={0}></rect>
-      </svg>
-
-      <main class="min-h-screen md:h-full mx-auto p-8 sm:p-12 md:p-24 flex items-center justify-center">
-        <div class="w-full px-4">
-          <div class="max-w-3xl mx-auto bg-white dark:bg-gray-900/60 backdrop-blur-sm rounded-xl p-8 md:p-12 text-center border border-gray-100 dark:border-gray-800">
-            <h1 class="text-4xl sm:text-6xl font-bold mb-4" style={`color: ${siteConfig.accentColor}`}>
-              Coming Soon!
-            </h1>
-            <p class="text-lg sm:text-xl text-gray-700 dark:text-gray-300 mb-8">
-              I'm working on something awesome. Stay tuned!
-            </p>
-
-            <p class="text-sm text-gray-500 dark:text-gray-400 mt-8">© {new Date().getFullYear()} {siteConfig.name}</p>
-          </div>
+          <p class="font-system-sans text-caption text-ash mt-8">© {new Date().getFullYear()} {siteConfig.name}</p>
         </div>
-      </main>
+      </div>
+    </main>
 
-      <!-- removed internal CTA strip; button moved just below the hero -->
-    </div>
-
-    <!-- Back to home button removed as requested -->
-
-    <ThemeToggle />
+    <Footer />
   </body>
 </html>

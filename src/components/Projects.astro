@@ -1,106 +1,91 @@
 ---
 // @ts-nocheck
 import { siteConfig } from "../config";
-import { GlowingEffect } from "@/components/ui/glowing-effect";
 const hasProjects = siteConfig.projects && siteConfig.projects.length > 0;
 ---
 
 {
   hasProjects && (
-    <section id="projects" class="p-8 sm:p-12 md:p-16 lg:p-24">
-      <div>
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-start">
-          <div class="lg:col-span-4">
-            <h2 class="text-3xl sm:text-4xl md:text-5xl xl:text-7xl font-bold text-gray-900">
-              Projects
-            </h2>
-            <div
-              class="w-[75px] h-[5px] mt-2 rounded-full"
-              style={`background-color: ${siteConfig.accentColor}`}
-            />
-          </div>
+    <section id="projects" class="py-24 px-8 sm:px-12 md:px-24 bg-concrete flex flex-col items-center text-center">
+      <div class="w-full max-w-[1200px] flex flex-col items-center">
+        <!-- Section Title Block -->
+        <div class="flex flex-col items-center mb-16">
+          <span class="font-caveat text-graphite text-[28px] tracking-tight mb-2 select-none">
+            Selected Works
+          </span>
+          <h2 class="text-obsidian font-reddit-sans-condensed font-black text-display leading-none tracking-tighter uppercase select-none">
+            WORK
+          </h2>
+        </div>
 
-          <div class="lg:col-span-8">
-        <div class="bento-grid">
+        <!-- Bento Grid of Projects -->
+        <div class="bento-grid w-full text-left">
           {siteConfig.projects.map((project, index) => {
-                const Component = project.link ? "a" : "div";
-                const linkProps = project.link
-                  ? {
-                      href: project.link,
-                      target: "_blank",
-                      rel: "noopener noreferrer",
-                    }
-                  : {};
+            const Component = project.link ? "a" : "div";
+            const linkProps = project.link
+              ? {
+                  href: project.link,
+                  target: "_blank",
+                  rel: "noopener noreferrer",
+                }
+              : {};
 
-                return (
-                  <div class="group relative">
-                    <Component
-                        {...linkProps}
-                        class={`block relative overflow-visible p-4 sm:p-6 md:p-8 bg-gray-50 rounded-xl sm:rounded-2xl border border-gray-200 transition-all duration-300 aceternity-glow ${
-                          project.link
-                            ? "hover:bg-white hover:shadow-xl hover:border-gray-300 hover:-translate-y-1 fallback-shadow"
-                            : ""
-                        }`}
-                        style={`--accent-color: ${siteConfig.accentColor}`}
+            return (
+              <div class="group relative">
+                <Component
+                  {...linkProps}
+                  class={`block relative overflow-hidden p-8 sm:p-10 bg-paper-white rounded-cards border border-silver/50 transition-all duration-300 shadow-subtle ${
+                    project.link ? "hover:-translate-y-1 hover:border-silver" : ""
+                  }`}
+                >
+                  {project.link && (
+                    <div class="absolute top-8 right-8 w-10 h-10 flex items-center justify-center bg-obsidian text-paper-white rounded-full transition-all duration-200 group-hover:bg-solar-beam group-hover:text-obsidian">
+                      <svg
+                        class="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2.5"
+                        viewBox="0 0 24 24"
                       >
-                      <GlowingEffect client:idle glow={true} disabled={false} />
-                      {project.link && (
-                        <div class="absolute top-4 right-4 sm:top-6 sm:right-6 md:top-8 md:right-8 w-10 h-10 sm:w-11 sm:h-11 md:w-12 md:h-12 flex items-center justify-center bg-gray-900 rounded-full text-white transition-all duration-300 group-hover:bg-gray-700">
-                          <svg
-                            class="w-4 h-4 sm:w-4.5 sm:h-4.5 md:w-5 md:h-5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                          >
-                            <path
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              stroke-width="2"
-                              d="M7 17L17 7M17 7H7M17 7V17"
-                            />
-                          </svg>
-                        </div>
-                      )}
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="M7 17L17 7M17 7H7M17 7V17"
+                        />
+                      </svg>
+                    </div>
+                  )}
 
-                      <div class="space-y-4">
-                        <div>
+                  <div class="flex flex-col gap-6">
+                    <div class="flex items-center gap-3">
+                      <span class="font-inter font-medium text-caption text-ash">
+                        0{index + 1}
+                      </span>
+                      <h3 class="font-inter font-medium text-subheading text-obsidian">
+                        {project.name}
+                      </h3>
+                    </div>
+
+                    <p class={`font-inter-display font-medium text-body text-graphite leading-relaxed ${project.link ? "pr-12" : ""}`}>
+                      {project.description}
+                    </p>
+
+                    {project.skills && project.skills.length > 0 && (
+                      <div class="flex flex-wrap gap-2 pt-2">
+                        {project.skills.map((skill) => (
                           <span
-                            class="text-sm font-mono"
-                            style={{ color: siteConfig.accentColor }}
+                            class="px-3 py-1 bg-concrete text-graphite rounded-buttons text-caption font-inter font-medium border border-silver/50 transition-colors duration-200 group-hover:bg-solar-beam group-hover:text-obsidian group-hover:border-solar-beam"
                           >
-                            0{index + 1}
+                            {skill}
                           </span>
-                          <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mt-1">
-                            {project.name}
-                          </h3>
-                        </div>
-
-                        <p
-                          class={`text-base sm:text-lg text-gray-600 leading-relaxed ${project.link ? "pr-12 sm:pr-14 md:pr-16" : ""}`}
-                        >
-                          {project.description}
-                        </p>
-
-                        {project.skills && project.skills.length > 0 && (
-                          <div class="flex flex-wrap gap-1.5 sm:gap-2 pt-2">
-                            {project.skills.map((skill) => (
-                              <span
-                                class={`px-2.5 sm:px-3 py-1 sm:py-1.5 bg-gray-900 text-white rounded-md sm:rounded-lg text-xs sm:text-sm font-medium transition-all duration-300 ${
-                                  project.link ? "group-hover:bg-gray-800" : ""
-                                }`}
-                              >
-                                {skill}
-                              </span>
-                            ))}
-                          </div>
-                        )}
+                        ))}
                       </div>
-                    </Component>
+                    )}
                   </div>
-                );
-              })}
-            </div>
-          </div>
+                </Component>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>

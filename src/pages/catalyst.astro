@@ -1,7 +1,6 @@
 ---
 import { siteConfig } from "../config";
 import Header from "../components/Header.astro";
-import ThemeToggle from "../components/ThemeToggle.astro";
 import Footer from "../components/Footer.astro";
 import "../styles/global.css";
 
@@ -43,112 +42,84 @@ const features = [
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="color-scheme" content="light dark" />
     <link rel="icon" href="/favicon.svg" />
     <meta name="description" content="Catalyst - AI-powered timetable generator for schools and colleges. Create NEP-compliant, conflict-free schedules in seconds." />
     <title>Catalyst - AI-Powered Timetable Generator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Inter:wght@500&family=Reddit+Sans+Condensed:wght@900&display=swap"
+      rel="stylesheet"
+    />
   </head>
-  <body>
-    <div class="relative isolate overflow-hidden bg-white dark:bg-[#0b0b10] min-h-screen" style={`--accent-color: ${siteConfig.accentColor}`}>
-      <!-- Gradient overlay -->
-      <div
-        class="fixed inset-0 -z-10 hero-overlay"
-        style={`background: radial-gradient(ellipse 800px 1200px at 50% 0%, color-mix(in srgb, var(--accent-color) 25%, transparent) 0%, color-mix(in srgb, var(--accent-color) 15%, transparent) 20%, color-mix(in srgb, var(--accent-color) 8%, transparent) 40%, rgba(255, 255, 255, 0.3) 70%, rgba(255, 255, 255, 0.8) 90%, white 100%)`}
-      ></div>
-
-      <svg
-        aria-hidden="true"
-        class="hero-bg-svg fixed inset-0 -z-10 size-full stroke-gray-200 dark:stroke-gray-800 [mask-image:radial-gradient(100%_100%_at_top_center,white,transparent)]"
-      >
-        <defs>
-          <pattern
-            x="50%"
-            y={-1}
-            id="catalyst-pattern"
-            width={200}
-            height={200}
-            patternUnits="userSpaceOnUse"
-          >
-            <path d="M.5 200V.5H200" fill="none"></path>
-          </pattern>
-        </defs>
-        <rect fill="url(#catalyst-pattern)" width="100%" height="100%" stroke-width={0}></rect>
-      </svg>
-
+  <body class="bg-concrete text-obsidian">
     <Header />
 
     <!-- Hero Section -->
-    <div id="hero" class="relative py-24 md:py-32">
+    <main class="relative py-32 flex items-center justify-center min-h-[70vh]">
+      <!-- Diagonal wash of light -->
+      <div
+        class="absolute top-0 right-0 w-[60%] h-full -z-10 pointer-events-none"
+        style="background: radial-gradient(circle at 100% 0%, var(--color-solar-beam) 0%, transparent 60%); opacity: 0.25; filter: blur(40px);"
+      ></div>
 
-      <main class="mx-auto max-w-7xl px-6 lg:px-8">
-        <div class="mx-auto max-w-4xl text-center">
-          <div class="inline-flex items-center gap-2 px-4 py-2 bg-blue-50 dark:bg-gray-800 border border-blue-200 dark:border-gray-600 rounded-full mb-8">
-            <span class="relative flex h-2 w-2">
-              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
-              <span class="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
-            </span>
-            <span class="text-sm font-medium text-blue-900 dark:text-white">Launched December 25, 2025</span>
-          </div>
-          
-          <h1 class="text-5xl sm:text-6xl md:text-7xl font-bold mb-6 text-gray-900 dark:text-white">
-            <span style={`color: ${siteConfig.accentColor}`}>Catalyst</span>
-            <br />
-            <span class="text-gray-900 dark:text-gray-100">AI-Powered Timetables</span>
-          </h1>
-          
-          <p class="text-xl sm:text-2xl text-gray-600 dark:text-gray-300 mb-12 leading-relaxed">
-            Revolutionize academic scheduling with intelligent, conflict-free timetable generation. 
-            Save hours of manual work and eliminate scheduling headaches.
-          </p>
-
-          <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <a 
-              href="https://cataylst.vercel.app/" 
-              target="_blank"
-              rel="noopener noreferrer"
-              class="px-8 py-4 rounded-xl font-semibold text-white transition-all duration-300 hover:shadow-xl hover:-translate-y-1 flex items-center gap-2"
-              style={`background-color: ${siteConfig.accentColor}`}
-            >
-              View Live Demo
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-              </svg>
-            </a>
-            <a 
-              href="#features" 
-              class="px-8 py-4 bg-gray-100 dark:bg-gray-800 rounded-xl font-semibold text-gray-900 dark:text-gray-100 hover:bg-gray-200 dark:hover:bg-gray-700 transition-all duration-300"
-            >
-              Explore Features
-            </a>
-          </div>
+      <div class="mx-auto max-w-4xl px-6 lg:px-8 text-center flex flex-col items-center">
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 bg-paper-white border border-silver/50 rounded-buttons mb-8 select-none shadow-subtle">
+          <span class="relative flex h-2 w-2">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-solar-beam opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-solar-beam"></span>
+          </span>
+          <span class="font-inter font-medium text-caption text-graphite">Launched December 25, 2025</span>
         </div>
-      </main>
-    </div>
+        
+        <h1 class="text-obsidian font-reddit-sans-condensed font-black text-display leading-none tracking-tighter uppercase select-none mb-6">
+          CATALYST
+        </h1>
+        
+        <p class="font-inter-display font-medium text-body text-graphite mb-10 leading-relaxed max-w-2xl">
+          Revolutionize academic scheduling with intelligent, conflict-free timetable generation. Save hours of manual work and eliminate scheduling headaches.
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+          <a 
+            href="https://cataylst.vercel.app/" 
+            target="_blank"
+            rel="noopener noreferrer"
+            class="px-8 py-3 bg-solar-beam text-obsidian rounded-buttons font-inter font-medium text-body-sm border border-solar-beam hover:bg-obsidian hover:text-paper-white hover:border-obsidian transition-colors duration-200 cursor-pointer"
+          >
+            View Live Demo
+          </a>
+          <a 
+            href="#features" 
+            class="px-8 py-3 bg-concrete text-obsidian rounded-buttons font-inter font-medium text-body-sm border border-silver/50 hover:bg-solar-beam hover:border-solar-beam transition-colors duration-200 cursor-pointer"
+          >
+            Explore Features
+          </a>
+        </div>
+      </div>
+    </main>
 
     <!-- Features Section -->
-    <section id="features" class="relative p-8 sm:p-12 md:p-16 lg:p-24">
-      <div class="max-w-7xl mx-auto">
-        <div class="text-center mb-16">
-          <h2 class="text-4xl sm:text-5xl md:text-6xl font-bold text-gray-900 dark:text-white mb-4">
-            Powerful Features
+    <section id="features" class="py-24 px-8 sm:px-12 md:px-24 border-t border-silver/30 bg-concrete flex flex-col items-center text-center">
+      <div class="w-full max-w-[1200px] flex flex-col items-center">
+        <!-- Section Title Block -->
+        <div class="flex flex-col items-center mb-16">
+          <span class="font-caveat text-graphite text-[28px] tracking-tight mb-2 select-none">
+            Perfect Scheduling
+          </span>
+          <h2 class="text-obsidian font-reddit-sans-condensed font-black text-display leading-none tracking-tighter uppercase select-none">
+            FEATURES
           </h2>
-          <div 
-            class="w-24 h-1.5 mx-auto rounded-full" 
-            style={`background-color: ${siteConfig.accentColor}`}
-          ></div>
-          <p class="text-xl text-gray-600 dark:text-gray-300 mt-6 max-w-3xl mx-auto">
-            Everything you need to create perfect timetables for schools and colleges
-          </p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full text-left">
           {features.map((feature) => (
-            <div class="group bg-white dark:bg-gray-900/60 p-8 rounded-2xl border border-gray-200 dark:border-gray-800 hover:border-gray-300 dark:hover:border-gray-700 transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
-              <div class="text-5xl mb-4">{feature.icon}</div>
-              <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-3">
+            <div class="group bg-paper-white p-8 sm:p-10 rounded-cards border border-silver/50 shadow-subtle hover:border-silver transition-all duration-300">
+              <div class="text-5xl mb-4 select-none">{feature.icon}</div>
+              <h3 class="font-inter font-medium text-subheading text-obsidian mb-3">
                 {feature.title}
               </h3>
-              <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+              <p class="font-inter-display font-medium text-body text-graphite leading-relaxed">
                 {feature.description}
               </p>
             </div>
@@ -158,22 +129,22 @@ const features = [
     </section>
 
     <!-- Tech Stack Section -->
-    <section class="relative p-8 sm:p-12 md:p-16 lg:p-24">
-      <div class="max-w-7xl mx-auto">
-        <div class="text-center mb-16">
-          <h2 class="text-4xl sm:text-5xl md:text-6xl font-bold text-gray-900 dark:text-white mb-4">
-            Built With Modern Tech
+    <section class="py-24 px-8 sm:px-12 md:px-24 border-t border-silver/30 bg-concrete flex flex-col items-center text-center">
+      <div class="w-full max-w-[1200px] flex flex-col items-center">
+        <!-- Section Title Block -->
+        <div class="flex flex-col items-center mb-16">
+          <span class="font-caveat text-graphite text-[28px] tracking-tight mb-2 select-none">
+            Technologies Utilized
+          </span>
+          <h2 class="text-obsidian font-reddit-sans-condensed font-black text-display leading-none tracking-tighter uppercase select-none">
+            TECH STACK
           </h2>
-          <div 
-            class="w-24 h-1.5 mx-auto rounded-full" 
-            style={`background-color: ${siteConfig.accentColor}`}
-          ></div>
         </div>
 
-        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 w-full">
           {["Next.js", "TypeScript", "JavaScript", "SQL", "AI", "TailwindCSS"].map((tech) => (
-            <div class="bg-gray-50 dark:bg-gray-900/60 p-6 rounded-xl border border-gray-200 dark:border-gray-800 text-center hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
-              <p class="font-semibold text-gray-900 dark:text-white">{tech}</p>
+            <div class="bg-paper-white p-6 rounded-cards border border-silver/50 text-center shadow-subtle hover:border-silver transition-colors duration-300">
+              <p class="font-inter font-medium text-body-sm text-obsidian select-none">{tech}</p>
             </div>
           ))}
         </div>
@@ -181,26 +152,25 @@ const features = [
     </section>
 
     <!-- CTA Section -->
-    <section class="relative p-8 sm:p-12 md:p-16 lg:p-24">
-      <div class="max-w-4xl mx-auto text-center">
-        <div class="bg-white dark:bg-gray-900/60 backdrop-blur-sm rounded-2xl p-12 border border-gray-200 dark:border-gray-800">
-          <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">
+    <section class="py-24 px-8 sm:px-12 md:px-24 border-t border-silver/30 bg-concrete flex flex-col items-center text-center">
+      <div class="w-full max-w-4xl flex flex-col items-center">
+        <div class="bg-paper-white p-12 rounded-cards border border-silver/50 w-full shadow-subtle">
+          <h2 class="font-reddit-sans-condensed font-black text-heading-lg text-obsidian uppercase select-none mb-6">
             Ready to Transform Your Scheduling?
           </h2>
-          <p class="text-xl text-gray-600 dark:text-gray-300 mb-8">
-            Join the future of academic timetable management with Catalyst
+          <p class="font-inter-display font-medium text-body text-graphite mb-10 leading-relaxed max-w-xl mx-auto">
+            Join the future of academic timetable management with Catalyst.
           </p>
           <div class="flex flex-col sm:flex-row gap-4 justify-center">
             <a 
               href={siteConfig.social.email ? `mailto:${siteConfig.social.email}?subject=Catalyst Inquiry` : "#"}
-              class="px-8 py-4 rounded-xl font-semibold text-white transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
-              style={`background-color: ${siteConfig.accentColor}`}
+              class="px-8 py-3 bg-solar-beam text-obsidian border border-solar-beam rounded-buttons font-inter font-medium text-body-sm hover:bg-obsidian hover:text-paper-white hover:border-obsidian transition-colors duration-200 cursor-pointer"
             >
               Get in Touch
             </a>
             <a 
               href="/" 
-              class="px-8 py-4 bg-gray-100 dark:bg-gray-800 rounded-xl font-semibold text-gray-900 dark:text-gray-100 hover:bg-gray-200 dark:hover:bg-gray-700 transition-all duration-300"
+              class="px-8 py-3 bg-concrete text-obsidian border border-silver/50 rounded-buttons font-inter font-medium text-body-sm hover:bg-solar-beam hover:border-solar-beam transition-colors duration-200 cursor-pointer"
             >
               Back to Portfolio
             </a>
@@ -208,25 +178,7 @@ const features = [
         </div>
       </div>
     </section>
-    </div>
 
     <Footer />
-    <ThemeToggle />
   </body>
 </html>
-
-<style>
-  /* Override global CSS conflicts for dark mode on this page */
-  :root[data-theme='dark'] .dark\:text-gray-100 { color: #f3f4f6 !important; }
-  :root[data-theme='dark'] .dark\:text-white { color: #ffffff !important; }
-  :root[data-theme='dark'] .dark\:text-gray-300 { color: #d1d5db !important; }
-  :root[data-theme='dark'] .dark\:bg-\[\#0b0b10\] { background-color: #0b0b10 !important; }
-  :root[data-theme='dark'] .dark\:bg-gray-800 { background-color: #1f2937 !important; }
-  :root[data-theme='dark'] .dark\:bg-gray-900\/60 { background-color: rgba(17, 24, 39, 0.6) !important; }
-  :root[data-theme='dark'] .dark\:border-gray-800 { border-color: #1f2937 !important; }
-  :root[data-theme='dark'] .dark\:border-gray-700 { border-color: #374151 !important; }
-  :root[data-theme='dark'] .dark\:border-gray-600 { border-color: #4b5563 !important; }
-  :root[data-theme='dark'] .dark\:hover\:border-gray-700:hover { border-color: #374151 !important; }
-  :root[data-theme='dark'] .dark\:hover\:bg-gray-700:hover { background-color: #374151 !important; }
-  :root[data-theme='dark'] .dark\:stroke-gray-800 { stroke: #1f2937 !important; }
-</style>

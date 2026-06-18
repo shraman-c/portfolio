@@ -1,201 +1,58 @@
 ---
 // @ts-nocheck
 import { siteConfig } from "../config";
-// Encode the typewriter phrases on the server so we can safely inject into the client script
-const __typewriterEncoded = encodeURIComponent(JSON.stringify(siteConfig.typewriterPhrases ?? []));
 ---
 
 <div
   id="hero"
-  class="relative isolate overflow-hidden bg-gray-50 py-24 md:h-screen"
-  style={`--accent-color: ${siteConfig.accentColor}`}
+  class="relative isolate overflow-hidden bg-concrete min-h-screen flex items-center"
 >
-  <!-- Gradient overlay -->
+  <!-- Solar Beam Gradient cutting from upper-right to lower-left -->
   <div
-    class="absolute inset-0 -z-10 hero-overlay"
-    style={`background: radial-gradient(ellipse 800px 1200px at 0% 0%, color-mix(in srgb, var(--accent-color) 25%, transparent) 0%, color-mix(in srgb, var(--accent-color) 15%, transparent) 20%, color-mix(in srgb, var(--accent-color) 8%, transparent) 40%, rgba(255, 255, 255, 0.3) 70%, rgba(255, 255, 255, 0.8) 90%, white 100%)`}
-  >
-  </div>
-  <svg
-    aria-hidden="true"
-    class="hero-bg-svg absolute inset-0 -z-10 size-full stroke-gray-200 [mask-image:radial-gradient(100%_100%_at_top_right,white,transparent)]"
-  >
-    <defs>
-      <pattern
-        x="50%"
-        y={-1}
-        id="0787a7c5-978c-4f66-83c7-11c213f99cb7"
-        width={200}
-        height={200}
-        patternUnits="userSpaceOnUse"
-      >
-        <path d="M.5 200V.5H200" fill="none"></path>
-      </pattern>
-      <pattern
-        id="programming-symbols"
-        x="0"
-        y="0"
-        width="400"
-        height="400"
-        patternUnits="userSpaceOnUse"
-      >
-        <text
-          x="50"
-          y="50"
-          fill={siteConfig.accentColor}
-          font-family="monospace"
-          font-size="24"
-          transform="rotate(-15)">&lt;/&gt;</text
-        >
-        <text
-          x="150"
-          y="100"
-          fill={siteConfig.accentColor}
-          font-family="monospace"
-          font-size="20"
-          transform="rotate(10)">{}</text
-        >
-        <text
-          x="250"
-          y="80"
-          fill={siteConfig.accentColor}
-          font-family="monospace"
-          font-size="18"
-          transform="rotate(-5)">=&gt;</text
-        >
-        <text
-          x="100"
-          y="200"
-          fill={siteConfig.accentColor}
-          font-family="monospace"
-          font-size="22"
-          transform="rotate(15)">[]</text
-        >
-        <text
-          x="300"
-          y="180"
-          fill={siteConfig.accentColor}
-          font-family="monospace"
-          font-size="20"
-          transform="rotate(-10)">&lt;&gt;</text
-        >
-        <text
-          x="200"
-          y="250"
-          fill={siteConfig.accentColor}
-          font-family="monospace"
-          font-size="24"
-          transform="rotate(5)">()</text
-        >
-        <text
-          x="50"
-          y="320"
-          fill={siteConfig.accentColor}
-          font-family="monospace"
-          font-size="18"
-          transform="rotate(-8)">::</text
-        >
-        <text
-          x="350"
-          y="300"
-          fill={siteConfig.accentColor}
-          font-family="monospace"
-          font-size="22"
-          transform="rotate(12)">==</text
-        >
-        <text
-          x="150"
-          y="350"
-          fill={siteConfig.accentColor}
-          font-family="monospace"
-          font-size="20"
-          transform="rotate(-15)">++</text
-        >
-        <text
-          x="250"
-          y="370"
-          fill={siteConfig.accentColor}
-          font-family="monospace"
-          font-size="24"
-          transform="rotate(8)">;</text
-        >
-      </pattern>
-    </defs>
-    <rect
-      fill="url(#programming-symbols)"
-      width="100%"
-      height="100%"
-      opacity="0.2"></rect>
-    <rect
-      fill="url(#0787a7c5-978c-4f66-83c7-11c213f99cb7)"
-      width="100%"
-      height="100%"
-      stroke-width={0}></rect>
-  </svg>
-  <div class="h-full mx-auto p-8 sm:p-12 md:p-24 flex items-center">
-    <div>
-      <h2
-        class="text-pretty text-xl sm:text-2xl md:text-5xl font-bold tracking-tight text-gray-700 animate-fade-in"
-      >
-        Hello! 👋
-      </h2>
-      <h1
-        class="mt-6 sm:mt-8 md:mt-10 text-pretty text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-bold tracking-tight text-gray-800 animate-fade-in animation-delay-200"
-      >
-        I'm
-        <span id="typewriter-root" class="ml-3 inline-block" aria-live="polite" data-phrases={JSON.stringify(siteConfig.typewriterPhrases ?? [])}>
-          <span id="typewriter-text" style={`color: ${siteConfig.accentColor}`}>{siteConfig.name}</span>
-          <span id="typewriter-cursor" aria-hidden="true">▌</span>
-        </span>
-      </h1>
+    class="absolute top-0 right-0 w-[80%] h-full -z-10 pointer-events-none"
+    style="background: radial-gradient(circle at 100% 0%, var(--color-solar-beam) 0%, transparent 60%); opacity: 0.35; filter: blur(40px);"
+  ></div>
+  <div
+    class="absolute top-0 right-0 w-full h-full -z-20 pointer-events-none"
+    style="background: linear-gradient(225deg, rgba(255, 213, 0, 0.15) 0%, transparent 50%);"
+  ></div>
 
-      <!-- Typewriter controls removed; phrases are hardcoded in the script below -->
-      <p
-        class="mt-4 sm:mt-6 md:mt-8 text-pretty text-base sm:text-lg md:text-xl/8 font-medium text-gray-600 animate-fade-in animation-delay-400"
+  <div class="w-full max-w-none mx-auto p-8 sm:p-12 md:p-24 relative z-10 pt-32 pb-24 md:py-32">
+    <div class="flex flex-col items-start gap-4">
+      <!-- Lead Paragraph -->
+      <p 
+        class="text-graphite font-inter-display text-body font-medium leading-relaxed max-w-2xl animate-fade-in"
       >
         {siteConfig.title}
       </p>
+      
+      <!-- Display Name -->
+      <h1
+        class="text-obsidian font-reddit-sans-condensed font-black leading-none uppercase tracking-tighter animate-fade-in animation-delay-200 select-none cursor-default"
+        style="font-size: clamp(64px, 14vw, 246px); letter-spacing: -0.028em; line-height: 0.95;"
+      >
+        {siteConfig.name}
+      </h1>
     </div>
   </div>
+
+  <!-- Social Icons at bottom left, styled flat -->
   <div
-    class="hero-action-row absolute bottom-0 left-0 right-0 p-8 sm:p-12 md:p-24 flex gap-x-4 sm:gap-x-6 md:gap-x-8 text-gray-700 animate-fade-in animation-delay-600"
+    class="hero-action-row absolute bottom-0 left-0 p-8 sm:p-12 md:p-24 flex gap-x-6 text-graphite animate-fade-in animation-delay-600 z-10"
   >
     {
       siteConfig.social?.email && (
         <a
           href={`mailto:${siteConfig.social.email}`}
           aria-label="Email"
-          class="transition-colors duration-300 hover:text-[var(--accent-color)]"
+          class="transition-colors duration-200 hover:text-obsidian"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            class="h-6 w-6 sm:h-7 sm:w-7 md:h-8 md:w-8"
-          >
-            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-            <path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z" />
-            <path d="M3 7l9 6l9 -6" />
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6">
+            <path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z" /><path d="M3 7l9 6l9 -6" />
           </svg>
         </a>
       )
     }
-    <a
-      href="/connect"
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label="Contact"
-      class="transition-colors duration-300 hover:text-[var(--accent-color)] inline-flex items-center gap-2"
-      style={{ '--accent-color': siteConfig.accentColor }}
-    >
-  <span role="img" aria-label="Contact" class="contact-icon h-6 w-6 site-icon-dark-fix" />
-    </a>
     {
       siteConfig.social?.linkedin && (
         <a
@@ -203,28 +60,10 @@ const __typewriterEncoded = encodeURIComponent(JSON.stringify(siteConfig.typewri
           target="_blank"
           rel="noopener noreferrer"
           aria-label="LinkedIn"
-          class="transition-colors duration-300 hover:text-[var(--accent-color)]"
+          class="transition-colors duration-200 hover:text-obsidian"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            class="h-6 w-6 sm:h-7 sm:w-7 md:h-8 md:w-8"
-          >
-            <>
-              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-              <path d="M8 11v5" />
-              <path d="M8 8v.01" />
-              <path d="M12 16v-5" />
-              <path d="M16 16v-3a2 2 0 1 0 -4 0" />
-              <path d="M3 7a4 4 0 0 1 4 -4h10a4 4 0 0 1 4 4v10a4 4 0 0 1 -4 4h-10a4 4 0 0 1 -4 -4z" />
-            </>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6">
+            <path d="M8 11v5" /><path d="M8 8v.01" /><path d="M12 16v-5" /><path d="M16 16v-3a2 2 0 1 0 -4 0" /><path d="M3 7a4 4 0 0 1 4 -4h10a4 4 0 0 1 4 4v10a4 4 0 0 1 -4 4h-10a4 4 0 0 1 -4 -4z" />
           </svg>
         </a>
       )
@@ -236,24 +75,10 @@ const __typewriterEncoded = encodeURIComponent(JSON.stringify(siteConfig.typewri
           target="_blank"
           rel="noopener noreferrer"
           aria-label="GitHub"
-          class="transition-colors duration-300 hover:text-[var(--accent-color)]"
+          class="transition-colors duration-200 hover:text-obsidian"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            class="h-6 w-6 sm:h-7 sm:w-7 md:h-8 md:w-8"
-          >
-            <>
-              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-              <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
-            </>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6">
+            <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
           </svg>
         </a>
       )
@@ -261,141 +86,15 @@ const __typewriterEncoded = encodeURIComponent(JSON.stringify(siteConfig.typewri
   </div>
 </div>
 
-  <script type="module">
-  /* @ts-nocheck */
-  (function(){
-    // Defensive initializer for the typewriter. Reads phrases injected into the DOM via
-    // data-attributes (from siteConfig at build time). Works whether the script runs
-    // before or after DOMContentLoaded.
-
-    function initTypewriter(){
-      let phrases = [];
-      const rootEl = document.getElementById('typewriter-root');
-      if (!rootEl) {
-        // Nothing to do if the DOM node isn't present
-        // console.debug('typewriter: root element not found');
-        return;
-      }
-
-      try {
-        const raw = rootEl.dataset && rootEl.dataset.phrases ? rootEl.dataset.phrases : '[]';
-        phrases = JSON.parse(raw);
-      } catch (e) {
-        // malformed JSON -> ignore
-        // console.warn('typewriter: failed to parse phrases', e);
-        phrases = [];
-      }
-
-      const textEl = document.getElementById('typewriter-text');
-      const cursor = document.getElementById('typewriter-cursor');
-      if (!textEl || !cursor) return;
-
-      const realName = (textEl.textContent || '').trim();
-      const cycle = [...(Array.isArray(phrases) ? phrases : []), realName];
-
-      let idx = 0;
-      let char = 0;
-      let typing = true;
-
-      // Slower typing/backspace settings
-      const TYPING_SPEED = 120; // ms per char (slower)
-      const PAUSE_AFTER = 1400; // ms after full phrase
-
-      function wait(ms){ return new Promise(r => setTimeout(r, ms)); }
-
-      async function tick(){
-        const phrase = cycle[idx] || '';
-        if (typing){
-          char = Math.min(char + 1, phrase.length);
-          textEl.textContent = phrase.slice(0, char);
-          if (char >= phrase.length){
-            typing = false;
-            await wait(PAUSE_AFTER);
-          }
-        } else {
-          char = Math.max(char - 1, 0);
-          textEl.textContent = phrase.slice(0, char);
-          if (char <= 0){
-            idx = (idx + 1) % cycle.length;
-            typing = true;
-          }
-        }
-        cursor.style.opacity = (cursor.style.opacity === '0' ? '1' : '0');
-        setTimeout(tick, typing ? TYPING_SPEED : Math.max(TYPING_SPEED/1.2, 40));
-      }
-
-      // reset and start
-      textEl.textContent = '';
-      idx = 0; char = 0; typing = true;
-      tick();
-    }
-
-    if (document.readyState === 'loading') {
-      window.addEventListener('DOMContentLoaded', initTypewriter);
-    } else {
-      // DOM already ready
-      initTypewriter();
-    }
-  })();
-  </script>
-
 <style>
   @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
   }
-
   .animate-fade-in {
-    animation: fadeIn 0.8s ease-out forwards;
+    animation: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     opacity: 0;
   }
-
-  .animation-delay-200 {
-    animation-delay: 0.2s;
-  }
-
-  .animation-delay-400 {
-    animation-delay: 0.4s;
-  }
-
-  .animation-delay-600 {
-    animation-delay: 0.6s;
-  }
-
-  /* Forced themes via [data-theme] */
-  :root[data-theme='dark'] #hero {
-    background-color: #0b0b10;
-  }
-  :root[data-theme='dark'] #hero .hero-overlay {
-    background: radial-gradient(
-      ellipse 800px 1200px at 0% 0%,
-      color-mix(in srgb, var(--accent-color) 22%, transparent) 0%,
-      color-mix(in srgb, var(--accent-color) 14%, transparent) 20%,
-      color-mix(in srgb, var(--accent-color) 7%, transparent) 40%,
-      rgba(0, 0, 0, 0.45) 70%,
-      rgba(0, 0, 0, 0.75) 90%,
-      #0b0b10 100%
-    ) !important;
-  }
-
-  :root[data-theme='light'] #hero {
-    background-color: #f9fafb;
-  }
-  :root[data-theme='light'] #hero .hero-overlay {
-    background: radial-gradient(
-      ellipse 800px 1200px at 0% 0%,
-      color-mix(in srgb, var(--accent-color) 25%, transparent) 0%,
-      color-mix(in srgb, var(--accent-color) 15%, transparent) 20%,
-      color-mix(in srgb, var(--accent-color) 8%, transparent) 40%,
-      rgba(255, 255, 255, 0.3) 70%,
-      rgba(255, 255, 255, 0.8) 90%,
-      white 100%
-    ) !important;
-  }
+  .animation-delay-200 { animation-delay: 0.15s; }
+  .animation-delay-600 { animation-delay: 0.4s; }
 </style>

@@ -1,69 +1,64 @@
 ---
 // @ts-nocheck
 import { siteConfig } from "../config";
-import { GlowingEffect } from "@/components/ui/glowing-effect";
 ---
 
 {
   siteConfig.classroomNotes && siteConfig.classroomNotes.length > 0 && (
-    <section id="classroom-notes" class="p-8 sm:p-12 md:p-16 lg:p-24">
-      <div>
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-start">
-          <div class="lg:col-span-4">
-            <h2 class="text-3xl sm:text-4xl md:text-5xl xl:text-7xl font-bold text-gray-900">
-              Classroom Notes
-            </h2>
-            <div
-              class="w-[75px] h-[5px] mt-2 rounded-full"
-              style={`background-color: ${siteConfig.accentColor}`}
-            />
-          </div>
-          <div class="lg:col-span-8">
-            <div class="space-y-8">
-              {siteConfig.classroomNotes.map((note, index) => (
-                <a
-                  href={note.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="block relative overflow-visible p-4 sm:p-6 md:p-8 bg-gray-50 rounded-xl sm:rounded-2xl border border-gray-200 transition-all duration-300 hover:bg-white hover:shadow-xl hover:border-gray-300 hover:-translate-y-1 aceternity-glow"
-                  style={`--accent-color: ${siteConfig.accentColor}`}
-                >
-                  <GlowingEffect client:idle glow={true} disabled={false} />
-                  <div class="absolute top-4 right-4 sm:top-6 sm:right-6 md:top-8 md:right-8 w-10 h-10 sm:w-11 sm:h-11 md:w-12 md:h-12 flex items-center justify-center bg-gray-900 rounded-full text-white transition-all duration-300 group-hover:bg-gray-700">
-                    <svg
-                      class="w-4 h-4 sm:w-4.5 sm:h-4.5 md:w-5 md:h-5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M7 17L17 7M17 7H7M17 7V17"
-                      />
-                    </svg>
+    <section id="classroom-notes" class="py-24 px-8 sm:px-12 md:px-24 bg-concrete flex flex-col items-center text-center">
+      <div class="w-full max-w-[1200px] flex flex-col items-center">
+        <!-- Section Title Block -->
+        <div class="flex flex-col items-center mb-16">
+          <span class="font-caveat text-graphite text-[28px] tracking-tight mb-2 select-none">
+            Classroom Notes
+          </span>
+          <h2 class="text-obsidian font-reddit-sans-condensed font-black text-display leading-none tracking-tighter uppercase select-none">
+            PROCESS
+          </h2>
+        </div>
+
+        <!-- Vertical Stack of Notes -->
+        <div class="flex flex-col items-center gap-8 w-full">
+          {siteConfig.classroomNotes.map((note, index) => (
+            <div class="w-full max-w-3xl group relative text-left">
+              <a
+                href={note.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="block relative overflow-hidden p-8 sm:p-10 bg-paper-white rounded-cards border border-silver/50 shadow-subtle transition-all duration-300 hover:border-silver"
+              >
+                <div class="absolute top-8 right-8 w-10 h-10 flex items-center justify-center bg-obsidian text-paper-white rounded-full transition-all duration-200 group-hover:bg-solar-beam group-hover:text-obsidian">
+                  <svg
+                    class="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M7 17L17 7M17 7H7M17 7V17"
+                    />
+                  </svg>
+                </div>
+
+                <div class="flex flex-col gap-4 pr-12">
+                  <div>
+                    <span class="font-inter font-medium text-caption text-ash">
+                      0{index + 1}
+                    </span>
+                    <h3 class="font-inter font-medium text-subheading text-obsidian mt-1">
+                      {note.name}
+                    </h3>
                   </div>
-                  <div class="space-y-4">
-                    <div>
-                      <span
-                        class="text-sm font-mono"
-                        style={{ color: siteConfig.accentColor }}
-                      >
-                        0{index + 1}
-                      </span>
-                      <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mt-1">
-                        {note.name}
-                      </h3>
-                    </div>
-                    <p class="text-base sm:text-lg text-gray-600 leading-relaxed">
-                      {note.description}
-                    </p>
-                  </div>
-                </a>
-              ))}
+                  <p class="font-inter-display font-medium text-body text-graphite leading-relaxed">
+                    {note.description}
+                  </p>
+                </div>
+              </a>
             </div>
-          </div>
+          ))}
         </div>
       </div>
     </section>

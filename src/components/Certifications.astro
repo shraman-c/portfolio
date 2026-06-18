@@ -1,41 +1,67 @@
 ---
 // @ts-nocheck
 import { siteConfig } from "../config";
-import { GlowingEffect } from "@/components/ui/glowing-effect";
 const hasCerts = siteConfig.certifications && siteConfig.certifications.length > 0;
 ---
 
 {
   hasCerts && (
-    <section id="certifications" class="p-8 sm:p-12 md:p-16 lg:p-24">
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-start">
-        <div class="lg:col-span-3">
-          <h2 class="text-3xl sm:text-4xl md:text-5xl xl:text-5xl font-bold text-gray-900 max-w-lg">Certifications</h2>
-          <div class="w-[75px] h-[5px] mt-2 rounded-full" style={`background-color: ${siteConfig.accentColor}`} />
+    <section id="certifications" class="py-24 px-8 sm:px-12 md:px-24 bg-concrete flex flex-col items-center text-center">
+      <div class="w-full max-w-[1200px] flex flex-col items-center">
+        <!-- Section Title Block -->
+        <div class="flex flex-col items-center mb-16">
+          <span class="font-caveat text-graphite text-[28px] tracking-tight mb-2 select-none">
+            Credentials & Badges
+          </span>
+          <h2 class="text-obsidian font-reddit-sans-condensed font-black text-display leading-none tracking-tighter uppercase select-none">
+            CERTIFICATIONS
+          </h2>
         </div>
 
-        <div class="lg:col-span-9">
-          <div class="bento-grid">
-            {siteConfig.certifications.map((c, idx) => (
-              <div class="group relative">
-                <div class={`block relative overflow-visible p-4 sm:p-6 md:p-8 bg-gray-50 rounded-xl sm:rounded-2xl border border-gray-200 transition-all duration-300 aceternity-glow`} style={`--accent-color: ${siteConfig.accentColor}`}>
-                  <GlowingEffect client:idle glow={true} disabled={false} />
-                  <div class="space-y-3">
-                    <div class="flex items-baseline justify-between">
-                      <span class="text-sm font-mono" style={{ color: siteConfig.accentColor }}>{`0${idx + 1}`}</span>
-                      {c.date && <span class="text-xs text-gray-500">{c.date}</span>}
-                    </div>
-                    <h3 class="text-xl sm:text-2xl font-bold text-gray-900">{c.title}</h3>
-                    {c.issuer && <div class="text-sm text-gray-600">{c.issuer}</div>}
-                    {c.description && <p class="text-gray-600">{c.description}</p>}
-                    {c.link && (
-                      <a class="text-sm text-blue-600 underline" href={c.link} target="_blank" rel="noopener noreferrer">View certificate</a>
+        <!-- Bento Grid of Certifications -->
+        <div class="bento-grid w-full text-left">
+          {siteConfig.certifications.map((c, idx) => (
+            <div class="group relative">
+              <div class="block relative overflow-hidden p-8 sm:p-10 bg-paper-white rounded-cards border border-silver/50 transition-all duration-300 shadow-subtle hover:border-silver">
+                <div class="flex flex-col gap-6">
+                  <div class="flex items-baseline justify-between w-full">
+                    <span class="font-inter font-medium text-caption text-ash">{`0${idx + 1}`}</span>
+                    {c.date && <span class="font-inter font-medium text-caption text-ash">{c.date}</span>}
+                  </div>
+                  
+                  <div class="space-y-2">
+                    <h3 class="font-inter font-medium text-subheading text-obsidian">{c.title}</h3>
+                    {c.issuer && (
+                      <p class="font-inter font-medium text-body-sm text-solar-beam uppercase tracking-wider">
+                        {c.issuer}
+                      </p>
+                    )}
+                    {c.description && (
+                      <p class="font-inter-display font-medium text-body text-graphite leading-relaxed">
+                        {c.description}
+                      </p>
                     )}
                   </div>
+
+                  {c.link && (
+                    <div class="pt-2">
+                      <a 
+                        class="inline-flex items-center gap-1.5 px-4 py-2 bg-concrete text-obsidian rounded-buttons text-caption font-inter font-medium border border-silver/50 hover:bg-solar-beam hover:border-solar-beam transition-colors duration-200" 
+                        href={c.link} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                      >
+                        <span>View credential</span>
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+                        </svg>
+                      </a>
+                    </div>
+                  )}
                 </div>
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
       </div>
     </section>

@@ -1,62 +1,55 @@
 ---
 // @ts-nocheck
 import { siteConfig } from "../config";
-import { GlowingEffect } from "@/components/ui/glowing-effect";
 const hasEducation = siteConfig.education && siteConfig.education.length > 0;
 ---
 
 {
   hasEducation && (
-    <section id="education" class="p-8 sm:p-12 md:p-16 lg:p-24">
-      <div>
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-start">
-          <div class="lg:col-span-4">
-            <h2 class="text-3xl sm:text-4xl md:text-5xl xl:text-7xl font-bold text-gray-900">
-              Education
-            </h2>
-            <div
-              class="w-[75px] h-[5px] mt-2 rounded-full"
-              style={`background-color: ${siteConfig.accentColor}`}
-            />
-          </div>
+    <section id="education" class="py-24 px-8 sm:px-12 md:px-24 bg-concrete flex flex-col items-center text-center">
+      <div class="w-full max-w-[1200px] flex flex-col items-center">
+        <!-- Section Title Block -->
+        <div class="flex flex-col items-center mb-16">
+          <span class="font-caveat text-graphite text-[28px] tracking-tight mb-2 select-none">
+            Academic Foundation
+          </span>
+          <h2 class="text-obsidian font-reddit-sans-condensed font-black text-display leading-none tracking-tighter uppercase select-none">
+            EDUCATION
+          </h2>
+        </div>
 
-          <div class="lg:col-span-8">
-            <div class="space-y-8">
-              {siteConfig.education.map((edu) => (
-                    <div class="relative bg-white rounded-lg shadow-sm border border-gray-100 p-4 sm:p-5 md:p-6 hover:shadow-md transition-shadow duration-300 aceternity-glow overflow-visible"
-                  style={`--accent-color: ${siteConfig.accentColor}`}>
-                  <GlowingEffect client:idle className="" glow={true} disabled={false} />
-                  <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between mb-4">
-                    <div>
-                      <h3 class="text-lg sm:text-xl font-semibold text-gray-900">
-                        {edu.degree}
-                      </h3>
-                      <p
-                        class="text-base sm:text-lg"
-                        style={`color: ${siteConfig.accentColor}`}
-                      >
-                        {edu.school}
-                      </p>
-                    </div>
-                    <span class="text-xs sm:text-sm text-gray-500 mt-2 sm:mt-0">
-                      {edu.dateRange}
-                    </span>
+        <!-- Vertical Stack of Education -->
+        <div class="flex flex-col items-center gap-8 w-full">
+          {siteConfig.education.map((edu) => (
+            <div class="w-full max-w-3xl group relative text-left">
+              <div class="bg-paper-white rounded-cards border border-silver/50 p-8 sm:p-10 shadow-subtle transition-all duration-300 hover:border-silver">
+                <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between mb-6 gap-2">
+                  <div>
+                    <h3 class="font-inter font-medium text-subheading text-obsidian">
+                      {edu.degree}
+                    </h3>
+                    <p class="font-inter-display font-medium text-body-sm text-solar-beam uppercase tracking-wider mt-1 select-none">
+                      {edu.school}
+                    </p>
                   </div>
-
-                  <ul class="space-y-2">
-                    {edu.achievements.map((achievement) => (
-                      <li class="flex items-start">
-                        <span class="inline-block w-1.5 h-1.5 rounded-full bg-gray-400 mt-2 mr-3 flex-shrink-0" />
-                        <span class="text-sm sm:text-base text-gray-600">
-                          {achievement}
-                        </span>
-                      </li>
-                    ))}
-                  </ul>
+                  <span class="font-inter font-medium text-caption text-ash sm:text-right mt-1 sm:mt-0 select-none whitespace-nowrap">
+                    {edu.dateRange}
+                  </span>
                 </div>
-              ))}
+
+                <ul class="space-y-3">
+                  {edu.achievements.map((achievement) => (
+                    <li class="flex items-start gap-3">
+                      <span class="inline-block w-1.5 h-1.5 rounded-full bg-silver mt-2 flex-shrink-0" />
+                      <span class="font-inter-display font-medium text-body text-graphite leading-relaxed">
+                        {achievement}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
-          </div>
+          ))}
         </div>
       </div>
     </section>
