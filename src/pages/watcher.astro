@@ -7,32 +7,26 @@ import "../styles/global.css";
 
 const features = [
   {
-    icon: "👁️",
     title: "Real-time Monitoring",
     description: "Automatically watches folders and organizes files as they're created, with zero latency."
   },
   {
-    icon: "🤖",
     title: "Smart Categorization",
     description: "Intelligently sorts files by extension into configurable categories with custom rules."
   },
   {
-    icon: "⚙️",
     title: "Dual-Mode Operation",
     description: "Switch between intuitive GUI and powerful CLI with full feature parity."
   },
   {
-    icon: "📁",
     title: "Multi-folder Support",
     description: "Watch multiple directories simultaneously with independent settings for each."
   },
   {
-    icon: "🔒",
     title: "Safe & Non-recursive",
     description: "Only organizes top-level files - subfolders are never touched or modified."
   },
   {
-    icon: "🚀",
     title: "Zero Configuration",
     description: "Works perfectly out of the box with sensible defaults - no setup required."
   }
@@ -146,7 +140,7 @@ const techStack = ["Python 3.9+", "Watchdog", "Tkinter", "PyInstaller", "Cross-p
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full text-left">
           {features.map((feature) => (
             <div class="group bg-paper-white p-8 sm:p-10 rounded-cards border border-silver/50 shadow-subtle hover:border-silver transition-all duration-300">
-              <div class="text-5xl mb-4 select-none">{feature.icon}</div>
+
               <h3 class="font-inter font-medium text-subheading text-obsidian mb-3">
                 {feature.title}
               </h3>
@@ -174,7 +168,7 @@ const techStack = ["Python 3.9+", "Watchdog", "Tkinter", "PyInstaller", "Cross-p
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8 w-full text-left">
           <div class="bg-paper-white p-8 sm:p-10 rounded-cards border border-silver/50 shadow-subtle hover:border-silver transition-colors duration-300">
-            <div class="text-4xl mb-4 select-none">🖥️</div>
+
             <h3 class="font-inter font-medium text-subheading text-obsidian mb-3">Modern GUI</h3>
             <p class="font-inter-display font-medium text-body text-graphite leading-relaxed">
               Intuitive tkinter interface with drag-and-drop folder management, inline rules editor, and real-time status monitoring.
@@ -182,7 +176,7 @@ const techStack = ["Python 3.9+", "Watchdog", "Tkinter", "PyInstaller", "Cross-p
           </div>
 
           <div class="bg-paper-white p-8 sm:p-10 rounded-cards border border-silver/50 shadow-subtle hover:border-silver transition-colors duration-300">
-            <div class="text-4xl mb-4 select-none">⚡</div>
+
             <h3 class="font-inter font-medium text-subheading text-obsidian mb-3">Powerful CLI</h3>
             <p class="font-inter-display font-medium text-body text-graphite leading-relaxed">
               Full-featured command-line interface with custom rules, batch operations, and automation support for advanced users.
@@ -190,7 +184,7 @@ const techStack = ["Python 3.9+", "Watchdog", "Tkinter", "PyInstaller", "Cross-p
           </div>
 
           <div class="bg-paper-white p-8 sm:p-10 rounded-cards border border-silver/50 shadow-subtle hover:border-silver transition-colors duration-300">
-            <div class="text-4xl mb-4 select-none">🌍</div>
+
             <h3 class="font-inter font-medium text-subheading text-obsidian mb-3">Cross-Platform</h3>
             <p class="font-inter-display font-medium text-body text-graphite leading-relaxed">
               Runs seamlessly on Windows, macOS, and Linux. Single executable or Python script - your choice.

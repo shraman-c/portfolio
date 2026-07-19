@@ -101,6 +101,13 @@ export const siteConfig = {
         "An open-source portable Digital Audio Player based on the ESP32-C3 Super Mini and DFPlayer Mini with deep sleep, state restore, and 5-button control.",
       link: "/opendap-c3",
       skills: ["ESP32-C3", "Arduino", "PlatformIO", "C++", "DFPlayer Mini"],
+    },
+    {
+      name: "OpenClock-C3: ESP32-C3 Smart Clock",
+      description:
+        "An ESP32-C3 Super Mini based smart clock with NTP time sync, live weather display, OLED interface, web config panel, and alarm system.",
+      link: "/openclock-c3",
+      skills: ["ESP32-C3", "Arduino", "PlatformIO", "C++", "U8g2", "ArduinoJson"],
     }
   ],
   // experience removed

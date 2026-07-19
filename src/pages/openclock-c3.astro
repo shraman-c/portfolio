@@ -1,0 +1,420 @@
+---
+import { siteConfig } from "../config";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import ThemeToggle from "../components/ThemeToggle.astro";
+import "../styles/global.css";
+
+const features = [
+  {
+    title: "NTP Time Sync",
+    description: "Automatically fetches accurate time from NTP servers over Wi-Fi — no manual clock setting required."
+  },
+  {
+    title: "Live Weather Display",
+    description: "Integrates with the OpenWeather API to show real-time outdoor temperature and conditions."
+  },
+  {
+    title: "Web Configuration Panel",
+    description: "Built-in web server for easy setup — configure Wi-Fi, alarms, and time overrides from any browser."
+  },
+  {
+    title: "Multiple Display Faces",
+    description: "Cycle through Time/Date, Weather, Alarm Config, and Diagnostics views with a single touch."
+  },
+  {
+    title: "Alarm System",
+    description: "Configurable daily alarm with buzzer output — set and manage alarms through the web panel."
+  },
+  {
+    title: "Battery Monitoring",
+    description: "Telemetry subsystem with voltage divider for tracking battery levels and power status."
+  }
+];
+
+const hardwareComponents = [
+  { name: "Board", value: "ESP32-C3 Super Mini" },
+  { name: "Display", value: "SH1106 OLED (128×64, I2C)" },
+  { name: "Controls", value: "TTP223 Touch Sensor" },
+  { name: "Audio", value: "Active/Passive Buzzer" },
+  { name: "Power", value: "Battery Voltage Divider (GPIO 3)" },
+];
+
+const wiringTable = [
+  { component: "SH1106 OLED (SDA)", pin: "GPIO 8", notes: "Hardware I2C" },
+  { component: "SH1106 OLED (SCL)", pin: "GPIO 9", notes: "Hardware I2C" },
+  { component: "TTP223 Touch Pad", pin: "GPIO 7", notes: "Digital input for face navigation" },
+  { component: "Buzzer", pin: "GPIO 6", notes: "Digital output for alarm" },
+  { component: "Battery Voltage Divider", pin: "GPIO 3", notes: "Analog input" },
+];
+
+const techStack = ["ESP32-C3", "Arduino Framework", "PlatformIO", "U8g2", "ArduinoJson", "C++"];
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="OpenClock-C3 — An ESP32-C3 Super Mini based smart clock with NTP sync, weather display, web config panel, and OLED interface." />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="icon" href="/favicon.svg" />
+    <link rel="canonical" href="https://shramanc.pages.dev/openclock-c3" />
+    <title>OpenClock-C3 — ESP32-C3 Smart Clock</title>
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://shramanc.pages.dev/openclock-c3" />
+    <meta property="og:title" content="OpenClock-C3 — ESP32-C3 Smart Clock" />
+    <meta property="og:description" content="An ESP32-C3 Super Mini based smart clock with NTP sync, weather display, web config panel, and OLED interface." />
+    <meta property="og:image" content="https://shramanc.pages.dev/images/openclock-c3-hardware.jpg" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://shramanc.pages.dev/openclock-c3" />
+    <meta property="twitter:title" content="OpenClock-C3 — ESP32-C3 Smart Clock" />
+    <meta property="twitter:description" content="An ESP32-C3 Super Mini based smart clock with NTP sync, weather display, web config panel, and OLED interface." />
+    <meta property="twitter:image" content="https://shramanc.pages.dev/images/openclock-c3-hardware.jpg" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Inter:wght@500&family=Reddit+Sans+Condensed:wght@900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg-concrete text-obsidian">
+    <Header />
+
+    <!-- Hero Section -->
+    <main class="relative py-32 flex items-center justify-center min-h-[70vh]">
+      <!-- Diagonal wash of light -->
+      <div
+        class="absolute top-0 right-0 w-[60%] h-full -z-10 pointer-events-none"
+        style="background: radial-gradient(circle at 100% 0%, var(--color-solar-beam) 0%, transparent 60%); opacity: 0.25; filter: blur(40px);"
+      ></div>
+
+      <div class="mx-auto max-w-4xl px-6 lg:px-8 text-center flex flex-col items-center">
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 bg-paper-white border border-silver/50 rounded-buttons mb-8 select-none shadow-subtle">
+          <span class="relative flex h-2 w-2">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-solar-beam opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-solar-beam"></span>
+          </span>
+          <span class="font-inter font-medium text-caption text-graphite">Open Source &bull; MIT License</span>
+        </div>
+
+        <h1 class="text-obsidian font-reddit-sans-condensed font-black text-display leading-none tracking-tighter uppercase select-none mb-6">
+          OPENCLOCK-C3
+        </h1>
+
+        <p class="font-inter-display font-medium text-body text-graphite mb-10 leading-relaxed max-w-2xl">
+          A feature-rich smart clock built on the ESP32-C3 Super Mini. Wi-Fi time sync, live weather, OLED display faces, and a built-in web configuration panel — all in a tiny package.
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+          <a
+            href="https://github.com/shraman-c/OpenClock-C3"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="px-8 py-3 bg-solar-beam text-obsidian border border-solar-beam rounded-buttons font-inter font-medium text-body-sm hover:bg-obsidian hover:text-paper-white hover:border-obsidian transition-colors duration-200 cursor-pointer flex items-center gap-2"
+          >
+            <span>View on GitHub</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+            </svg>
+          </a>
+          <a
+            href="#features"
+            class="px-8 py-3 bg-concrete text-obsidian border border-silver/50 rounded-buttons font-inter font-medium text-body-sm hover:bg-solar-beam hover:border-solar-beam transition-colors duration-200 cursor-pointer"
+          >
+            Learn More
+          </a>
+          <a
+            href="/"
+            class="px-8 py-3 bg-concrete text-obsidian border border-silver/50 rounded-buttons font-inter font-medium text-body-sm hover:bg-solar-beam hover:border-solar-beam transition-colors duration-200 cursor-pointer"
+          >
+            Back to Portfolio
+          </a>
+        </div>
+      </div>
+    </main>
+
+    <!-- Gallery Section -->
+    <section class="py-16 px-8 sm:px-12 md:px-24 border-t border-silver/30 bg-concrete flex flex-col items-center text-center">
+      <div class="w-full max-w-4xl flex flex-col items-center">
+        <div class="flex flex-col items-center mb-12">
+          <span class="font-caveat text-graphite text-[28px] tracking-tight mb-2 select-none">
+            In Action
+          </span>
+          <h2 class="text-obsidian font-reddit-sans-condensed font-black text-display leading-none tracking-tighter uppercase select-none">
+            GALLERY
+          </h2>
+        </div>
+
+        <!-- Display Faces -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full mb-6">
+          <div class="bg-paper-white rounded-cards border border-silver/50 shadow-subtle overflow-hidden">
+            <img
+              src="/images/openclock-c3-time.jpg"
+              alt="OpenClock-C3 showing the time and date display face on the OLED screen"
+              class="w-full h-auto object-cover"
+              loading="lazy"
+            />
+            <p class="font-inter-display font-medium text-body-sm text-graphite py-3 px-5 italic">Time &amp; Date Display</p>
+          </div>
+          <div class="bg-paper-white rounded-cards border border-silver/50 shadow-subtle overflow-hidden">
+            <img
+              src="/images/openclock-c3-weather.jpg"
+              alt="OpenClock-C3 showing the weather display face with temperature and conditions"
+              class="w-full h-auto object-cover"
+              loading="lazy"
+            />
+            <p class="font-inter-display font-medium text-body-sm text-graphite py-3 px-5 italic">Weather Display</p>
+          </div>
+        </div>
+
+        <!-- Hardware Setup -->
+        <div class="bg-paper-white rounded-cards border border-silver/50 shadow-subtle overflow-hidden w-full">
+          <img
+            src="/images/openclock-c3-hardware.jpg"
+            alt="OpenClock-C3 hardware setup showing ESP32-C3 Super Mini, SH1106 OLED, buzzer and touch sensor"
+            class="w-full h-auto object-cover"
+            loading="lazy"
+          />
+          <p class="font-inter-display font-medium text-body-sm text-graphite py-4 px-6 italic">
+            Hardware setup — ESP32-C3 Super Mini, SH1106 OLED, TTP223 touch sensor, and buzzer
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-24 px-8 sm:px-12 md:px-24 border-t border-silver/30 bg-concrete flex flex-col items-center text-center">
+      <div class="w-full max-w-[1200px] flex flex-col items-center">
+        <div class="flex flex-col items-center mb-16">
+          <span class="font-caveat text-graphite text-[28px] tracking-tight mb-2 select-none">
+            What It Can Do
+          </span>
+          <h2 class="text-obsidian font-reddit-sans-condensed font-black text-display leading-none tracking-tighter uppercase select-none">
+            FEATURES
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full text-left">
+          {features.map((feature) => (
+            <div class="group bg-paper-white p-8 sm:p-10 rounded-cards border border-silver/50 shadow-subtle hover:border-silver transition-all duration-300">
+
+              <h3 class="font-inter font-medium text-subheading text-obsidian mb-3">
+                {feature.title}
+              </h3>
+              <p class="font-inter-display font-medium text-body text-graphite leading-relaxed">
+                {feature.description}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Hardware Components Section -->
+    <section class="py-24 px-8 sm:px-12 md:px-24 border-t border-silver/30 bg-concrete flex flex-col items-center text-center">
+      <div class="w-full max-w-[1200px] flex flex-col items-center">
+        <div class="flex flex-col items-center mb-16">
+          <span class="font-caveat text-graphite text-[28px] tracking-tight mb-2 select-none">
+            Bill of Materials
+          </span>
+          <h2 class="text-obsidian font-reddit-sans-condensed font-black text-display leading-none tracking-tighter uppercase select-none">
+            COMPONENTS
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 w-full text-left">
+          {hardwareComponents.map((comp) => (
+            <div class="bg-paper-white p-8 sm:p-10 rounded-cards border border-silver/50 shadow-subtle hover:border-silver transition-colors duration-300">
+
+              <h3 class="font-inter font-medium text-body-sm text-graphite uppercase tracking-wider mb-2">{comp.name}</h3>
+              <p class="font-inter font-medium text-subheading text-obsidian">{comp.value}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Wiring Table Section -->
+    <section class="py-24 px-8 sm:px-12 md:px-24 border-t border-silver/30 bg-concrete flex flex-col items-center text-center">
+      <div class="w-full max-w-4xl flex flex-col items-center">
+        <div class="flex flex-col items-center mb-16">
+          <span class="font-caveat text-graphite text-[28px] tracking-tight mb-2 select-none">
+            Pin Connections
+          </span>
+          <h2 class="text-obsidian font-reddit-sans-condensed font-black text-display leading-none tracking-tighter uppercase select-none">
+            WIRING
+          </h2>
+        </div>
+
+        <div class="bg-paper-white rounded-cards border border-silver/50 shadow-subtle w-full overflow-hidden">
+          <div class="overflow-x-auto">
+            <table class="w-full text-left">
+              <thead>
+                <tr class="border-b border-silver/50">
+                  <th class="font-inter font-medium text-body-sm text-graphite uppercase tracking-wider py-5 px-8">Component</th>
+                  <th class="font-inter font-medium text-body-sm text-graphite uppercase tracking-wider py-5 px-8">ESP32-C3 Pin</th>
+                  <th class="font-inter font-medium text-body-sm text-graphite uppercase tracking-wider py-5 px-8">Notes</th>
+                </tr>
+              </thead>
+              <tbody>
+                {wiringTable.map((row, i) => (
+                  <tr class:list={["border-b border-silver/20 last:border-b-0", i % 2 === 1 ? "bg-concrete/30" : ""]}>
+                    <td class="font-inter font-medium text-body text-obsidian py-4 px-8">{row.component}</td>
+                    <td class="font-inter-display font-medium text-body text-graphite py-4 px-8 font-mono">{row.pin}</td>
+                    <td class="font-inter-display font-medium text-body-sm text-graphite py-4 px-8">{row.notes}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tech Stack Section -->
+    <section class="py-24 px-8 sm:px-12 md:px-24 border-t border-silver/30 bg-concrete flex flex-col items-center text-center">
+      <div class="w-full max-w-[1200px] flex flex-col items-center">
+        <div class="flex flex-col items-center mb-16">
+          <span class="font-caveat text-graphite text-[28px] tracking-tight mb-2 select-none">
+            Technologies Used
+          </span>
+          <h2 class="text-obsidian font-reddit-sans-condensed font-black text-display leading-none tracking-tighter uppercase select-none">
+            TECH STACK
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 w-full">
+          {techStack.map((tech) => (
+            <div class="bg-paper-white p-6 rounded-cards border border-silver/50 text-center shadow-subtle hover:border-silver transition-colors duration-300">
+              <p class="font-inter font-medium text-body-sm text-obsidian select-none">{tech}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Getting Started Section -->
+    <section class="py-24 px-8 sm:px-12 md:px-24 border-t border-silver/30 bg-concrete flex flex-col items-center text-center">
+      <div class="w-full max-w-4xl flex flex-col items-center">
+        <div class="bg-paper-white p-12 rounded-cards border border-silver/50 w-full shadow-subtle text-left">
+          <h2 class="font-reddit-sans-condensed font-black text-heading-lg text-obsidian uppercase select-none text-center mb-12">
+            Getting Started
+          </h2>
+          <div class="space-y-8 max-w-2xl mx-auto">
+            <div class="flex gap-5">
+              <div class="flex-shrink-0">
+                <div class="flex items-center justify-center h-10 w-10 rounded-full bg-solar-beam text-obsidian font-bold select-none">1</div>
+              </div>
+              <div>
+                <h3 class="font-inter font-medium text-body text-obsidian mb-1">Install PlatformIO</h3>
+                <p class="font-inter-display font-medium text-body-sm text-graphite">Install <a href="https://platformio.org/" target="_blank" rel="noopener noreferrer" class="underline hover:text-obsidian transition-colors">PlatformIO</a> as a VS Code extension or use the CLI.</p>
+              </div>
+            </div>
+            <div class="flex gap-5">
+              <div class="flex-shrink-0">
+                <div class="flex items-center justify-center h-10 w-10 rounded-full bg-solar-beam text-obsidian font-bold select-none">2</div>
+              </div>
+              <div>
+                <h3 class="font-inter font-medium text-body text-obsidian mb-1">Clone &amp; Configure</h3>
+                <p class="font-inter-display font-medium text-body-sm text-graphite mb-2">Clone the repository and add your OpenWeather API key in the source code.</p>
+                <code class="block bg-concrete/60 border border-silver/30 rounded-cards px-4 py-3 text-body-sm font-mono text-obsidian">git clone https://github.com/shraman-c/OpenClock-C3.git</code>
+              </div>
+            </div>
+            <div class="flex gap-5">
+              <div class="flex-shrink-0">
+                <div class="flex items-center justify-center h-10 w-10 rounded-full bg-solar-beam text-obsidian font-bold select-none">3</div>
+              </div>
+              <div>
+                <h3 class="font-inter font-medium text-body text-obsidian mb-1">Compile &amp; Flash</h3>
+                <p class="font-inter-display font-medium text-body-sm text-graphite mb-2">Build the firmware and upload it to your ESP32-C3 Super Mini.</p>
+                <code class="block bg-concrete/60 border border-silver/30 rounded-cards px-4 py-3 text-body-sm font-mono text-obsidian">pio run -t upload</code>
+              </div>
+            </div>
+            <div class="flex gap-5">
+              <div class="flex-shrink-0">
+                <div class="flex items-center justify-center h-10 w-10 rounded-full bg-solar-beam text-obsidian font-bold select-none">4</div>
+              </div>
+              <div>
+                <h3 class="font-inter font-medium text-body text-obsidian mb-1">Configure via Web Panel</h3>
+                <p class="font-inter-display font-medium text-body-sm text-graphite">Connect to the clock's Wi-Fi AP and open <code class="bg-concrete/60 px-2 py-0.5 rounded text-obsidian">192.168.4.1</code> in your browser to set Wi-Fi credentials, alarms, and more.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Project Structure Section -->
+    <section class="py-24 px-8 sm:px-12 md:px-24 border-t border-silver/30 bg-concrete flex flex-col items-center text-center">
+      <div class="w-full max-w-[1200px] flex flex-col items-center">
+        <div class="flex flex-col items-center mb-16">
+          <span class="font-caveat text-graphite text-[28px] tracking-tight mb-2 select-none">
+            Architecture
+          </span>
+          <h2 class="text-obsidian font-reddit-sans-condensed font-black text-display leading-none tracking-tighter uppercase select-none">
+            STRUCTURE
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full text-left">
+          <div class="bg-paper-white p-8 sm:p-10 rounded-cards border border-silver/50 shadow-subtle hover:border-silver transition-colors duration-300">
+
+            <h3 class="font-inter font-medium text-subheading text-obsidian mb-3">src/main.cpp</h3>
+            <p class="font-inter-display font-medium text-body text-graphite leading-relaxed">
+              The core firmware containing hardware initialisation, network stack, web server, NTP client, weather API integration, and OLED display logic.
+            </p>
+          </div>
+
+          <div class="bg-paper-white p-8 sm:p-10 rounded-cards border border-silver/50 shadow-subtle hover:border-silver transition-colors duration-300">
+
+            <h3 class="font-inter font-medium text-subheading text-obsidian mb-3">platformio.ini</h3>
+            <p class="font-inter-display font-medium text-body text-graphite leading-relaxed">
+              PlatformIO configuration defining the ESP32-C3 environment and library dependencies — <code class="bg-concrete/60 px-1.5 py-0.5 rounded text-body-sm">U8g2</code> for OLED graphics and <code class="bg-concrete/60 px-1.5 py-0.5 rounded text-body-sm">ArduinoJson</code> for API parsing.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-24 px-8 sm:px-12 md:px-24 border-t border-silver/30 bg-concrete flex flex-col items-center text-center">
+      <div class="w-full max-w-4xl flex flex-col items-center">
+        <div class="bg-paper-white p-12 rounded-cards border border-silver/50 w-full shadow-subtle">
+          <h2 class="font-reddit-sans-condensed font-black text-heading-lg text-obsidian uppercase select-none mb-6">
+            Build Your Own Smart Clock
+          </h2>
+          <p class="font-inter-display font-medium text-body text-graphite mb-10 leading-relaxed max-w-xl mx-auto">
+            OpenClock-C3 is fully open-source. Fork it, customise the display faces, add your own sensors, and build a smart clock that does exactly what you need.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a
+              href="https://github.com/shraman-c/OpenClock-C3"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="px-8 py-3 bg-solar-beam text-obsidian border border-solar-beam rounded-buttons font-inter font-medium text-body-sm hover:bg-obsidian hover:text-paper-white hover:border-obsidian transition-colors duration-200 cursor-pointer flex items-center justify-center gap-2"
+            >
+              <span>Fork on GitHub</span>
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+              </svg>
+            </a>
+            <a
+              href="/"
+              class="px-8 py-3 bg-concrete text-obsidian border border-silver/50 rounded-buttons font-inter font-medium text-body-sm hover:bg-solar-beam hover:border-solar-beam transition-colors duration-200 cursor-pointer"
+            >
+              Back to Portfolio
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <Footer />
+    <ThemeToggle />
+  </body>
+</html>

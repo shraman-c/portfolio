@@ -7,32 +7,26 @@ import "../styles/global.css";
 
 const features = [
   {
-    icon: "🤖",
     title: "AI-Powered Intelligence",
     description: "Advanced algorithms automatically resolve scheduling conflicts and optimize timetables for maximum efficiency."
   },
   {
-    icon: "📚",
     title: "NEP 2020 Compliant",
     description: "Built with National Education Policy guidelines in mind, ensuring your schedules meet modern educational standards."
   },
   {
-    icon: "⚡",
     title: "Lightning Fast",
     description: "Generate complex timetables in seconds, not hours. Save valuable time for what really matters - education."
   },
   {
-    icon: "🎯",
     title: "Conflict-Free Scheduling",
     description: "Intelligent constraint handling ensures zero conflicts between teachers, rooms, and student groups."
   },
   {
-    icon: "📊",
     title: "Visual Analytics",
     description: "Beautiful, interactive dashboards to visualize schedules, track utilization, and identify optimization opportunities."
   },
   {
-    icon: "🔄",
     title: "Easy Modifications",
     description: "Make changes on the fly with automatic conflict detection and instant schedule adjustments."
   }
@@ -133,7 +127,7 @@ const features = [
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full text-left">
           {features.map((feature) => (
             <div class="group bg-paper-white p-8 sm:p-10 rounded-cards border border-silver/50 shadow-subtle hover:border-silver transition-all duration-300">
-              <div class="text-5xl mb-4 select-none">{feature.icon}</div>
+
               <h3 class="font-inter font-medium text-subheading text-obsidian mb-3">
                 {feature.title}
               </h3>

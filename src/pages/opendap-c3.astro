@@ -7,43 +7,37 @@ import "../styles/global.css";
 
 const features = [
   {
-    icon: "🎵",
     title: "MP3 & WAV Playback",
     description: "Plays MP3 and WAV files directly from a microSD card via the DFPlayer Mini audio decoder."
   },
   {
-    icon: "🎛️",
     title: "5-Button Control",
     description: "Resistor ladder design gives you Play/Pause, Next, Previous, Volume Up and Volume Down — all on a single GPIO pin."
   },
   {
-    icon: "🔋",
     title: "Deep Sleep Power Management",
     description: "Intelligent power management with ESP32-C3 deep sleep keeps battery drain near zero when idle."
   },
   {
-    icon: "💾",
     title: "State Restore on Boot",
     description: "Volume level and last-played track are saved to flash and restored automatically every time the device powers on."
   },
   {
-    icon: "🎧",
     title: "3.5 mm Headphone Output",
     description: "Standard headphone jack for private listening — plug in any wired headphones or earbuds."
   },
   {
-    icon: "🐛",
     title: "UART Debug Console",
     description: "Full debug logging over serial UART for easy firmware development and troubleshooting."
   }
 ];
 
 const hardwareComponents = [
-  { name: "MCU", value: "ESP32-C3 Super Mini", icon: "⚡" },
-  { name: "Audio Decoder", value: "DFRobot DFPlayer Mini", icon: "🔊" },
-  { name: "Battery", value: "3.7V Li-ion 402020 (400 mAh)", icon: "🔋" },
-  { name: "Charging", value: "TP4056 USB-C Module", icon: "🔌" },
-  { name: "Regulator", value: "LM2950-3.3", icon: "📐" },
+  { name: "MCU", value: "ESP32-C3 Super Mini" },
+  { name: "Audio Decoder", value: "DFRobot DFPlayer Mini" },
+  { name: "Battery", value: "3.7V Li-ion 402020 (400 mAh)" },
+  { name: "Charging", value: "TP4056 USB-C Module" },
+  { name: "Regulator", value: "LM2950-3.3" },
 ];
 
 const wiringTable = [
@@ -185,7 +179,7 @@ const techStack = ["ESP32-C3", "Arduino Framework", "PlatformIO", "DFPlayer Mini
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full text-left">
           {features.map((feature) => (
             <div class="group bg-paper-white p-8 sm:p-10 rounded-cards border border-silver/50 shadow-subtle hover:border-silver transition-all duration-300">
-              <div class="text-5xl mb-4 select-none">{feature.icon}</div>
+
               <h3 class="font-inter font-medium text-subheading text-obsidian mb-3">
                 {feature.title}
               </h3>
@@ -213,7 +207,7 @@ const techStack = ["ESP32-C3", "Arduino Framework", "PlatformIO", "DFPlayer Mini
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 w-full text-left">
           {hardwareComponents.map((comp) => (
             <div class="bg-paper-white p-8 sm:p-10 rounded-cards border border-silver/50 shadow-subtle hover:border-silver transition-colors duration-300">
-              <div class="text-4xl mb-4 select-none">{comp.icon}</div>
+
               <h3 class="font-inter font-medium text-body-sm text-graphite uppercase tracking-wider mb-2">{comp.name}</h3>
               <p class="font-inter font-medium text-subheading text-obsidian">{comp.value}</p>
             </div>
@@ -336,7 +330,7 @@ const techStack = ["ESP32-C3", "Arduino Framework", "PlatformIO", "DFPlayer Mini
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8 w-full text-left">
           <div class="bg-paper-white p-8 sm:p-10 rounded-cards border border-silver/50 shadow-subtle hover:border-silver transition-colors duration-300">
-            <div class="text-4xl mb-4 select-none">📂</div>
+
             <h3 class="font-inter font-medium text-subheading text-obsidian mb-3">Folder Navigation</h3>
             <p class="font-inter-display font-medium text-body text-graphite leading-relaxed">
               Navigate to Next/Previous folders with explicit folder index tracking for the DFPlayer Mini.
@@ -344,7 +338,7 @@ const techStack = ["ESP32-C3", "Arduino Framework", "PlatformIO", "DFPlayer Mini
           </div>
 
           <div class="bg-paper-white p-8 sm:p-10 rounded-cards border border-silver/50 shadow-subtle hover:border-silver transition-colors duration-300">
-            <div class="text-4xl mb-4 select-none">🔧</div>
+
             <h3 class="font-inter font-medium text-subheading text-obsidian mb-3">Enhanced Debouncing</h3>
             <p class="font-inter-display font-medium text-body text-graphite leading-relaxed">
               Improved debouncing filters for more reliable button presses, especially during rapid inputs.
@@ -352,7 +346,7 @@ const techStack = ["ESP32-C3", "Arduino Framework", "PlatformIO", "DFPlayer Mini
           </div>
 
           <div class="bg-paper-white p-8 sm:p-10 rounded-cards border border-silver/50 shadow-subtle hover:border-silver transition-colors duration-300">
-            <div class="text-4xl mb-4 select-none">📺</div>
+
             <h3 class="font-inter font-medium text-subheading text-obsidian mb-3">OLED Display</h3>
             <p class="font-inter-display font-medium text-body text-graphite leading-relaxed">
               Add a small OLED screen for displaying current track info, volume level, and battery status.
