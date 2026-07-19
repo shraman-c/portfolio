@@ -1,0 +1,401 @@
+---
+import { siteConfig } from "../config";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import ThemeToggle from "../components/ThemeToggle.astro";
+import "../styles/global.css";
+
+const features = [
+  {
+    icon: "🎵",
+    title: "MP3 & WAV Playback",
+    description: "Plays MP3 and WAV files directly from a microSD card via the DFPlayer Mini audio decoder."
+  },
+  {
+    icon: "🎛️",
+    title: "5-Button Control",
+    description: "Resistor ladder design gives you Play/Pause, Next, Previous, Volume Up and Volume Down — all on a single GPIO pin."
+  },
+  {
+    icon: "🔋",
+    title: "Deep Sleep Power Management",
+    description: "Intelligent power management with ESP32-C3 deep sleep keeps battery drain near zero when idle."
+  },
+  {
+    icon: "💾",
+    title: "State Restore on Boot",
+    description: "Volume level and last-played track are saved to flash and restored automatically every time the device powers on."
+  },
+  {
+    icon: "🎧",
+    title: "3.5 mm Headphone Output",
+    description: "Standard headphone jack for private listening — plug in any wired headphones or earbuds."
+  },
+  {
+    icon: "🐛",
+    title: "UART Debug Console",
+    description: "Full debug logging over serial UART for easy firmware development and troubleshooting."
+  }
+];
+
+const hardwareComponents = [
+  { name: "MCU", value: "ESP32-C3 Super Mini", icon: "⚡" },
+  { name: "Audio Decoder", value: "DFRobot DFPlayer Mini", icon: "🔊" },
+  { name: "Battery", value: "3.7V Li-ion 402020 (400 mAh)", icon: "🔋" },
+  { name: "Charging", value: "TP4056 USB-C Module", icon: "🔌" },
+  { name: "Regulator", value: "LM2950-3.3", icon: "📐" },
+];
+
+const wiringTable = [
+  { component: "DFPlayer RX", pin: "GPIO4" },
+  { component: "DFPlayer TX", pin: "GPIO5" },
+  { component: "DFPlayer USB+ / USB-", pin: "USB-C Breakout D+ / D-" },
+  { component: "Button Ladder", pin: "GPIO1" },
+];
+
+const techStack = ["ESP32-C3", "Arduino Framework", "PlatformIO", "DFPlayer Mini", "C++"];
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="OpenDAP-C3 — An open-source portable Digital Audio Player based on the ESP32-C3 Super Mini and DFPlayer Mini." />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="icon" href="/favicon.svg" />
+    <link rel="canonical" href="https://shramanc.pages.dev/opendap-c3" />
+    <title>OpenDAP-C3 — Open-Source Portable Digital Audio Player</title>
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://shramanc.pages.dev/opendap-c3" />
+    <meta property="og:title" content="OpenDAP-C3 — Open-Source Portable Digital Audio Player" />
+    <meta property="og:description" content="An open-source portable Digital Audio Player based on the ESP32-C3 Super Mini and DFPlayer Mini." />
+    <meta property="og:image" content="https://shramanc.pages.dev/images/opendap-c3-hardware.jpg" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://shramanc.pages.dev/opendap-c3" />
+    <meta property="twitter:title" content="OpenDAP-C3 — Open-Source Portable Digital Audio Player" />
+    <meta property="twitter:description" content="An open-source portable Digital Audio Player based on the ESP32-C3 Super Mini and DFPlayer Mini." />
+    <meta property="twitter:image" content="https://shramanc.pages.dev/images/opendap-c3-hardware.jpg" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Inter:wght@500&family=Reddit+Sans+Condensed:wght@900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg-concrete text-obsidian">
+    <Header />
+
+    <!-- Hero Section -->
+    <main class="relative py-32 flex items-center justify-center min-h-[70vh]">
+      <!-- Diagonal wash of light -->
+      <div
+        class="absolute top-0 right-0 w-[60%] h-full -z-10 pointer-events-none"
+        style="background: radial-gradient(circle at 100% 0%, var(--color-solar-beam) 0%, transparent 60%); opacity: 0.25; filter: blur(40px);"
+      ></div>
+
+      <div class="mx-auto max-w-4xl px-6 lg:px-8 text-center flex flex-col items-center">
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 bg-paper-white border border-silver/50 rounded-buttons mb-8 select-none shadow-subtle">
+          <span class="relative flex h-2 w-2">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-solar-beam opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-solar-beam"></span>
+          </span>
+          <span class="font-inter font-medium text-caption text-graphite">Open Source &bull; MIT License</span>
+        </div>
+
+        <h1 class="text-obsidian font-reddit-sans-condensed font-black text-display leading-none tracking-tighter uppercase select-none mb-6">
+          OPENDAP-C3
+        </h1>
+
+        <p class="font-inter-display font-medium text-body text-graphite mb-10 leading-relaxed max-w-2xl">
+          An open-source portable Digital Audio Player built around the ESP32-C3 Super Mini and DFPlayer Mini. Compact, hackable, and designed for makers.
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+          <a
+            href="https://github.com/shraman-c/OpenDAP-C3"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="px-8 py-3 bg-solar-beam text-obsidian border border-solar-beam rounded-buttons font-inter font-medium text-body-sm hover:bg-obsidian hover:text-paper-white hover:border-obsidian transition-colors duration-200 cursor-pointer flex items-center gap-2"
+          >
+            <span>View on GitHub</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+            </svg>
+          </a>
+          <a
+            href="#features"
+            class="px-8 py-3 bg-concrete text-obsidian border border-silver/50 rounded-buttons font-inter font-medium text-body-sm hover:bg-solar-beam hover:border-solar-beam transition-colors duration-200 cursor-pointer"
+          >
+            Learn More
+          </a>
+          <a
+            href="/"
+            class="px-8 py-3 bg-concrete text-obsidian border border-silver/50 rounded-buttons font-inter font-medium text-body-sm hover:bg-solar-beam hover:border-solar-beam transition-colors duration-200 cursor-pointer"
+          >
+            Back to Portfolio
+          </a>
+        </div>
+      </div>
+    </main>
+
+    <!-- Hardware Prototype Image -->
+    <section class="py-16 px-8 sm:px-12 md:px-24 border-t border-silver/30 bg-concrete flex flex-col items-center text-center">
+      <div class="w-full max-w-3xl flex flex-col items-center">
+        <div class="flex flex-col items-center mb-12">
+          <span class="font-caveat text-graphite text-[28px] tracking-tight mb-2 select-none">
+            Prototype Build
+          </span>
+          <h2 class="text-obsidian font-reddit-sans-condensed font-black text-display leading-none tracking-tighter uppercase select-none">
+            HARDWARE
+          </h2>
+        </div>
+
+        <div class="bg-paper-white rounded-cards border border-silver/50 shadow-subtle overflow-hidden w-full">
+          <img
+            src="/images/opendap-c3-hardware.jpg"
+            alt="OpenDAP-C3 prototype hardware setup showing ESP32-C3, DFPlayer Mini, battery and wiring"
+            class="w-full h-auto object-cover"
+            loading="lazy"
+          />
+          <p class="font-inter-display font-medium text-body-sm text-graphite py-4 px-6 italic">
+            Prototype product image — ESP32-C3 Super Mini, DFPlayer Mini, TP4056 charging board and Li-ion battery
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-24 px-8 sm:px-12 md:px-24 border-t border-silver/30 bg-concrete flex flex-col items-center text-center">
+      <div class="w-full max-w-[1200px] flex flex-col items-center">
+        <!-- Section Title Block -->
+        <div class="flex flex-col items-center mb-16">
+          <span class="font-caveat text-graphite text-[28px] tracking-tight mb-2 select-none">
+            What It Can Do
+          </span>
+          <h2 class="text-obsidian font-reddit-sans-condensed font-black text-display leading-none tracking-tighter uppercase select-none">
+            FEATURES
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full text-left">
+          {features.map((feature) => (
+            <div class="group bg-paper-white p-8 sm:p-10 rounded-cards border border-silver/50 shadow-subtle hover:border-silver transition-all duration-300">
+              <div class="text-5xl mb-4 select-none">{feature.icon}</div>
+              <h3 class="font-inter font-medium text-subheading text-obsidian mb-3">
+                {feature.title}
+              </h3>
+              <p class="font-inter-display font-medium text-body text-graphite leading-relaxed">
+                {feature.description}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Hardware Components Section -->
+    <section class="py-24 px-8 sm:px-12 md:px-24 border-t border-silver/30 bg-concrete flex flex-col items-center text-center">
+      <div class="w-full max-w-[1200px] flex flex-col items-center">
+        <div class="flex flex-col items-center mb-16">
+          <span class="font-caveat text-graphite text-[28px] tracking-tight mb-2 select-none">
+            Bill of Materials
+          </span>
+          <h2 class="text-obsidian font-reddit-sans-condensed font-black text-display leading-none tracking-tighter uppercase select-none">
+            COMPONENTS
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 w-full text-left">
+          {hardwareComponents.map((comp) => (
+            <div class="bg-paper-white p-8 sm:p-10 rounded-cards border border-silver/50 shadow-subtle hover:border-silver transition-colors duration-300">
+              <div class="text-4xl mb-4 select-none">{comp.icon}</div>
+              <h3 class="font-inter font-medium text-body-sm text-graphite uppercase tracking-wider mb-2">{comp.name}</h3>
+              <p class="font-inter font-medium text-subheading text-obsidian">{comp.value}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Wiring Table Section -->
+    <section class="py-24 px-8 sm:px-12 md:px-24 border-t border-silver/30 bg-concrete flex flex-col items-center text-center">
+      <div class="w-full max-w-4xl flex flex-col items-center">
+        <div class="flex flex-col items-center mb-16">
+          <span class="font-caveat text-graphite text-[28px] tracking-tight mb-2 select-none">
+            Pin Connections
+          </span>
+          <h2 class="text-obsidian font-reddit-sans-condensed font-black text-display leading-none tracking-tighter uppercase select-none">
+            WIRING
+          </h2>
+        </div>
+
+        <div class="bg-paper-white rounded-cards border border-silver/50 shadow-subtle w-full overflow-hidden">
+          <table class="w-full text-left">
+            <thead>
+              <tr class="border-b border-silver/50">
+                <th class="font-inter font-medium text-body-sm text-graphite uppercase tracking-wider py-5 px-8">Component</th>
+                <th class="font-inter font-medium text-body-sm text-graphite uppercase tracking-wider py-5 px-8">ESP32-C3 / External Pin</th>
+              </tr>
+            </thead>
+            <tbody>
+              {wiringTable.map((row, i) => (
+                <tr class:list={["border-b border-silver/20 last:border-b-0", i % 2 === 1 ? "bg-concrete/30" : ""]}>
+                  <td class="font-inter font-medium text-body text-obsidian py-4 px-8">{row.component}</td>
+                  <td class="font-inter-display font-medium text-body text-graphite py-4 px-8 font-mono">{row.pin}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          <p class="font-inter-display font-medium text-caption text-graphite py-4 px-8 italic border-t border-silver/20">
+            See the full <a href="https://github.com/shraman-c/OpenDAP-C3/blob/main/Wiring_Table.md" target="_blank" rel="noopener noreferrer" class="underline hover:text-obsidian transition-colors">Wiring_Table.md</a> for detailed power and resistor connections.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tech Stack Section -->
+    <section class="py-24 px-8 sm:px-12 md:px-24 border-t border-silver/30 bg-concrete flex flex-col items-center text-center">
+      <div class="w-full max-w-[1200px] flex flex-col items-center">
+        <div class="flex flex-col items-center mb-16">
+          <span class="font-caveat text-graphite text-[28px] tracking-tight mb-2 select-none">
+            Technologies Used
+          </span>
+          <h2 class="text-obsidian font-reddit-sans-condensed font-black text-display leading-none tracking-tighter uppercase select-none">
+            TECH STACK
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 w-full">
+          {techStack.map((tech) => (
+            <div class="bg-paper-white p-6 rounded-cards border border-silver/50 text-center shadow-subtle hover:border-silver transition-colors duration-300">
+              <p class="font-inter font-medium text-body-sm text-obsidian select-none">{tech}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Firmware / Getting Started Section -->
+    <section class="py-24 px-8 sm:px-12 md:px-24 border-t border-silver/30 bg-concrete flex flex-col items-center text-center">
+      <div class="w-full max-w-4xl flex flex-col items-center">
+        <div class="bg-paper-white p-12 rounded-cards border border-silver/50 w-full shadow-subtle text-left">
+          <h2 class="font-reddit-sans-condensed font-black text-heading-lg text-obsidian uppercase select-none text-center mb-12">
+            Build the Firmware
+          </h2>
+          <div class="space-y-8 max-w-2xl mx-auto">
+            <div class="flex gap-5">
+              <div class="flex-shrink-0">
+                <div class="flex items-center justify-center h-10 w-10 rounded-full bg-solar-beam text-obsidian font-bold select-none">1</div>
+              </div>
+              <div>
+                <h3 class="font-inter font-medium text-body text-obsidian mb-1">Clone the Repository</h3>
+                <p class="font-inter-display font-medium text-body-sm text-graphite mb-2">Get the source code from GitHub.</p>
+                <code class="block bg-concrete/60 border border-silver/30 rounded-cards px-4 py-3 text-body-sm font-mono text-obsidian">git clone https://github.com/shraman-c/OpenDAP-C3.git</code>
+              </div>
+            </div>
+            <div class="flex gap-5">
+              <div class="flex-shrink-0">
+                <div class="flex items-center justify-center h-10 w-10 rounded-full bg-solar-beam text-obsidian font-bold select-none">2</div>
+              </div>
+              <div>
+                <h3 class="font-inter font-medium text-body text-obsidian mb-1">Open in PlatformIO</h3>
+                <p class="font-inter-display font-medium text-body-sm text-graphite">Open the project folder in VS Code with the PlatformIO extension installed.</p>
+              </div>
+            </div>
+            <div class="flex gap-5">
+              <div class="flex-shrink-0">
+                <div class="flex items-center justify-center h-10 w-10 rounded-full bg-solar-beam text-obsidian font-bold select-none">3</div>
+              </div>
+              <div>
+                <h3 class="font-inter font-medium text-body text-obsidian mb-1">Compile &amp; Flash</h3>
+                <p class="font-inter-display font-medium text-body-sm text-graphite mb-2">Build the firmware using the Arduino framework and flash to your ESP32-C3.</p>
+                <code class="block bg-concrete/60 border border-silver/30 rounded-cards px-4 py-3 text-body-sm font-mono text-obsidian">pio run</code>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Future Improvements Section -->
+    <section class="py-24 px-8 sm:px-12 md:px-24 border-t border-silver/30 bg-concrete flex flex-col items-center text-center">
+      <div class="w-full max-w-[1200px] flex flex-col items-center">
+        <div class="flex flex-col items-center mb-16">
+          <span class="font-caveat text-graphite text-[28px] tracking-tight mb-2 select-none">
+            What's Next
+          </span>
+          <h2 class="text-obsidian font-reddit-sans-condensed font-black text-display leading-none tracking-tighter uppercase select-none">
+            ROADMAP
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 w-full text-left">
+          <div class="bg-paper-white p-8 sm:p-10 rounded-cards border border-silver/50 shadow-subtle hover:border-silver transition-colors duration-300">
+            <div class="text-4xl mb-4 select-none">📂</div>
+            <h3 class="font-inter font-medium text-subheading text-obsidian mb-3">Folder Navigation</h3>
+            <p class="font-inter-display font-medium text-body text-graphite leading-relaxed">
+              Navigate to Next/Previous folders with explicit folder index tracking for the DFPlayer Mini.
+            </p>
+          </div>
+
+          <div class="bg-paper-white p-8 sm:p-10 rounded-cards border border-silver/50 shadow-subtle hover:border-silver transition-colors duration-300">
+            <div class="text-4xl mb-4 select-none">🔧</div>
+            <h3 class="font-inter font-medium text-subheading text-obsidian mb-3">Enhanced Debouncing</h3>
+            <p class="font-inter-display font-medium text-body text-graphite leading-relaxed">
+              Improved debouncing filters for more reliable button presses, especially during rapid inputs.
+            </p>
+          </div>
+
+          <div class="bg-paper-white p-8 sm:p-10 rounded-cards border border-silver/50 shadow-subtle hover:border-silver transition-colors duration-300">
+            <div class="text-4xl mb-4 select-none">📺</div>
+            <h3 class="font-inter font-medium text-subheading text-obsidian mb-3">OLED Display</h3>
+            <p class="font-inter-display font-medium text-body text-graphite leading-relaxed">
+              Add a small OLED screen for displaying current track info, volume level, and battery status.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-24 px-8 sm:px-12 md:px-24 border-t border-silver/30 bg-concrete flex flex-col items-center text-center">
+      <div class="w-full max-w-4xl flex flex-col items-center">
+        <div class="bg-paper-white p-12 rounded-cards border border-silver/50 w-full shadow-subtle">
+          <h2 class="font-reddit-sans-condensed font-black text-heading-lg text-obsidian uppercase select-none mb-6">
+            Build Your Own DAP
+          </h2>
+          <p class="font-inter-display font-medium text-body text-graphite mb-10 leading-relaxed max-w-xl mx-auto">
+            OpenDAP-C3 is fully open-source. Fork the repo, tweak the firmware, and build a portable music player that's truly yours.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a
+              href="https://github.com/shraman-c/OpenDAP-C3"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="px-8 py-3 bg-solar-beam text-obsidian border border-solar-beam rounded-buttons font-inter font-medium text-body-sm hover:bg-obsidian hover:text-paper-white hover:border-obsidian transition-colors duration-200 cursor-pointer flex items-center justify-center gap-2"
+            >
+              <span>Fork on GitHub</span>
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+              </svg>
+            </a>
+            <a
+              href="/"
+              class="px-8 py-3 bg-concrete text-obsidian border border-silver/50 rounded-buttons font-inter font-medium text-body-sm hover:bg-solar-beam hover:border-solar-beam transition-colors duration-200 cursor-pointer"
+            >
+              Back to Portfolio
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <Footer />
+    <ThemeToggle />
+  </body>
+</html>

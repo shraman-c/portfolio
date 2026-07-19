@@ -94,6 +94,13 @@ export const siteConfig = {
         "Watcher automatically organizes your files by type in real-time, keeping your folders neat and tidy without any manual effort.",
       link: "/watcher",
       skills: ["Python 3.9+", "Watchdog", "Tkinter", "PyInstaller", "Cross-platform"],
+    },
+    {
+      name: "OpenDAP-C3: Open-Source Digital Audio Player",
+      description:
+        "An open-source portable Digital Audio Player based on the ESP32-C3 Super Mini and DFPlayer Mini with deep sleep, state restore, and 5-button control.",
+      link: "/opendap-c3",
+      skills: ["ESP32-C3", "Arduino", "PlatformIO", "C++", "DFPlayer Mini"],
     }
   ],
   // experience removed
