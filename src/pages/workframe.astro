@@ -1,0 +1,250 @@
+---
+import { siteConfig } from "../config";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import ThemeToggle from "../components/ThemeToggle.astro";
+import "../styles/global.css";
+
+const features = [
+  {
+    title: "Secure HR Access",
+    description: "Email verification, JWT-based authentication, and encrypted credential handling keep employee and admin access secure."
+  },
+  {
+    title: "Role-Based Portals",
+    description: "Separate employee and admin dashboards with permissions tailored to the workflows each role needs most."
+  },
+  {
+    title: "Profile & Document Management",
+    description: "Employees can manage personal profiles, uploads, and key documentation from a centralized workspace."
+  },
+  {
+    title: "Attendance Workflow",
+    description: "Track check-in and check-out activity, monitor attendance trends, and simplify daily operations."
+  },
+  {
+    title: "Leave Approvals",
+    description: "Create leave requests, route them through approval flows, and keep records transparent for HR teams."
+  },
+  {
+    title: "Payroll Visibility",
+    description: "Expose salary and payroll information in a clean, accessible experience for employees and administrators alike."
+  }
+];
+
+const techStack = ["Next.js", "React", "TypeScript", "Tailwind CSS", "Prisma", "PostgreSQL", "JWT", "bcryptjs", "Nodemailer", "SMTP"];
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="WorkFrame is a full-stack Human Resource Management System built with Next.js, Prisma, and PostgreSQL for secure attendance, leave, payroll, and employee workflows."
+    />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="icon" href="/favicon.svg" />
+    <link rel="canonical" href="https://shramanc.pages.dev/workframe" />
+    <title>WorkFrame — Human Resource Management System</title>
+
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://shramanc.pages.dev/workframe" />
+    <meta property="og:title" content="WorkFrame — Human Resource Management System" />
+    <meta
+      property="og:description"
+      content="WorkFrame is a full-stack Human Resource Management System built with Next.js, Prisma, and PostgreSQL for secure attendance, leave, payroll, and employee workflows."
+    />
+    <meta property="og:image" content="https://shramanc.pages.dev/images/avt.png" />
+
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://shramanc.pages.dev/workframe" />
+    <meta property="twitter:title" content="WorkFrame — Human Resource Management System" />
+    <meta
+      property="twitter:description"
+      content="WorkFrame is a full-stack Human Resource Management System built with Next.js, Prisma, and PostgreSQL for secure attendance, leave, payroll, and employee workflows."
+    />
+    <meta property="twitter:image" content="https://shramanc.pages.dev/images/avt.png" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Inter:wght@500&family=Reddit+Sans+Condensed:wght@900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg-concrete text-obsidian">
+    <Header />
+
+    <main class="relative py-32 flex items-center justify-center min-h-[70vh]">
+      <div
+        class="absolute top-0 right-0 w-[60%] h-full -z-10 pointer-events-none"
+        style="background: radial-gradient(circle at 100% 0%, var(--color-solar-beam) 0%, transparent 60%); opacity: 0.25; filter: blur(40px);"
+      ></div>
+
+      <div class="mx-auto max-w-4xl px-6 lg:px-8 text-center flex flex-col items-center">
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 bg-paper-white border border-silver/50 rounded-buttons mb-8 select-none shadow-subtle">
+          <span class="relative flex h-2 w-2">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-solar-beam opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-solar-beam"></span>
+          </span>
+          <span class="font-inter font-medium text-caption text-graphite">HR Operations Platform</span>
+        </div>
+
+        <h1 class="text-obsidian font-reddit-sans-condensed font-black text-display leading-none tracking-tighter uppercase select-none mb-6">
+          WORKFRAME
+        </h1>
+
+        <p class="font-inter-display font-medium text-body text-graphite mb-10 leading-relaxed max-w-2xl">
+          A full-stack Human Resource Management System designed to streamline employee self-service, attendance monitoring, leave approvals, payroll visibility, and secure administration.
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+          <a
+            href="https://work-frame-lake.vercel.app/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="px-8 py-3 bg-solar-beam text-obsidian rounded-buttons font-inter font-medium text-body-sm border border-solar-beam hover:bg-obsidian hover:text-paper-white hover:border-obsidian transition-colors duration-200 cursor-pointer"
+          >
+            View Live Demo
+          </a>
+          <a
+            href="#features"
+            class="px-8 py-3 bg-concrete text-obsidian rounded-buttons font-inter font-medium text-body-sm border border-silver/50 hover:bg-solar-beam hover:border-solar-beam transition-colors duration-200 cursor-pointer"
+          >
+            Explore Features
+          </a>
+          <a
+            href="https://github.com/shraman-c/WorkFrame"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="px-8 py-3 bg-concrete text-obsidian rounded-buttons font-inter font-medium text-body-sm border border-silver/50 hover:bg-solar-beam hover:border-solar-beam transition-colors duration-200 cursor-pointer"
+          >
+            GitHub
+          </a>
+        </div>
+      </div>
+    </main>
+
+    <section id="features" class="py-24 px-8 sm:px-12 md:px-24 border-t border-silver/30 bg-concrete flex flex-col items-center text-center">
+      <div class="w-full max-w-[1200px] flex flex-col items-center">
+        <div class="flex flex-col items-center mb-16">
+          <span class="font-caveat text-graphite text-[28px] tracking-tight mb-2 select-none">
+            Built for smarter teams
+          </span>
+          <h2 class="text-obsidian font-reddit-sans-condensed font-black text-display leading-none tracking-tighter uppercase select-none">
+            FEATURES
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full text-left">
+          {features.map((feature) => (
+            <div class="group bg-paper-white p-8 sm:p-10 rounded-cards border border-silver/50 shadow-subtle hover:border-silver transition-all duration-300">
+              <h3 class="font-inter font-medium text-subheading text-obsidian mb-3">
+                {feature.title}
+              </h3>
+              <p class="font-inter-display font-medium text-body text-graphite leading-relaxed">
+                {feature.description}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="py-24 px-8 sm:px-12 md:px-24 border-t border-silver/30 bg-concrete flex flex-col items-center text-center">
+      <div class="w-full max-w-[1200px] flex flex-col items-center">
+        <div class="flex flex-col items-center mb-16">
+          <span class="font-caveat text-graphite text-[28px] tracking-tight mb-2 select-none">
+            Built for daily operations
+          </span>
+          <h2 class="text-obsidian font-reddit-sans-condensed font-black text-display leading-none tracking-tighter uppercase select-none">
+            PLATFORM HIGHLIGHTS
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 w-full text-left">
+          <div class="bg-paper-white p-8 sm:p-10 rounded-cards border border-silver/50 shadow-subtle hover:border-silver transition-colors duration-300">
+            <h3 class="font-inter font-medium text-subheading text-obsidian mb-3">Employee Self-Service</h3>
+            <p class="font-inter-display font-medium text-body text-graphite leading-relaxed">
+              Employees can manage profiles, access payroll data, and submit HR requests without depending on manual admin follow-ups.
+            </p>
+          </div>
+
+          <div class="bg-paper-white p-8 sm:p-10 rounded-cards border border-silver/50 shadow-subtle hover:border-silver transition-colors duration-300">
+            <h3 class="font-inter font-medium text-subheading text-obsidian mb-3">Admin Control Center</h3>
+            <p class="font-inter-display font-medium text-body text-graphite leading-relaxed">
+              HR administrators can review attendance, approve leave, and keep business-critical workflows running smoothly.
+            </p>
+          </div>
+
+          <div class="bg-paper-white p-8 sm:p-10 rounded-cards border border-silver/50 shadow-subtle hover:border-silver transition-colors duration-300">
+            <h3 class="font-inter font-medium text-subheading text-obsidian mb-3">Audit-Friendly</h3>
+            <p class="font-inter-display font-medium text-body text-graphite leading-relaxed">
+              Notifications and audit logging help teams track actions, support accountability, and maintain operational transparency.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-24 px-8 sm:px-12 md:px-24 border-t border-silver/30 bg-concrete flex flex-col items-center text-center">
+      <div class="w-full max-w-[1200px] flex flex-col items-center">
+        <div class="flex flex-col items-center mb-16">
+          <span class="font-caveat text-graphite text-[28px] tracking-tight mb-2 select-none">
+            Technologies in use
+          </span>
+          <h2 class="text-obsidian font-reddit-sans-condensed font-black text-display leading-none tracking-tighter uppercase select-none">
+            TECH STACK
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 w-full">
+          {techStack.map((tech) => (
+            <div class="bg-paper-white p-6 rounded-cards border border-silver/50 text-center shadow-subtle hover:border-silver transition-colors duration-300">
+              <p class="font-inter font-medium text-body-sm text-obsidian select-none">{tech}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="py-24 px-8 sm:px-12 md:px-24 border-t border-silver/30 bg-concrete flex flex-col items-center text-center">
+      <div class="w-full max-w-4xl flex flex-col items-center">
+        <div class="bg-paper-white p-12 rounded-cards border border-silver/50 w-full shadow-subtle">
+          <h2 class="font-reddit-sans-condensed font-black text-heading-lg text-obsidian uppercase select-none mb-6">
+            Ready to streamline HR workflows?
+          </h2>
+          <p class="font-inter-display font-medium text-body text-graphite mb-10 leading-relaxed max-w-xl mx-auto">
+            WorkFrame brings secure access, role-based operations, and employee-first automation together in one modern HR platform.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a
+              href="https://work-frame-lake.vercel.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="px-8 py-3 bg-solar-beam text-obsidian border border-solar-beam rounded-buttons font-inter font-medium text-body-sm hover:bg-obsidian hover:text-paper-white hover:border-obsidian transition-colors duration-200 cursor-pointer"
+            >
+              Try the Demo
+            </a>
+            <a
+              href={siteConfig.social.email ? `mailto:${siteConfig.social.email}?subject=WorkFrame Inquiry` : "#"}
+              class="px-8 py-3 bg-concrete text-obsidian border border-silver/50 rounded-buttons font-inter font-medium text-body-sm hover:bg-solar-beam hover:border-solar-beam transition-colors duration-200 cursor-pointer"
+            >
+              Contact
+            </a>
+            <a
+              href="/"
+              class="px-8 py-3 bg-concrete text-obsidian border border-silver/50 rounded-buttons font-inter font-medium text-body-sm hover:bg-solar-beam hover:border-solar-beam transition-colors duration-200 cursor-pointer"
+            >
+              Back to Portfolio
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <Footer />
+    <ThemeToggle />
+  </body>
+</html>

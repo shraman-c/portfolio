@@ -16,11 +16,12 @@ const hasEducation = siteConfig.education && siteConfig.education.length > 0;
       <!-- Navigation Links -->
       <nav class="footer-nav w-full">
         <div class="footer-items flex flex-wrap justify-center gap-x-8 gap-y-3 font-inter font-medium text-body-sm text-graphite">
-          <a href="/#about" class="hover:text-obsidian transition-colors">Story</a>
+          <a href="/" class="hover:text-obsidian transition-colors">Home</a>
+          <a href="/#about" class="hover:text-obsidian transition-colors">About me</a>
           { hasProjects && <a href="/#projects" class="hover:text-obsidian transition-colors">Work</a> }
-          <a href="/#classroom-notes" class="hover:text-obsidian transition-colors">Process</a>
           { hasEducation && <a href="/#education" class="hover:text-obsidian transition-colors">Education</a> }
-          <a href="/caesar-cipher" class="hover:text-obsidian transition-colors">Caesar Cipher</a>
+          <a href="/#classroom-notes" class="hover:text-obsidian transition-colors">Learning Process</a>
+          <a href="/coming-soon" class="hover:text-obsidian transition-colors">Resume</a>
           <a href="/connect" class="hover:text-obsidian transition-colors">Connect</a>
         </div>
 

@@ -2,6 +2,7 @@
 import { siteConfig } from "../config";
 
 const hasProjects = siteConfig.projects && siteConfig.projects.length > 0;
+const hasEducation = siteConfig.education && siteConfig.education.length > 0;
 ---
 
 <header
@@ -20,6 +21,15 @@ const hasProjects = siteConfig.projects && siteConfig.projects.length > 0;
           Home
         </a>
       </li>
+      <li>
+        <a 
+          href="/#about" 
+          class="px-3 py-1.5 rounded-buttons text-gray-300 hover:text-solar-beam hover:bg-white/10 transition-all duration-200 font-medium cursor-pointer"
+          id="nav-link-about"
+        >
+          About me
+        </a>
+      </li>
       { hasProjects && 
         <li>
           <a 
@@ -31,22 +41,33 @@ const hasProjects = siteConfig.projects && siteConfig.projects.length > 0;
           </a>
         </li> 
       }
-      <li>
-        <a 
-          href="/#about" 
-          class="px-3 py-1.5 rounded-buttons text-gray-300 hover:text-solar-beam hover:bg-white/10 transition-all duration-200 font-medium cursor-pointer"
-          id="nav-link-about"
-        >
-          Story
-        </a>
-      </li>
+      { hasEducation && 
+        <li>
+          <a 
+            href="/#education" 
+            class="px-3 py-1.5 rounded-buttons text-gray-300 hover:text-solar-beam hover:bg-white/10 transition-all duration-200 font-medium cursor-pointer"
+            id="nav-link-education"
+          >
+            Education
+          </a>
+        </li>
+      }
       <li>
         <a 
           href="/#classroom-notes" 
           class="px-3 py-1.5 rounded-buttons text-gray-300 hover:text-solar-beam hover:bg-white/10 transition-all duration-200 font-medium cursor-pointer"
           id="nav-link-classroom-notes"
         >
-          Process
+          Learning Process
+        </a>
+      </li>
+      <li>
+        <a 
+          href="/coming-soon" 
+          class="px-3 py-1.5 rounded-buttons text-gray-300 hover:text-solar-beam hover:bg-white/10 transition-all duration-200 font-medium cursor-pointer"
+          id="nav-link-resume"
+        >
+          Resume
         </a>
       </li>
       <li>
@@ -69,6 +90,7 @@ const hasProjects = siteConfig.projects && siteConfig.projects.length > 0;
     const sections = [
       document.getElementById('projects'),
       document.getElementById('about'),
+      document.getElementById('education'),
       document.getElementById('classroom-notes')
     ].filter(Boolean);
 

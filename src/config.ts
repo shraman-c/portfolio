@@ -12,7 +12,7 @@ export const siteConfig = {
     },
     {
       name: "DAA Lab Programming Notes",
-      description: "Classroom notes and resources for learning the basics of DAA lab programming.",
+      description: "Classroom notes and resources for learning the basics of DAA programming.",
       link: "https://github.com/shraman-c/DAA-lab"
     },
   ],
@@ -31,7 +31,7 @@ export const siteConfig = {
       title: "Finalist - Oddo x Adamas University Hackathon 2026",
       date: "2026",
       description: "Secured the Finalist position in the Oddo x Adamas University Hackathon 2026, showcasing innovative problem-solving skills and teamwork.",
-      }
+    },
     {
       title: "Adamas University - Smart India Hackathon 2025 (Internal) - Runner Up (Software Edition)",
       date: "2025",
