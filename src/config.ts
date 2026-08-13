@@ -10,18 +10,28 @@ export const siteConfig = {
       description: "Classroom notes and resources for learning the basics of C++ programming.",
       link: "https://github.com/shraman-c/Basic-CPP-Programming"
     },
+    {
+      name: "DAA Lab Programming Notes",
+      description: "Classroom notes and resources for learning the basics of DAA lab programming.",
+      link: "https://github.com/shraman-c/DAA-lab"
+    },
   ],
   name: "Shraman Chaudhuri",
-  title: "Student || Developer",
+  title: "Student",
   description: "Portfolio website of Shraman Chaudhuri",
   accentColor: "#1d4ed8",
   // Typewriter phrases shown before the real name in the hero.
   // Edit these strings to change what appears in the typewriter effect.
   typewriterPhrases: [
-    "a Student",
-    "a Developer",
+    "a Student Developer",
+    "an Open Source Contributor",
   ],
   achievements: [
+    {
+      title: "Finalist - Oddo x Adamas University Hackathon 2026",
+      date: "2026",
+      description: "Secured the Finalist position in the Oddo x Adamas University Hackathon 2026, showcasing innovative problem-solving skills and teamwork.",
+      }
     {
       title: "Adamas University - Smart India Hackathon 2025 (Internal) - Runner Up (Software Edition)",
       date: "2025",
@@ -31,6 +41,19 @@ export const siteConfig = {
   ],
   certifications: [
     {
+      title: "Introduction to Cybersecurity",
+      issuer: "Cisco Networking Academy",
+      date: "August 2026",
+      description: "Completed the Cisco Networking Academy course on Introduction to Cybersecurity.",
+      link: "https://www.credly.com/badges/80c201bc-0004-4847-90d0-a193ee433bd5"
+    },
+    {
+      title: "Getting Started with Cisco Packet Tracer",
+      issuer: "Cisco Networking Academy",
+      date: "August 2026",
+      description: "Completed the Cisco Networking Academy course on Getting Started with Cisco Packet Tracer.",
+      link: "https://www.netacad.com/recognitions/verify/92d64d1e-61c7-44c9-89f6-f1573a33ffec"
+    },{
       title: "Cybersecurity Fundamentals",
       issuer: "IBM - SkillsBuild",
       date: "January 2026",
@@ -57,7 +80,7 @@ export const siteConfig = {
     github: "https://github.com/shraman-c",
   },
   aboutMe:
-    "I’m a curious student developer who enjoys turning ideas into software. With a strong base in Java and C, I contribute to open-source projects, build Android and Windows apps, and explore local networking. I’m always looking for chances to learn, collaborate, and take on challenges.", 
+  "I'm Shraman, a Computer Science undergrad specializing in Cyber Security at Adamas University. I like building things end-to-end — from full-stack web apps and AI-integrated platforms to firmware for small embedded devices. Some of my recent work includes an AI-powered timetable generator, a role-based HR management system, and a couple of ESP32-based hardware projects. Outside of code, I'm active in event hosting and team leadership at university, and I volunteer as a mentor with the Scouts.",
   skills: ["Java", "C", "C++", "Arduino IDE", "Python", "Android", "Node.js", "Astro", "Next.js", "TypeScript", "SQL", "AI", "TailwindCSS", "JavaScript","Linux"],
   projects: [
     {
@@ -108,7 +131,14 @@ export const siteConfig = {
         "An ESP32-C3 Super Mini based smart clock with NTP time sync, live weather display, OLED interface, web config panel, and alarm system.",
       link: "/openclock-c3",
       skills: ["ESP32-C3", "Arduino", "PlatformIO", "C++", "U8g2", "ArduinoJson"],
-    }
+    },
+    {
+      name: "WorkFrame: Human Resource Management System",
+      description:
+        "A full-stack HRMS with role-based portals for employees and HR admins, featuring JWT-based authentication, attendance tracking, leave approval workflows, and payroll visibility.",
+      link: "/workframe",
+      skills: ["Next.js", "React", "Prisma", "PostgreSQL", "Tailwind CSS", "JWT"],
+    },
   ],
   // experience removed
   education: [
