@@ -12,6 +12,7 @@
 - /openclock-c3: ESP32-C3 Smart Clock project.
 - /workframe: Human Resource Management System project.
 - /bsg_notes: Bharat Scouts and Guides notes.
+- /resume: Link to view or download the latest resume via Google Drive.
 
 ## Contact
 Please reach out through the social links available on the site for inquiries.

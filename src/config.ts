@@ -20,6 +20,7 @@ export const siteConfig = {
   title: "Student",
   description: "Portfolio website of Shraman Chaudhuri",
   accentColor: "#1d4ed8",
+  resumeLink: "https://drive.google.com/file/d/1JLOCaVGXC22OKfyjSRbcvNLJZiapisRa/preview",
   // Typewriter phrases shown before the real name in the hero.
   // Edit these strings to change what appears in the typewriter effect.
   typewriterPhrases: [
