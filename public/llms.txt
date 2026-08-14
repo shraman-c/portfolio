@@ -1,0 +1,23 @@
+# Shraman Chaudhuri Portfolio
+
+> A personal portfolio site built with Astro and Tailwind CSS.
+
+## Site Contents
+- Home (/): Main portfolio featuring about me, skills, projects, achievements, certifications, education, and experience.
+- /connect: Hub for my links.
+- /caesar-cipher: Caesar cipher utility tool.
+- /catalyst: Catalyst project showcase (AI-Powered Timetable Generator).
+- /watcher: Watcher project showcase (Automated file organiser).
+- /opendap-c3: Open-Source Digital Audio Player project.
+- /openclock-c3: ESP32-C3 Smart Clock project.
+- /workframe: Human Resource Management System project.
+- /bsg_notes: Bharat Scouts and Guides notes.
+
+## Contact
+Please reach out through the social links available on the site for inquiries.
+Email: shramanchaudhuri@gmail.com
+LinkedIn: https://linkedin.com/in/shramanchaudhuri
+GitHub: https://github.com/shraman-c
+
+## Technical Details
+This site is built with Astro 5, Tailwind CSS v4, and React.
