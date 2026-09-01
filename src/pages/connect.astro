@@ -16,27 +16,19 @@ import "../styles/links.css";
     <link rel="canonical" href="https://shramanc.pages.dev/connect" />
     <title>Links - {siteConfig.name}</title>
 
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://shramanc.pages.dev/connect" />
-    <meta property="og:title" content={`Links - ${siteConfig.name}`} />
-    <meta property="og:description" content={`Social links and contact endpoints for ${siteConfig.name}. Connect via GitHub, LinkedIn, and more.`} />
-    <meta property="og:image" content="https://shramanc.pages.dev/images/avt.png" />
-
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content="https://shramanc.pages.dev/connect" />
-    <meta property="twitter:title" content={`Links - ${siteConfig.name}`} />
-    <meta property="twitter:description" content={`Social links and contact endpoints for ${siteConfig.name}. Connect via GitHub, LinkedIn, and more.`} />
-    <meta property="twitter:image" content="https://shramanc.pages.dev/images/avt.png" />
-
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Inter:wght@500&family=Reddit+Sans+Condensed:wght@900&display=swap"
       rel="stylesheet"
     />
-  </head>
+    <!-- Open Graph Tags for LinkedIn/Social Previews -->
+    <meta property="og:title" content={`Links - ${siteConfig.name}`} />
+    <meta property="og:description" content={`Social links and contact endpoints for ${siteConfig.name}. Connect via GitHub, LinkedIn, and more.`} />
+    <meta property="og:url" content="https://shramanc.pages.dev/connect/" />
+    <!-- Optional: Add a screenshot link if you have one -->
+    <!-- <meta property="og:image" content="https://shramanc.pages.dev/connect/preview.png" /> -->
+    </head>
   <body class="bg-concrete">
     <Header />
     <main class="min-h-screen py-32 flex items-center justify-center">
