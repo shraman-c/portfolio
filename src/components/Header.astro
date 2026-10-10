@@ -5,17 +5,17 @@ const hasProjects = siteConfig.projects && siteConfig.projects.length > 0;
 const hasEducation = siteConfig.education && siteConfig.education.length > 0;
 ---
 
+<!-- Desktop Floating Nav Capsule (visible on md: screens and above) -->
 <header
   id="header"
-  class="fixed top-0 left-0 right-0 z-50 flex justify-center pt-6"
+  class="fixed top-0 left-0 right-0 z-50 hidden md:flex justify-center pt-6 pointer-events-none"
 >
-  <nav class="flex items-center p-1.5 bg-[#1f1f1f] text-white rounded-navcapsule font-inter text-body-sm transition-all duration-300 ease-in-out shadow-none border border-white/10">
-    <!-- Nav Links with premium hover states -->
-    <ul class="flex items-center gap-1.5">
+  <nav class="flex items-center p-1.5 bg-[#1f1f1f] text-white rounded-navcapsule font-inter text-body-sm transition-all duration-300 ease-in-out shadow-none border border-white/10 pointer-events-auto">
+    <ul class="flex items-center gap-1">
       <li>
         <a 
           href="/" 
-          class="px-3 py-1.5 rounded-buttons text-gray-300 hover:text-solar-beam hover:bg-white/10 transition-all duration-200 font-medium cursor-pointer"
+          class="nav-link px-3 py-1.5 rounded-buttons text-gray-300 hover:text-solar-beam hover:bg-white/10 transition-all duration-200 font-medium cursor-pointer whitespace-nowrap"
           id="nav-link-home"
         >
           Home
@@ -24,17 +24,17 @@ const hasEducation = siteConfig.education && siteConfig.education.length > 0;
       <li>
         <a 
           href="/#about" 
-          class="px-3 py-1.5 rounded-buttons text-gray-300 hover:text-solar-beam hover:bg-white/10 transition-all duration-200 font-medium cursor-pointer"
+          class="nav-link px-3 py-1.5 rounded-buttons text-gray-300 hover:text-solar-beam hover:bg-white/10 transition-all duration-200 font-medium cursor-pointer whitespace-nowrap"
           id="nav-link-about"
         >
-          About me
+          About
         </a>
       </li>
       { hasProjects && 
         <li>
           <a 
             href="/#projects" 
-            class="px-3 py-1.5 rounded-buttons text-gray-300 hover:text-solar-beam hover:bg-white/10 transition-all duration-200 font-medium cursor-pointer"
+            class="nav-link px-3 py-1.5 rounded-buttons text-gray-300 hover:text-solar-beam hover:bg-white/10 transition-all duration-200 font-medium cursor-pointer whitespace-nowrap"
             id="nav-link-projects"
           >
             Work
@@ -45,7 +45,7 @@ const hasEducation = siteConfig.education && siteConfig.education.length > 0;
         <li>
           <a 
             href="/#education" 
-            class="px-3 py-1.5 rounded-buttons text-gray-300 hover:text-solar-beam hover:bg-white/10 transition-all duration-200 font-medium cursor-pointer"
+            class="nav-link px-3 py-1.5 rounded-buttons text-gray-300 hover:text-solar-beam hover:bg-white/10 transition-all duration-200 font-medium cursor-pointer whitespace-nowrap"
             id="nav-link-education"
           >
             Education
@@ -55,16 +55,16 @@ const hasEducation = siteConfig.education && siteConfig.education.length > 0;
       <li>
         <a 
           href="/#classroom-notes" 
-          class="px-3 py-1.5 rounded-buttons text-gray-300 hover:text-solar-beam hover:bg-white/10 transition-all duration-200 font-medium cursor-pointer"
+          class="nav-link px-3 py-1.5 rounded-buttons text-gray-300 hover:text-solar-beam hover:bg-white/10 transition-all duration-200 font-medium cursor-pointer whitespace-nowrap"
           id="nav-link-classroom-notes"
         >
-          Learning Process
+          Notes
         </a>
       </li>
       <li>
         <a 
           href="/resume" 
-          class="px-3 py-1.5 rounded-buttons text-gray-300 hover:text-solar-beam hover:bg-white/10 transition-all duration-200 font-medium cursor-pointer"
+          class="nav-link px-3 py-1.5 rounded-buttons text-gray-300 hover:text-solar-beam hover:bg-white/10 transition-all duration-200 font-medium cursor-pointer whitespace-nowrap"
           id="nav-link-resume"
         >
           Resume
@@ -73,7 +73,7 @@ const hasEducation = siteConfig.education && siteConfig.education.length > 0;
       <li>
         <a 
           href="/connect" 
-          class="px-4 py-1.5 rounded-buttons bg-solar-beam text-black font-medium hover:bg-white hover:text-black transition-all duration-200 cursor-pointer ml-1 inline-flex items-center"
+          class="nav-link px-3 py-1.5 rounded-buttons text-gray-300 hover:text-solar-beam hover:bg-white/10 transition-all duration-200 font-medium cursor-pointer whitespace-nowrap"
           id="nav-link-connect"
         >
           Connect
@@ -83,10 +83,138 @@ const hasEducation = siteConfig.education && siteConfig.education.length > 0;
   </nav>
 </header>
 
+<!-- Mobile Simple Hamburger Menu (visible on screens smaller than md) -->
+<div class="md:hidden fixed top-4 right-4 z-50">
+  <button
+    id="mobile-menu-btn"
+    class="w-11 h-11 rounded-full bg-[#1f1f1f] text-white border border-white/15 flex items-center justify-center shadow-lg cursor-pointer hover:text-solar-beam transition-colors focus:outline-none"
+    aria-label="Toggle navigation menu"
+    aria-expanded="false"
+  >
+    <svg id="hamburger-icon" class="w-5 h-5 block" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5M3.75 17.25h16.5" />
+    </svg>
+    <svg id="close-icon" class="w-5 h-5 hidden" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+    </svg>
+  </button>
+
+  <!-- Mobile Dropdown Menu -->
+  <nav
+    id="mobile-menu-dropdown"
+    class="hidden absolute top-14 right-0 w-48 p-2 bg-[#1f1f1f]/95 backdrop-blur-md text-white rounded-2xl border border-white/15 shadow-2xl flex-col gap-1 transition-all duration-200"
+  >
+    <a 
+      href="/" 
+      class="mobile-nav-link px-4 py-2.5 rounded-buttons text-gray-300 hover:text-solar-beam hover:bg-white/10 text-sm font-medium transition-colors"
+      id="mobile-link-home"
+    >
+      Home
+    </a>
+    <a 
+      href="/#about" 
+      class="mobile-nav-link px-4 py-2.5 rounded-buttons text-gray-300 hover:text-solar-beam hover:bg-white/10 text-sm font-medium transition-colors"
+      id="mobile-link-about"
+    >
+      About
+    </a>
+    { hasProjects && (
+      <a 
+        href="/#projects" 
+        class="mobile-nav-link px-4 py-2.5 rounded-buttons text-gray-300 hover:text-solar-beam hover:bg-white/10 text-sm font-medium transition-colors"
+        id="mobile-link-projects"
+      >
+        Work
+      </a>
+    )}
+    { hasEducation && (
+      <a 
+        href="/#education" 
+        class="mobile-nav-link px-4 py-2.5 rounded-buttons text-gray-300 hover:text-solar-beam hover:bg-white/10 text-sm font-medium transition-colors"
+        id="mobile-link-education"
+      >
+        Education
+      </a>
+    )}
+    <a 
+      href="/#classroom-notes" 
+      class="mobile-nav-link px-4 py-2.5 rounded-buttons text-gray-300 hover:text-solar-beam hover:bg-white/10 text-sm font-medium transition-colors"
+      id="mobile-link-classroom-notes"
+    >
+      Notes
+    </a>
+    <a 
+      href="/resume" 
+      class="mobile-nav-link px-4 py-2.5 rounded-buttons text-gray-300 hover:text-solar-beam hover:bg-white/10 text-sm font-medium transition-colors"
+      id="mobile-link-resume"
+    >
+      Resume
+    </a>
+    <a 
+      href="/connect" 
+      class="mobile-nav-link px-4 py-2.5 rounded-buttons text-gray-300 hover:text-solar-beam hover:bg-white/10 text-sm font-medium transition-colors"
+      id="mobile-link-connect"
+    >
+      Connect
+    </a>
+  </nav>
+</div>
+
 <script>
   // @ts-nocheck
   (function() {
-    const links = document.querySelectorAll('header nav ul li a');
+    const desktopLinks = document.querySelectorAll('header nav ul li a');
+    const mobileLinks = document.querySelectorAll('.mobile-nav-link');
+    const allLinks = [...desktopLinks, ...mobileLinks];
+
+    const mobileBtn = document.getElementById('mobile-menu-btn');
+    const mobileDropdown = document.getElementById('mobile-menu-dropdown');
+    const hamburgerIcon = document.getElementById('hamburger-icon');
+    const closeIcon = document.getElementById('close-icon');
+
+    // Toggle Mobile Menu
+    if (mobileBtn && mobileDropdown) {
+      mobileBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isOpen = !mobileDropdown.classList.contains('hidden');
+        if (isOpen) {
+          mobileDropdown.classList.add('hidden');
+          mobileDropdown.classList.remove('flex');
+          mobileBtn.setAttribute('aria-expanded', 'false');
+          hamburgerIcon.classList.remove('hidden');
+          closeIcon.classList.add('hidden');
+        } else {
+          mobileDropdown.classList.remove('hidden');
+          mobileDropdown.classList.add('flex');
+          mobileBtn.setAttribute('aria-expanded', 'true');
+          hamburgerIcon.classList.add('hidden');
+          closeIcon.classList.remove('hidden');
+        }
+      });
+
+      // Close menu on click outside
+      document.addEventListener('click', (e) => {
+        if (!mobileDropdown.contains(e.target) && !mobileBtn.contains(e.target)) {
+          mobileDropdown.classList.add('hidden');
+          mobileDropdown.classList.remove('flex');
+          mobileBtn.setAttribute('aria-expanded', 'false');
+          hamburgerIcon.classList.remove('hidden');
+          closeIcon.classList.add('hidden');
+        }
+      });
+
+      // Close menu on link click
+      mobileLinks.forEach(link => {
+        link.addEventListener('click', () => {
+          mobileDropdown.classList.add('hidden');
+          mobileDropdown.classList.remove('flex');
+          mobileBtn.setAttribute('aria-expanded', 'false');
+          hamburgerIcon.classList.remove('hidden');
+          closeIcon.classList.add('hidden');
+        });
+      });
+    }
+
     const sections = [
       document.getElementById('projects'),
       document.getElementById('about'),
@@ -97,13 +225,11 @@ const hasEducation = siteConfig.education && siteConfig.education.length > 0;
     function updateActiveLink() {
       const isHomePage = window.location.pathname === '/' || window.location.pathname === '/index.html';
       
-      // Don't run scroll detection if we are on a separate page
+      // Separate page path handling
       if (!isHomePage) {
-        links.forEach(link => {
-          const id = link.getAttribute('id');
-          if (id === 'nav-link-connect') return; // Keep highlight button styling
+        allLinks.forEach(link => {
           const href = link.getAttribute('href');
-          if (href && href.includes('connect') && window.location.pathname.includes('connect')) {
+          if (href && href.startsWith('/') && window.location.pathname.startsWith(href) && href !== '/') {
             link.classList.add('text-solar-beam', 'bg-white/10');
             link.classList.remove('text-gray-300');
           } else {
@@ -126,17 +252,15 @@ const hasEducation = siteConfig.education && siteConfig.education.length > 0;
         }
       });
 
-      // Special case: if at the top of the page, highlight Home
       if (window.scrollY < 120) {
         currentSectionId = 'home';
       }
 
-      links.forEach(link => {
-        const id = link.getAttribute('id');
-        if (id === 'nav-link-connect') return; // Keep highlight button styling
-        const href = link.getAttribute('href');
-        const isHomeMatch = id === 'nav-link-home' && currentSectionId === 'home';
-        const isSectionMatch = currentSectionId !== 'home' && href && href.endsWith(`#${currentSectionId}`);
+      allLinks.forEach(link => {
+        const id = link.getAttribute('id') || '';
+        const href = link.getAttribute('href') || '';
+        const isHomeMatch = (id.includes('home')) && currentSectionId === 'home';
+        const isSectionMatch = currentSectionId !== 'home' && href.endsWith(`#${currentSectionId}`);
         
         if (isHomeMatch || isSectionMatch) {
           link.classList.add('text-solar-beam', 'bg-white/10');
@@ -151,7 +275,6 @@ const hasEducation = siteConfig.education && siteConfig.education.length > 0;
     if (typeof window !== 'undefined') {
       window.addEventListener('scroll', updateActiveLink);
       window.addEventListener('resize', updateActiveLink);
-      // Run once on load
       setTimeout(updateActiveLink, 100);
     }
   })();
