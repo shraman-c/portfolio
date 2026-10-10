@@ -106,8 +106,8 @@
   /* Radius */
   --radius-cards: 14px;
   --radius-images: 14px;
-  --radius-buttons: 32px;
-  --radius-navcapsule: 110px;
+  --radius-buttons: 9999px;
+  --radius-navcapsule: 9999px;
 
   /* Shadows */
   --shadow-subtle: var(--shadow-val);

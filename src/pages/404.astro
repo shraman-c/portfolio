@@ -30,15 +30,14 @@ import "../styles/global.css";
     <Header />
     <main class="flex-grow flex items-center justify-center py-20 px-4">
       <div class="text-center">
-        <h1 class="text-9xl font-bold mb-4" style={`color: ${siteConfig.accentColor}`}>404</h1>
-        <h2 class="text-3xl font-bold mb-6">Page Not Found</h2>
-        <p class="text-[var(--text-secondary)] mb-8 max-w-md mx-auto">
+        <h1 class="text-obsidian font-reddit-sans-condensed font-black text-display uppercase select-none mb-2">404</h1>
+        <h2 class="text-obsidian font-reddit-sans-condensed font-black text-heading uppercase mb-4">Page Not Found</h2>
+        <p class="text-graphite font-inter-display font-medium text-body mb-8 max-w-md mx-auto">
           The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.
         </p>
         <a 
           href="/" 
-          class="inline-block px-8 py-3 rounded-full font-medium hover:opacity-90 transition-opacity"
-          style={`background-color: ${siteConfig.accentColor}; color: white;`}
+          class="inline-flex items-center justify-center px-6 py-2.5 bg-solar-beam text-black rounded-buttons font-inter font-medium text-body-sm border border-solar-beam hover:bg-obsidian hover:text-concrete hover:border-obsidian transition-colors duration-200 cursor-pointer"
         >
           Return Home
         </a>

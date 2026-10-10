@@ -134,6 +134,13 @@ export const siteConfig = {
       skills: ["ESP32-C3", "Arduino", "PlatformIO", "C++", "U8g2", "ArduinoJson"],
     },
     {
+      name: "Graphite: AI Knowledge Graph & Notes App",
+      description:
+        "Local-to-Cloud notes app that transforms raw thoughts and markdown into interactive knowledge graphs and automated spaced-repetition flashcards.",
+      link: "/graphite",
+      skills: ["Next.js", "TypeScript", "Groq API", "Pinecone", "PostgreSQL", "AES-256", "PWA"],
+    },
+    {
       name: "WorkFrame: Human Resource Management System",
       description:
         "A full-stack HRMS with role-based portals for employees and HR admins, featuring JWT-based authentication, attendance tracking, leave approval workflows, and payroll visibility.",

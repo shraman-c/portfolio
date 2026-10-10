@@ -73,7 +73,7 @@ const hasEducation = siteConfig.education && siteConfig.education.length > 0;
       <li>
         <a 
           href="/connect" 
-          class="px-3 py-1.5 rounded-buttons text-gray-300 hover:text-solar-beam hover:bg-white/10 transition-all duration-200 font-medium cursor-pointer"
+          class="px-4 py-1.5 rounded-buttons bg-solar-beam text-black font-medium hover:bg-white hover:text-black transition-all duration-200 cursor-pointer ml-1 inline-flex items-center"
           id="nav-link-connect"
         >
           Connect
@@ -100,6 +100,8 @@ const hasEducation = siteConfig.education && siteConfig.education.length > 0;
       // Don't run scroll detection if we are on a separate page
       if (!isHomePage) {
         links.forEach(link => {
+          const id = link.getAttribute('id');
+          if (id === 'nav-link-connect') return; // Keep highlight button styling
           const href = link.getAttribute('href');
           if (href && href.includes('connect') && window.location.pathname.includes('connect')) {
             link.classList.add('text-solar-beam', 'bg-white/10');
@@ -131,6 +133,7 @@ const hasEducation = siteConfig.education && siteConfig.education.length > 0;
 
       links.forEach(link => {
         const id = link.getAttribute('id');
+        if (id === 'nav-link-connect') return; // Keep highlight button styling
         const href = link.getAttribute('href');
         const isHomeMatch = id === 'nav-link-home' && currentSectionId === 'home';
         const isSectionMatch = currentSectionId !== 'home' && href && href.endsWith(`#${currentSectionId}`);

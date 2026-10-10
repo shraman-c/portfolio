@@ -63,8 +63,8 @@ h1 {
   display: inline-flex;
   align-items: center;
   gap: 12px;
-  padding: 12px 24px;
-  border-radius: var(--radius-buttons);
+  padding: 10px 22px;
+  border-radius: 9999px;
   text-decoration: none;
   font-family: var(--font-inter), sans-serif;
   font-weight: 500;

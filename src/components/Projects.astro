@@ -39,7 +39,7 @@ const hasProjects = siteConfig.projects && siteConfig.projects.length > 0;
                   }`}
                 >
                   {project.link && (
-                    <div class="absolute top-8 right-8 w-10 h-10 flex items-center justify-center bg-obsidian text-paper-white rounded-full transition-all duration-200 group-hover:bg-solar-beam group-hover:text-obsidian">
+                    <div class="absolute top-8 right-8 w-10 h-10 flex items-center justify-center bg-obsidian text-paper-white rounded-full transition-all duration-200 group-hover:bg-solar-beam group-hover:text-black">
                       <svg
                         class="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
                         fill="none"
@@ -74,7 +74,7 @@ const hasProjects = siteConfig.projects && siteConfig.projects.length > 0;
                       <div class="flex flex-wrap gap-2 pt-2">
                         {project.skills.map((skill) => (
                           <span
-                            class="px-3 py-1 bg-concrete text-graphite rounded-buttons text-caption font-inter font-medium border border-silver/50 transition-colors duration-200 group-hover:bg-solar-beam group-hover:text-obsidian group-hover:border-solar-beam"
+                            class="px-3 py-1 bg-concrete text-graphite rounded-buttons text-caption font-inter font-medium border border-silver/50 transition-colors duration-200 group-hover:bg-solar-beam group-hover:text-black group-hover:border-solar-beam"
                           >
                             {skill}
                           </span>

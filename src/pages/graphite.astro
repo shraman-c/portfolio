@@ -1,0 +1,543 @@
+---
+import { siteConfig } from "../config";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import ThemeToggle from "../components/ThemeToggle.astro";
+import "../styles/global.css";
+
+const features = [
+  {
+    title: "AI Knowledge Synthesis",
+    description: "Ingests raw markdown and leverages high-speed Groq LLaMA models to extract core concepts, link related ideas, and construct an interconnected conceptual topology."
+  },
+  {
+    title: "Obsidian-Style Force Graph",
+    description: "Interactive force-directed graph with collision avoidance, degree-based node sizing, domain color clusters, N-hop neighborhood focus, and progressive label reveal."
+  },
+  {
+    title: "Automated Spaced Repetition",
+    description: "Generates atomic Q&A and cloze flashcards directly from lecture notes with a daily-capped review scheduler to strengthen memory retention effortlessly."
+  },
+  {
+    title: "Local-to-Cloud Watcher Daemon",
+    description: "A lightweight companion Node.js background process that monitors local markdown folders, detects changes via SHA hashing, and syncs with offline SQLite queueing."
+  },
+  {
+    title: "AES-256-GCM Encryption at Rest",
+    description: "Enterprise-grade privacy with note content encrypted at rest, Argon2id password hashing, and zero plaintext exposure even during in-memory full-text search."
+  },
+  {
+    title: "Offline-First PWA Support",
+    description: "Installable Progressive Web App with custom service worker caching, IndexedDB local persistence, and background sync reconciliation on reconnection."
+  }
+];
+
+const pipelineSteps = [
+  {
+    step: "01",
+    name: "Note Capture & File Watch",
+    detail: "Save markdown files locally in Obsidian, VS Code, or write directly in the cloud editor. The local watcher daemon computes SHA-256 checksums and debounces writes."
+  },
+  {
+    step: "02",
+    name: "Chunking & Vector Embeddings",
+    detail: "Notes are partitioned into contextual sections. Embeddings are generated via Pinecone inference (voyage-3-lite) into per-subject namespaces for semantic retrieval."
+  },
+  {
+    step: "03",
+    name: "Concept Extraction & Deduplication",
+    detail: "Groq LLaMA 3.3 processes chunks in parallel to extract atomic concepts, resolve cross-note synonyms, and prune duplicates using Jaccard similarity."
+  },
+  {
+    step: "04",
+    name: "Graph Merge & Edge Synthesis",
+    detail: "Relationships are inferred and mapped into Supabase Postgres as directed graph nodes and typed edges with automatic clustering above 50 nodes."
+  },
+  {
+    step: "05",
+    name: "Flashcard Generation & Spaced Repetition",
+    detail: "Synthesizes Q&A and cloze cards from key propositions, scheduled into a daily review queue capped to prevent learner cognitive fatigue."
+  }
+];
+
+const securitySpecs = [
+  { label: "Content Encryption", value: "AES-256-GCM authenticated encryption at rest" },
+  { label: "Credential Security", value: "Argon2id password hashing (19 MiB memory, 2 passes)" },
+  { label: "Session Architecture", value: "Tamper-proof signed JOSE JWT with revocation & auto-healing" },
+  { label: "Search Privacy", value: "Decrypt-on-the-fly search without persisting plaintext indexes" },
+  { label: "Sync Protocol", value: "Ephemeral 6-digit cryptographic device pairing & rate limiting" }
+];
+
+const techStack = [
+  "Next.js 15",
+  "TypeScript",
+  "Groq API (LLaMA 3.3)",
+  "Pinecone Vector DB",
+  "Supabase PostgreSQL",
+  "Tailwind CSS",
+  "AES-256-GCM",
+  "Argon2id",
+  "Workbox PWA",
+  "Node.js Daemon"
+];
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Graphite — Local-to-Cloud Notes App that automatically turns raw thoughts and markdown into interactive knowledge graphs and spaced-repetition flashcards."
+    />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="icon" href="/favicon.svg" />
+    <link rel="canonical" href="https://shramanc.pages.dev/graphite" />
+    <title>Graphite — From Raw Thoughts to Connected Graphs</title>
+
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://shramanc.pages.dev/graphite" />
+    <meta property="og:title" content="Graphite — From Raw Thoughts to Connected Graphs" />
+    <meta
+      property="og:description"
+      content="Local-to-Cloud Notes App — turns raw notes into knowledge graphs and flashcards automatically."
+    />
+    <meta property="og:image" content="/images/graphite/graph-redesign.png" />
+
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://shramanc.pages.dev/graphite" />
+    <meta property="twitter:title" content="Graphite — From Raw Thoughts to Connected Graphs" />
+    <meta
+      property="twitter:description"
+      content="Local-to-Cloud Notes App — turns raw notes into knowledge graphs and flashcards automatically."
+    />
+    <meta property="twitter:image" content="/images/graphite/graph-redesign.png" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Inter:wght@500&family=Reddit+Sans+Condensed:wght@900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg-concrete text-obsidian">
+    <Header />
+
+    <!-- Hero Section -->
+    <main class="relative py-32 flex items-center justify-center min-h-[70vh]">
+      <!-- Diagonal Solar Beam wash -->
+      <div
+        class="absolute top-0 right-0 w-[60%] h-full -z-10 pointer-events-none"
+        style="background: radial-gradient(circle at 100% 0%, var(--color-solar-beam) 0%, transparent 60%); opacity: 0.25; filter: blur(40px);"
+      ></div>
+
+      <div class="mx-auto max-w-4xl px-6 lg:px-8 text-center flex flex-col items-center">
+        <!-- Live status badge -->
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 bg-paper-white border border-silver/50 rounded-buttons mb-8 select-none shadow-subtle">
+          <span class="relative flex h-2 w-2">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-solar-beam opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-solar-beam"></span>
+          </span>
+          <span class="font-inter font-medium text-caption text-graphite">Local-to-Cloud Knowledge Engine &bull; Open Source</span>
+        </div>
+
+        <h1 class="text-obsidian font-reddit-sans-condensed font-black text-display leading-none tracking-tighter uppercase select-none mb-6">
+          GRAPHITE
+        </h1>
+
+        <p class="font-caveat text-graphite text-[28px] tracking-tight mb-4 select-none">
+          From raw thoughts to connected graphs.
+        </p>
+
+        <p class="font-inter-display font-medium text-body text-graphite mb-10 leading-relaxed max-w-2xl">
+          An intelligent note-taking and cognitive synthesis platform. It turns chaotic markdown notes into interactive, force-directed knowledge graphs and automatically schedules spaced repetition flashcards for lasting retention.
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+          <a
+            href="https://graphite-notes.vercel.app/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="px-6 py-2.5 bg-solar-beam text-black rounded-buttons font-inter font-medium text-body-sm border border-solar-beam hover:bg-obsidian hover:text-concrete hover:border-obsidian transition-colors duration-200 cursor-pointer flex items-center justify-center gap-2"
+          >
+            <span>Launch Live App</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+            </svg>
+          </a>
+          <a
+            href="https://github.com/shraman-c/graphite"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="px-6 py-2.5 bg-paper-white text-obsidian rounded-buttons font-inter font-medium text-body-sm border border-silver/50 hover:bg-solar-beam hover:text-black hover:border-solar-beam transition-colors duration-200 cursor-pointer flex items-center justify-center gap-2"
+          >
+            <span>GitHub Repository</span>
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
+            </svg>
+          </a>
+          <a
+            href="#features"
+            class="px-6 py-2.5 bg-paper-white text-obsidian rounded-buttons font-inter font-medium text-body-sm border border-silver/50 hover:bg-solar-beam hover:text-black hover:border-solar-beam transition-colors duration-200 cursor-pointer"
+          >
+            Explore Features
+          </a>
+        </div>
+      </div>
+    </main>
+
+    <!-- Test Account Credentials Banner -->
+    <section class="px-8 sm:px-12 md:px-24 pb-16 bg-concrete flex flex-col items-center">
+      <div class="w-full max-w-4xl bg-paper-white p-6 sm:p-8 rounded-cards border border-silver/50 shadow-subtle flex flex-col sm:flex-row items-center justify-between gap-6">
+        <div class="flex items-start gap-4">
+          <div class="p-3 bg-solar-beam/20 rounded-buttons border border-solar-beam/30 text-obsidian shrink-0">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" />
+            </svg>
+          </div>
+          <div>
+            <h3 class="font-inter font-medium text-subheading text-obsidian mb-1">Instant Demo Credentials</h3>
+            <p class="font-inter-display font-medium text-body-sm text-graphite">
+              Try the deployed live version with pre-populated graphs, biology and CS subjects, notes, and flashcard queues:
+            </p>
+          </div>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-3 w-full sm:w-auto font-mono text-body-sm">
+          <div class="bg-concrete px-4 py-2 rounded-buttons border border-silver/50 text-obsidian select-all text-center">
+            demo@catalyst.com
+          </div>
+          <div class="bg-concrete px-4 py-2 rounded-buttons border border-silver/50 text-obsidian select-all text-center">
+            password12345
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Gallery / Visual Showcase Section -->
+    <section class="py-24 px-8 sm:px-12 md:px-24 border-t border-silver/30 bg-concrete flex flex-col items-center text-center">
+      <div class="w-full max-w-[1200px] flex flex-col items-center">
+        <div class="flex flex-col items-center mb-16">
+          <span class="font-caveat text-graphite text-[28px] tracking-tight mb-2 select-none">
+            Interface In Action
+          </span>
+          <h2 class="text-obsidian font-reddit-sans-condensed font-black text-display leading-none tracking-tighter uppercase select-none">
+            GALLERY
+          </h2>
+        </div>
+
+        <!-- Featured Large Screenshot: Knowledge Graph -->
+        <div class="bg-paper-white rounded-cards border border-silver/50 shadow-subtle overflow-hidden w-full mb-8">
+          <img
+            src="/images/graphite/graph-redesign.png"
+            alt="Graphite interactive knowledge graph visualization showing connected concepts with Obsidian-inspired aesthetic"
+            class="w-full h-auto object-cover border-b border-silver/40"
+            loading="lazy"
+          />
+          <div class="p-6 text-left flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
+            <div>
+              <h3 class="font-inter font-medium text-subheading text-obsidian">Obsidian-Style Knowledge Graph</h3>
+              <p class="font-inter-display font-medium text-body-sm text-graphite">
+                Force-directed layout with degree-scaled nodes, interactive hover halos, collision avoidance, and progressive label reveal.
+              </p>
+            </div>
+            <span class="font-inter font-medium text-caption px-3 py-1 bg-concrete rounded-buttons border border-silver/40 text-graphite shrink-0">
+              Canvas 2D Engine
+            </span>
+          </div>
+        </div>
+
+        <!-- 3-Column Screenshots Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 w-full text-left">
+          <div class="bg-paper-white rounded-cards border border-silver/50 shadow-subtle overflow-hidden flex flex-col">
+            <img
+              src="/images/graphite/dashboard.png"
+              alt="Graphite subject overview dashboard showing cards due and stats"
+              class="w-full h-52 object-cover object-top border-b border-silver/40"
+              loading="lazy"
+            />
+            <div class="p-6 flex-1 flex flex-col justify-between">
+              <div>
+                <h3 class="font-inter font-medium text-subheading text-obsidian mb-2">Subject Dashboard</h3>
+                <p class="font-inter-display font-medium text-body-sm text-graphite leading-relaxed">
+                  Centralized workspace showing active subjects, card review counts, total notes, and synchronization health.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-paper-white rounded-cards border border-silver/50 shadow-subtle overflow-hidden flex flex-col">
+            <img
+              src="/images/graphite/note-detail.png"
+              alt="Graphite note detail view with markdown rendering and extracted concepts"
+              class="w-full h-52 object-cover object-top border-b border-silver/40"
+              loading="lazy"
+            />
+            <div class="p-6 flex-1 flex flex-col justify-between">
+              <div>
+                <h3 class="font-inter font-medium text-subheading text-obsidian mb-2">Note Detail &amp; Concepts</h3>
+                <p class="font-inter-display font-medium text-body-sm text-graphite leading-relaxed">
+                  Clean typography, sanitised markdown previews, associated knowledge graph tags, and version history.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-paper-white rounded-cards border border-silver/50 shadow-subtle overflow-hidden flex flex-col">
+            <img
+              src="/images/graphite/review.png"
+              alt="Graphite flashcard spaced repetition review interface"
+              class="w-full h-52 object-cover object-top border-b border-silver/40"
+              loading="lazy"
+            />
+            <div class="p-6 flex-1 flex flex-col justify-between">
+              <div>
+                <h3 class="font-inter font-medium text-subheading text-obsidian mb-2">Spaced Repetition Review</h3>
+                <p class="font-inter-display font-medium text-body-sm text-graphite leading-relaxed">
+                  Distraction-free flashcard study mode with flip-to-reveal answers and confidence ratings for optimal recall pacing.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Core Features Section -->
+    <section id="features" class="py-24 px-8 sm:px-12 md:px-24 border-t border-silver/30 bg-concrete flex flex-col items-center text-center">
+      <div class="w-full max-w-[1200px] flex flex-col items-center">
+        <div class="flex flex-col items-center mb-16">
+          <span class="font-caveat text-graphite text-[28px] tracking-tight mb-2 select-none">
+            Engineered For Focus
+          </span>
+          <h2 class="text-obsidian font-reddit-sans-condensed font-black text-display leading-none tracking-tighter uppercase select-none">
+            CORE FEATURES
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full text-left">
+          {features.map((feature) => (
+            <div class="group bg-paper-white p-8 sm:p-10 rounded-cards border border-silver/50 shadow-subtle hover:border-silver transition-all duration-300">
+              <h3 class="font-inter font-medium text-subheading text-obsidian mb-3">
+                {feature.title}
+              </h3>
+              <p class="font-inter-display font-medium text-body text-graphite leading-relaxed">
+                {feature.description}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- AI Pipeline & Architecture Section -->
+    <section id="architecture" class="py-24 px-8 sm:px-12 md:px-24 border-t border-silver/30 bg-concrete flex flex-col items-center text-center">
+      <div class="w-full max-w-[1200px] flex flex-col items-center">
+        <div class="flex flex-col items-center mb-16">
+          <span class="font-caveat text-graphite text-[28px] tracking-tight mb-2 select-none">
+            Under The Hood
+          </span>
+          <h2 class="text-obsidian font-reddit-sans-condensed font-black text-display leading-none tracking-tighter uppercase select-none">
+            AI SYNTHESIS PIPELINE
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full text-left">
+          {pipelineSteps.map((p) => (
+            <div class="bg-paper-white p-8 rounded-cards border border-silver/50 shadow-subtle flex flex-col justify-between">
+              <div>
+                <div class="inline-block font-reddit-sans-condensed font-black text-heading-lg text-solar-beam mb-2">
+                  {p.step}
+                </div>
+                <h3 class="font-inter font-medium text-subheading text-obsidian mb-3">{p.name}</h3>
+                <p class="font-inter-display font-medium text-body text-graphite leading-relaxed">
+                  {p.detail}
+                </p>
+              </div>
+            </div>
+          ))}
+
+          <!-- Highlight Box for Vector & LLM Stack -->
+          <div class="bg-paper-white p-8 rounded-cards border border-solar-beam shadow-subtle flex flex-col justify-between">
+            <div>
+              <div class="font-caveat text-graphite text-[28px] tracking-tight mb-1">
+                Sub-second Speed
+              </div>
+              <h3 class="font-inter font-medium text-subheading text-obsidian mb-3">Parallel LLM &amp; Vector Index</h3>
+              <p class="font-inter-display font-medium text-body text-graphite leading-relaxed">
+                By combining concept extraction with flashcard generation into unified Groq requests and batching Pinecone upserts, note processing dropped from 50s down to 14s.
+              </p>
+            </div>
+            <div class="mt-6 flex flex-wrap gap-2">
+              <span class="px-3 py-1 bg-concrete border border-silver/50 rounded-buttons font-inter text-caption text-obsidian">Groq LLaMA 3.3</span>
+              <span class="px-3 py-1 bg-concrete border border-silver/50 rounded-buttons font-inter text-caption text-obsidian">Pinecone Voyage-3</span>
+              <span class="px-3 py-1 bg-concrete border border-silver/50 rounded-buttons font-inter text-caption text-obsidian">Supabase Pooler</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Watcher Companion CLI Section -->
+    <section class="py-24 px-8 sm:px-12 md:px-24 border-t border-silver/30 bg-concrete flex flex-col items-center text-center">
+      <div class="w-full max-w-[1200px] flex flex-col items-center">
+        <div class="flex flex-col items-center mb-16">
+          <span class="font-caveat text-graphite text-[28px] tracking-tight mb-2 select-none">
+            Local First, Cloud Synced
+          </span>
+          <h2 class="text-obsidian font-reddit-sans-condensed font-black text-display leading-none tracking-tighter uppercase select-none">
+            THE WATCHER DAEMON
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 w-full text-left">
+          <div class="bg-paper-white p-8 sm:p-10 rounded-cards border border-silver/50 shadow-subtle flex flex-col justify-between">
+            <div>
+              <h3 class="font-inter font-medium text-subheading text-obsidian mb-4">
+                Keep Working in Your Favorite Local Editor
+              </h3>
+              <p class="font-inter-display font-medium text-body text-graphite leading-relaxed mb-6">
+                You do not have to write notes inside a browser tab. The Graphite Watcher runs as a quiet background service on your workstation. Open Obsidian, Logseq, VS Code, or Notepad — the moment you save a file, it enters your knowledge graph.
+              </p>
+              <ul class="space-y-3 font-inter-display text-body-sm text-graphite">
+                <li class="flex items-center gap-2">
+                  <span class="w-2 h-2 rounded-full bg-solar-beam shrink-0"></span>
+                  <span><strong>2.5s Debounce:</strong> Protects your API quota while you type continuously.</span>
+                </li>
+                <li class="flex items-center gap-2">
+                  <span class="w-2 h-2 rounded-full bg-solar-beam shrink-0"></span>
+                  <span><strong>Content Hashing:</strong> Identical files with unchanged hashes are never re-uploaded.</span>
+                </li>
+                <li class="flex items-center gap-2">
+                  <span class="w-2 h-2 rounded-full bg-solar-beam shrink-0"></span>
+                  <span><strong>SQLite Resilience:</strong> Network outages queue sync events in <code class="font-mono text-caption bg-concrete px-1 py-0.5 rounded">watcher.db</code> and retry on reconnection.</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="bg-paper-white p-8 sm:p-10 rounded-cards border border-silver/50 shadow-subtle flex flex-col justify-between font-mono text-body-sm">
+            <div>
+              <div class="text-graphite text-caption uppercase tracking-wider mb-2">// 1-Minute Terminal Setup</div>
+              <div class="bg-concrete p-4 rounded-cards border border-silver/50 text-obsidian mb-4 overflow-x-auto">
+                <p class="text-graphite"># 1. Install &amp; pair your local folder</p>
+                <p>cd watcher &amp;&amp; npm install</p>
+                <p>node index.js --pair</p>
+                <p class="text-graphite mt-2"># 2. Enter 6-digit dashboard pairing code</p>
+                <p class="text-solar-beam font-bold">Pairing successful &bull; Token saved to config.json</p>
+                <p class="text-graphite mt-2"># 3. Start watching in the background</p>
+                <p>node index.js</p>
+              </div>
+              <p class="font-inter-display font-medium text-body-sm text-graphite">
+                Generates a secure pairing key linked directly to your authenticated Graphite user and target subject container.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Security & Privacy Architecture Table -->
+    <section class="py-24 px-8 sm:px-12 md:px-24 border-t border-silver/30 bg-concrete flex flex-col items-center text-center">
+      <div class="w-full max-w-4xl flex flex-col items-center">
+        <div class="flex flex-col items-center mb-16">
+          <span class="font-caveat text-graphite text-[28px] tracking-tight mb-2 select-none">
+            Zero-Knowledge Principles
+          </span>
+          <h2 class="text-obsidian font-reddit-sans-condensed font-black text-display leading-none tracking-tighter uppercase select-none">
+            SECURITY &amp; PRIVACY
+          </h2>
+        </div>
+
+        <div class="bg-paper-white rounded-cards border border-silver/50 shadow-subtle w-full overflow-hidden">
+          <div class="overflow-x-auto">
+            <table class="w-full text-left">
+              <thead>
+                <tr class="border-b border-silver/50 bg-concrete/50">
+                  <th class="py-4 px-6 font-inter font-medium text-body-sm text-obsidian">Security Layer</th>
+                  <th class="py-4 px-6 font-inter font-medium text-body-sm text-obsidian">Implementation Detail</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-silver/30">
+                {securitySpecs.map((spec) => (
+                  <tr class="hover:bg-concrete/30 transition-colors">
+                    <td class="py-4 px-6 font-inter font-medium text-body-sm text-obsidian whitespace-nowrap">{spec.label}</td>
+                    <td class="py-4 px-6 font-inter-display font-medium text-body-sm text-graphite">{spec.value}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tech Stack Grid Section -->
+    <section class="py-24 px-8 sm:px-12 md:px-24 border-t border-silver/30 bg-concrete flex flex-col items-center text-center">
+      <div class="w-full max-w-[1200px] flex flex-col items-center">
+        <div class="flex flex-col items-center mb-16">
+          <span class="font-caveat text-graphite text-[28px] tracking-tight mb-2 select-none">
+            Modern Full-Stack
+          </span>
+          <h2 class="text-obsidian font-reddit-sans-condensed font-black text-display leading-none tracking-tighter uppercase select-none">
+            TECH STACK
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 w-full">
+          {techStack.map((tech) => (
+            <div class="bg-paper-white p-6 rounded-cards border border-silver/50 text-center shadow-subtle hover:border-silver transition-colors duration-300">
+              <p class="font-inter font-medium text-body-sm text-obsidian select-none">{tech}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-24 px-8 sm:px-12 md:px-24 border-t border-silver/30 bg-concrete flex flex-col items-center text-center">
+      <div class="w-full max-w-4xl flex flex-col items-center">
+        <div class="bg-paper-white p-12 rounded-cards border border-silver/50 w-full shadow-subtle">
+          <h2 class="font-reddit-sans-condensed font-black text-heading-lg text-obsidian uppercase select-none mb-6">
+            Turn Raw Notes Into Deep Understanding
+          </h2>
+          <p class="font-inter-display font-medium text-body text-graphite mb-10 leading-relaxed max-w-xl mx-auto">
+            Experience the automated synthesis of thoughts, concepts, and memory cards. Explore the live demo or inspect the open-source codebase on GitHub.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a
+              href="https://graphite-notes.vercel.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="px-6 py-2.5 bg-solar-beam text-black border border-solar-beam rounded-buttons font-inter font-medium text-body-sm hover:bg-obsidian hover:text-concrete hover:border-obsidian transition-colors duration-200 cursor-pointer flex items-center justify-center gap-2"
+            >
+              <span>Launch Live Demo</span>
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+              </svg>
+            </a>
+            <a
+              href="https://github.com/shraman-c/graphite"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="px-6 py-2.5 bg-concrete text-obsidian border border-silver/50 rounded-buttons font-inter font-medium text-body-sm hover:bg-solar-beam hover:text-black hover:border-solar-beam transition-colors duration-200 cursor-pointer flex items-center justify-center gap-2"
+            >
+              <span>View Source on GitHub</span>
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
+              </svg>
+            </a>
+            <a
+              href="/"
+              class="px-6 py-2.5 bg-concrete text-obsidian border border-silver/50 rounded-buttons font-inter font-medium text-body-sm hover:bg-solar-beam hover:text-black hover:border-solar-beam transition-colors duration-200 cursor-pointer"
+            >
+              Back to Portfolio
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <Footer />
+    <ThemeToggle />
+  </body>
+</html>
