@@ -1,0 +1,297 @@
+---
+import { siteConfig } from "../config";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import ThemeToggle from "../components/ThemeToggle.astro";
+import "../styles/global.css";
+
+const features = [
+  {
+    title: "Strict 30-Second Timed Window",
+    description: "Leverages millisecond-precise hardware timers to execute a non-blocking prime search loop, terminating cleanly at exactly 30,000ms."
+  },
+  {
+    title: "Algorithm Optimization",
+    description: "Implements early even-number pruning and step-by-two odd trial division up to sqrt(N), maximizing raw integer computation throughput."
+  },
+  {
+    title: "Cross-Architecture Support",
+    description: "Runs identically across 8-bit AVR microcontrollers (ATmega328P, ATmega2560) and 32-bit modern processors (ESP32 Xtensa, ESP32-C3 RISC-V)."
+  },
+  {
+    title: "Real-Time Serial Telemetry",
+    description: "Streams immediate diagnostic data and final prime count over USB UART (115200 baud) without CPU-throttling string formatting inside the hot loop."
+  },
+  {
+    title: "Minimal Memory Overhead",
+    description: "Zero dynamic heap allocation (no malloc/free or String objects) preventing heap fragmentation and ensuring pure bare-metal determinism."
+  },
+  {
+    title: "Comparative Silicon Profiling",
+    description: "Provides an empirical baseline for comparing clock frequencies, pipeline depths, and instruction cycles across embedded development platforms."
+  }
+];
+
+const hardwareBenchmarks = [
+  {
+    board: "ESP32 DevKit (Xtensa LX6)",
+    architecture: "32-bit Dual-Core @ 240MHz",
+    category: "High Performance",
+    notes: "Hardware integer divider & branch prediction"
+  },
+  {
+    board: "ESP32-C3 Super Mini (RISC-V)",
+    architecture: "32-bit Single-Core @ 160MHz",
+    category: "Modern RISC-V",
+    notes: "Compact RV32IMC core with efficient caching"
+  },
+  {
+    board: "Arduino Uno / Nano (ATmega328P)",
+    architecture: "8-bit AVR @ 16MHz",
+    category: "Classic Embedded",
+    notes: "Pure software 32-bit long integer emulation"
+  },
+  {
+    board: "Arduino Mega 2560 (ATmega2560)",
+    architecture: "8-bit AVR @ 16MHz",
+    category: "Classic Embedded",
+    notes: "Expanded flash memory baseline"
+  }
+];
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="30SecPrimeBenchmark — 30 Seconds Prime Numbers Benchmark for Arduino, ESP32, and RISC-V microcontroller platforms."
+    />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="icon" href="/favicon.svg" />
+    <link rel="canonical" href="https://shramanc.pages.dev/30secbenchmark" />
+    <title>30SecPrimeBenchmark — Embedded Silicon Benchmark</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Inter:wght@500&family=Reddit+Sans+Condensed:wght@900&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="30SecPrimeBenchmark — Embedded Silicon Benchmark" />
+    <meta property="og:description" content="A standardized 30-second prime numbers benchmark measuring computational throughput on Arduino, ESP32, and RISC-V chips." />
+    <meta property="og:url" content="https://shramanc.pages.dev/30secbenchmark/" />
+  </head>
+  <body class="bg-concrete text-obsidian">
+    <Header />
+
+    <!-- Hero Section -->
+    <main class="relative py-32 flex items-center justify-center min-h-[70vh]">
+      <!-- Diagonal wash of light -->
+      <div
+        class="absolute top-0 right-0 w-[60%] h-full -z-10 pointer-events-none"
+        style="background: radial-gradient(circle at 100% 0%, var(--color-solar-beam) 0%, transparent 60%); opacity: 0.25; filter: blur(40px);"
+      ></div>
+
+      <div class="mx-auto max-w-4xl px-6 lg:px-8 text-center flex flex-col items-center">
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 bg-paper-white border border-silver/50 rounded-buttons mb-8 select-none shadow-subtle">
+          <span class="relative flex h-2 w-2">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-solar-beam opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-solar-beam"></span>
+          </span>
+          <span class="font-inter font-medium text-caption text-graphite">Firmware &amp; Hardware Benchmark</span>
+        </div>
+        
+        <h1 class="text-obsidian font-reddit-sans-condensed font-black text-display leading-none tracking-tighter uppercase select-none mb-6">
+          30SEC BENCHMARK
+        </h1>
+        
+        <p class="font-inter-display font-medium text-body text-graphite mb-10 leading-relaxed max-w-2xl">
+          A standardized 30-second prime number calculation benchmark for Arduino, ESP32, and RISC-V boards. Measures raw arithmetic throughput and CPU efficiency across microcontroller architectures.
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+          <a 
+            href="https://github.com/shraman-c/30SecPrimeBenchmark" 
+            target="_blank"
+            rel="noopener noreferrer"
+            class="px-6 py-2.5 bg-solar-beam text-black border border-solar-beam rounded-buttons font-inter font-medium text-body-sm hover:bg-obsidian hover:text-concrete hover:border-obsidian transition-colors duration-200 cursor-pointer flex items-center justify-center gap-2"
+          >
+            <span>View on GitHub</span>
+            <svg class="w-5 h-5 shrink-0" fill="currentColor" viewBox="0 0 24 24">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
+            </svg>
+          </a>
+          <a 
+            href="#comparison" 
+            class="px-6 py-2.5 bg-paper-white text-obsidian border border-silver/50 rounded-buttons font-inter font-medium text-body-sm hover:bg-solar-beam hover:text-black hover:border-solar-beam transition-colors duration-200 cursor-pointer"
+          >
+            Hardware Comparison
+          </a>
+          <a 
+            href="/" 
+            class="px-6 py-2.5 bg-paper-white text-obsidian border border-silver/50 rounded-buttons font-inter font-medium text-body-sm hover:bg-solar-beam hover:text-black hover:border-solar-beam transition-colors duration-200 cursor-pointer flex items-center justify-center gap-2"
+          >
+            <span>Back to Portfolio</span>
+          </a>
+        </div>
+      </div>
+    </main>
+
+    <!-- Capabilities Section -->
+    <section id="features" class="py-24 px-8 sm:px-12 md:px-24 border-t border-silver/30 bg-concrete flex flex-col items-center text-center">
+      <div class="w-full max-w-[1200px] flex flex-col items-center">
+        <!-- Section Title Block -->
+        <div class="flex flex-col items-center mb-16">
+          <span class="font-caveat text-graphite text-[28px] tracking-tight mb-2 select-none">
+            Silicon Profiling
+          </span>
+          <h2 class="text-obsidian font-reddit-sans-condensed font-black text-display leading-none tracking-tighter uppercase select-none">
+            BENCHMARK DESIGN
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full text-left">
+          {features.map((feature, i) => (
+            <div class="group bg-paper-white p-8 sm:p-10 rounded-cards border border-silver/50 shadow-subtle hover:border-silver transition-all duration-300">
+              <span class="font-inter font-medium text-caption text-ash block mb-4">0{i + 1}</span>
+              <h3 class="font-inter font-medium text-subheading text-obsidian mb-3">
+                {feature.title}
+              </h3>
+              <p class="font-inter-display font-medium text-body text-graphite leading-relaxed">
+                {feature.description}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Hardware Comparison Section -->
+    <section id="comparison" class="py-24 px-8 sm:px-12 md:px-24 border-t border-silver/30 bg-paper-white flex flex-col items-center text-center">
+      <div class="w-full max-w-[1200px] flex flex-col items-center">
+        <!-- Section Title Block -->
+        <div class="flex flex-col items-center mb-16">
+          <span class="font-caveat text-graphite text-[28px] tracking-tight mb-2 select-none">
+            Architecture Matrix
+          </span>
+          <h2 class="text-obsidian font-reddit-sans-condensed font-black text-display leading-none tracking-tighter uppercase select-none">
+            TARGET PLATFORMS
+          </h2>
+        </div>
+
+        <div class="w-full overflow-x-auto text-left">
+          <table class="w-full font-inter text-body-sm border-collapse bg-concrete rounded-cards border border-silver/50 overflow-hidden shadow-subtle">
+            <thead>
+              <tr class="border-b border-silver/40 text-ash text-caption uppercase bg-concrete">
+                <th class="py-4 px-6">Microcontroller Platform</th>
+                <th class="py-4 px-6">CPU Architecture &amp; Clock</th>
+                <th class="py-4 px-6">Category</th>
+                <th class="py-4 px-6">Arithmetic Characteristics</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-silver/20 text-graphite">
+              {hardwareBenchmarks.map((item) => (
+                <tr class="hover:bg-silver/10 transition-colors">
+                  <td class="py-4 px-6 font-medium text-obsidian">{item.board}</td>
+                  <td class="py-4 px-6 font-mono text-xs text-obsidian">{item.architecture}</td>
+                  <td class="py-4 px-6">
+                    <span class="px-3 py-1 bg-paper-white text-obsidian rounded-buttons text-caption border border-silver/40 font-medium">
+                      {item.category}
+                    </span>
+                  </td>
+                  <td class="py-4 px-6 text-caption text-graphite">{item.notes}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Algorithm Snapshot Section -->
+    <section class="py-24 px-8 sm:px-12 md:px-24 border-t border-silver/30 bg-concrete flex flex-col items-center text-center">
+      <div class="w-full max-w-[1200px] flex flex-col items-center">
+        <!-- Section Title Block -->
+        <div class="flex flex-col items-center mb-16">
+          <span class="font-caveat text-graphite text-[28px] tracking-tight mb-2 select-none">
+            Deterministic Evaluation
+          </span>
+          <h2 class="text-obsidian font-reddit-sans-condensed font-black text-display leading-none tracking-tighter uppercase select-none">
+            THE ALGORITHM
+          </h2>
+        </div>
+
+        <div class="w-full text-left bg-paper-white p-8 sm:p-10 rounded-cards border border-silver/50 shadow-subtle">
+          <h3 class="font-inter font-medium text-subheading text-obsidian mb-4">Core Benchmark Loop</h3>
+          <p class="font-inter-display font-medium text-body text-graphite mb-6 leading-relaxed">
+            The benchmark initiates with timestamp calibration via <code class="font-mono text-xs bg-concrete px-2 py-1 rounded text-obsidian">millis()</code>, cycling candidate primes through an optimized trial division routine until the 30-second boundary is crossed:
+          </p>
+          <pre class="bg-concrete p-6 rounded-cards border border-silver/40 font-mono text-xs text-obsidian overflow-x-auto leading-relaxed"><code>unsigned long startTime = millis();
+unsigned long count = 0;
+unsigned long candidate = 2;
+
+while (millis() - startTime &lt; 30000) &#123;
+    if (isPrime(candidate)) &#123;
+        count++;
+    &#125;
+    candidate++;
+&#125;
+
+Serial.print("Primes calculated in 30 seconds: ");
+Serial.println(count);</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tech Stack Section -->
+    <section class="py-24 px-8 sm:px-12 md:px-24 border-t border-silver/30 bg-concrete flex flex-col items-center text-center">
+      <div class="w-full max-w-[1200px] flex flex-col items-center">
+        <!-- Section Title Block -->
+        <div class="flex flex-col items-center mb-16">
+          <span class="font-caveat text-graphite text-[28px] tracking-tight mb-2 select-none">
+            Frameworks &amp; Tooling
+          </span>
+          <h2 class="text-obsidian font-reddit-sans-condensed font-black text-display leading-none tracking-tighter uppercase select-none">
+            TECH STACK
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 w-full">
+          {["Arduino IDE", "C++", "ESP-IDF", "PlatformIO", "AVR Architecture", "RISC-V Architecture"].map((tech) => (
+            <div class="bg-paper-white p-6 rounded-cards border border-silver/50 text-center shadow-subtle hover:border-silver transition-colors duration-300">
+              <span class="font-inter font-medium text-subheading text-obsidian block">
+                {tech}
+              </span>
+            </div>
+          ))}
+        </div>
+
+        <div class="mt-16 flex flex-wrap gap-4 justify-center">
+          <a
+            href="https://github.com/shraman-c/30SecPrimeBenchmark"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="px-6 py-2.5 bg-solar-beam text-black border border-solar-beam rounded-buttons font-inter font-medium text-body-sm hover:bg-obsidian hover:text-concrete hover:border-obsidian transition-colors duration-200 cursor-pointer flex items-center justify-center gap-2"
+          >
+            <span>View Source on GitHub</span>
+            <svg class="w-5 h-5 shrink-0" fill="currentColor" viewBox="0 0 24 24">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
+            </svg>
+          </a>
+          <a
+            href="/"
+            class="px-6 py-2.5 bg-paper-white text-obsidian border border-silver/50 rounded-buttons font-inter font-medium text-body-sm hover:bg-solar-beam hover:text-black hover:border-solar-beam transition-colors duration-200 cursor-pointer"
+          >
+            Back to Portfolio
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <Footer />
+    <ThemeToggle />
+  </body>
+</html>

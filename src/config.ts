@@ -88,21 +88,21 @@ export const siteConfig = {
       name: "CertifyGo",
       description:
         "CertifyGo is a GUI-based certificate generator that automates the process of creating personalized certificates from a PowerPoint template and Excel data file.",
-      link: "https://github.com/shraman-c/CertifyGo",
+      link: "/certifygo",
       skills: ["Python", "Tkinter", "Pillow"],
     },
     {
       name: "30SecPrimeBenchmark",
       description:
         "30 Seconds Prime numbers Benchmark for Arduino and ESP32",
-      link: "https://github.com/shraman-c/30SecPrimeBenchmark",
+      link: "/30secbenchmark",
       skills: ["Arduino", "C++", "ESP32"],
     },
     {
       name: "Master-Header-File-for-C",
       description:
         "This master.h file consolidates the most frequently used C standard and platform-specific headers. It is designed for rapid prototyping and general-purpose C development across Linux, macOS, and Windows.",
-      link: "https://github.com/shraman-c/Master-Header-File-for-C",
+      link: "/master-header",
       skills: ["C", "Cross-platform"],
     },
     {
@@ -146,6 +146,13 @@ export const siteConfig = {
         "A full-stack HRMS with role-based portals for employees and HR admins, featuring JWT-based authentication, attendance tracking, leave approval workflows, and payroll visibility.",
       link: "/workframe",
       skills: ["Next.js", "React", "Prisma", "PostgreSQL", "Tailwind CSS", "JWT"],
+    },
+    {
+      name: "codeCanon: Docs-Drift-Detector",
+      description:
+        "CLI tool, GUI, and autonomous Agent Skill that mathematically proves whether your documentation matches your JS/TS codebase using deterministic AST facts and Gemma 4 Vision.",
+      link: "/codecanon",
+      skills: ["TypeScript", "Gemma 4 Vision", "Node.js AST", "Python Tkinter", "Git Engine"],
     },
   ],
   // experience removed

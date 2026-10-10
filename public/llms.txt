@@ -4,13 +4,18 @@
 
 ## Site Contents
 - Home (/): Main portfolio featuring about me, skills, projects, achievements, certifications, education, and experience.
-- /connect: Hub for my links.
+- /connect: Hub for my links and social endpoints.
 - /caesar-cipher: Caesar cipher utility tool.
-- /catalyst: Catalyst project showcase (AI-Powered Timetable Generator).
-- /watcher: Watcher project showcase (Automated file organiser).
-- /opendap-c3: Open-Source Digital Audio Player project.
-- /openclock-c3: ESP32-C3 Smart Clock project.
-- /workframe: Human Resource Management System project.
+- /catalyst: Catalyst project showcase (AI-Powered NEP-Compliant Timetable Generator).
+- /watcher: Watcher project showcase (Automated CPU-efficient file organizer desktop app).
+- /graphite: Graphite project showcase (AI Knowledge Graph & Notes App with vector embeddings and spaced-repetition flashcards).
+- /opendap-c3: OpenDAP-C3 project showcase (Open-Source Digital Audio Player based on ESP32-C3 Super Mini and DFPlayer Mini).
+- /openclock-c3: OpenClock-C3 project showcase (ESP32-C3 Smart Clock with NTP time sync, live weather display, and web config panel).
+- /workframe: WorkFrame project showcase (Human Resource Management System with role-based portals and JWT auth).
+- /certifygo: CertifyGo project showcase (Automated certificate generator GUI from PowerPoint templates and Excel spreadsheets).
+- /30secbenchmark: 30SecPrimeBenchmark project showcase (30 Seconds Prime Numbers Benchmark for Arduino, ESP32, and RISC-V microcontrollers).
+- /master-header: Master Header for C project showcase (Consolidated master.h header unifying standard and platform-specific C libraries).
+- /codecanon: codeCanon project showcase (Autonomous Docs-Drift-Detector mathematically verifying documentation using AST fact extraction and multimodal Gemma 4 Vision).
 - /bsg_notes: Bharat Scouts and Guides notes.
 - /resume: Link to view or download the latest resume via Google Drive.
 

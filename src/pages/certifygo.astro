@@ -1,0 +1,266 @@
+---
+import { siteConfig } from "../config";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import ThemeToggle from "../components/ThemeToggle.astro";
+import "../styles/global.css";
+
+const features = [
+  {
+    title: "Excel Data Integration",
+    description: "Seamlessly map rows from .xlsx spreadsheets to certificate recipients, guardian information, roll numbers, or custom event credentials."
+  },
+  {
+    title: "Dynamic Placeholder Engine",
+    description: "Auto-replaces template tags including <<variable_0>>, <<variable_1>>, <<COURSE_NAME>>, <<CERTIFICATE_NO>>, and <<DATE>> across text frames."
+  },
+  {
+    title: "System Font Discovery",
+    description: "Real-time font picker scanning all installed system typefaces with live preview, custom point sizes, and hex color code styling."
+  },
+  {
+    title: "Native PPTX Templates",
+    description: "Design your certificate once in Microsoft PowerPoint or Google Slides, export as .pptx, and let CertifyGo handle slide replication."
+  },
+  {
+    title: "One-Click Batch Processing",
+    description: "Generates hundreds of personalized certificates in seconds with zero manual formatting or alignment discrepancies."
+  },
+  {
+    title: "Zero-Dependency Windows App",
+    description: "Pre-packaged standalone desktop executable built with Tkinter and Pillow—no Python runtime installation required for end users."
+  }
+];
+
+const templateTags = [
+  { tag: "<<variable_0>>", desc: "Maps to Column A (Recipient Full Name)" },
+  { tag: "<<variable_1>>", desc: "Maps to Column B (Guardian / Parent Name)" },
+  { tag: "<<variable_2>>", desc: "Maps to Column C (Custom Team / Organization)" },
+  { tag: "<<COURSE_NAME>>", desc: "Batch course or event title override" },
+  { tag: "<<CERTIFICATE_NO>>", desc: "Incremental or spreadsheet-provided ID" },
+  { tag: "<<DATE>>", desc: "Formatted event or issuance timestamp" }
+];
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="CertifyGo — Desktop GUI certificate generator that automates personalized certificate batch production from PowerPoint templates and Excel spreadsheets."
+    />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="icon" href="/favicon.svg" />
+    <link rel="canonical" href="https://shramanc.pages.dev/certifygo" />
+    <title>CertifyGo — Automated Certificate Generator</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Inter:wght@500&family=Reddit+Sans+Condensed:wght@900&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="CertifyGo — Automated Certificate Generator" />
+    <meta property="og:description" content="Desktop GUI certificate generator that automates personalized certificate batch production from PowerPoint templates and Excel spreadsheets." />
+    <meta property="og:url" content="https://shramanc.pages.dev/certifygo/" />
+  </head>
+  <body class="bg-concrete text-obsidian">
+    <Header />
+
+    <!-- Hero Section -->
+    <main class="relative py-32 flex items-center justify-center min-h-[70vh]">
+      <!-- Diagonal wash of light -->
+      <div
+        class="absolute top-0 right-0 w-[60%] h-full -z-10 pointer-events-none"
+        style="background: radial-gradient(circle at 100% 0%, var(--color-solar-beam) 0%, transparent 60%); opacity: 0.25; filter: blur(40px);"
+      ></div>
+
+      <div class="mx-auto max-w-4xl px-6 lg:px-8 text-center flex flex-col items-center">
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 bg-paper-white border border-silver/50 rounded-buttons mb-8 select-none shadow-subtle">
+          <span class="relative flex h-2 w-2">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-solar-beam opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-solar-beam"></span>
+          </span>
+          <span class="font-inter font-medium text-caption text-graphite">GUI Desktop Utility</span>
+        </div>
+        
+        <h1 class="text-obsidian font-reddit-sans-condensed font-black text-display leading-none tracking-tighter uppercase select-none mb-6">
+          CERTIFYGO
+        </h1>
+        
+        <p class="font-inter-display font-medium text-body text-graphite mb-10 leading-relaxed max-w-2xl">
+          Automate the creation of hundreds of personalized certificates in seconds. Combine your PowerPoint layout templates with Excel spreadsheets for flawless batch generation.
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+          <a 
+            href="https://github.com/shraman-c/CertifyGo" 
+            target="_blank"
+            rel="noopener noreferrer"
+            class="px-6 py-2.5 bg-solar-beam text-black border border-solar-beam rounded-buttons font-inter font-medium text-body-sm hover:bg-obsidian hover:text-concrete hover:border-obsidian transition-colors duration-200 cursor-pointer flex items-center justify-center gap-2"
+          >
+            <span>View on GitHub</span>
+            <svg class="w-5 h-5 shrink-0" fill="currentColor" viewBox="0 0 24 24">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
+            </svg>
+          </a>
+          <a 
+            href="#workflow" 
+            class="px-6 py-2.5 bg-paper-white text-obsidian border border-silver/50 rounded-buttons font-inter font-medium text-body-sm hover:bg-solar-beam hover:text-black hover:border-solar-beam transition-colors duration-200 cursor-pointer"
+          >
+            How It Works
+          </a>
+          <a 
+            href="/" 
+            class="px-6 py-2.5 bg-paper-white text-obsidian border border-silver/50 rounded-buttons font-inter font-medium text-body-sm hover:bg-solar-beam hover:text-black hover:border-solar-beam transition-colors duration-200 cursor-pointer flex items-center justify-center gap-2"
+          >
+            <span>Back to Portfolio</span>
+          </a>
+        </div>
+      </div>
+    </main>
+
+    <!-- Features Section -->
+    <section id="features" class="py-24 px-8 sm:px-12 md:px-24 border-t border-silver/30 bg-concrete flex flex-col items-center text-center">
+      <div class="w-full max-w-[1200px] flex flex-col items-center">
+        <!-- Section Title Block -->
+        <div class="flex flex-col items-center mb-16">
+          <span class="font-caveat text-graphite text-[28px] tracking-tight mb-2 select-none">
+            Automated Generation
+          </span>
+          <h2 class="text-obsidian font-reddit-sans-condensed font-black text-display leading-none tracking-tighter uppercase select-none">
+            KEY CAPABILITIES
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full text-left">
+          {features.map((feature, i) => (
+            <div class="group bg-paper-white p-8 sm:p-10 rounded-cards border border-silver/50 shadow-subtle hover:border-silver transition-all duration-300">
+              <span class="font-inter font-medium text-caption text-ash block mb-4">0{i + 1}</span>
+              <h3 class="font-inter font-medium text-subheading text-obsidian mb-3">
+                {feature.title}
+              </h3>
+              <p class="font-inter-display font-medium text-body text-graphite leading-relaxed">
+                {feature.description}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Workflow & Placeholders Section -->
+    <section id="workflow" class="py-24 px-8 sm:px-12 md:px-24 border-t border-silver/30 bg-paper-white flex flex-col items-center text-center">
+      <div class="w-full max-w-[1200px] flex flex-col items-center">
+        <!-- Section Title Block -->
+        <div class="flex flex-col items-center mb-16">
+          <span class="font-caveat text-graphite text-[28px] tracking-tight mb-2 select-none">
+            Data Architecture
+          </span>
+          <h2 class="text-obsidian font-reddit-sans-condensed font-black text-display leading-none tracking-tighter uppercase select-none">
+            TEMPLATE MAPPING
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 w-full text-left">
+          <!-- Excel Schema Card -->
+          <div class="bg-concrete p-8 sm:p-10 rounded-cards border border-silver/50 shadow-subtle">
+            <h3 class="font-inter font-medium text-subheading text-obsidian mb-4">Spreadsheet Input Format</h3>
+            <p class="font-inter-display font-medium text-body text-graphite mb-6 leading-relaxed">
+              CertifyGo ingests structured Excel sheets (.xlsx). Each row maps sequentially to one complete generated slide:
+            </p>
+            <div class="overflow-x-auto">
+              <table class="w-full text-left font-inter text-caption border-collapse">
+                <thead>
+                  <tr class="border-b border-silver/40 text-ash uppercase">
+                    <th class="py-2.5 px-3">Column A</th>
+                    <th class="py-2.5 px-3">Column B</th>
+                    <th class="py-2.5 px-3">Column C</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-silver/20 text-graphite">
+                  <tr>
+                    <td class="py-2.5 px-3 font-medium text-obsidian">Recipient Name</td>
+                    <td class="py-2.5 px-3">Guardian Name</td>
+                    <td class="py-2.5 px-3">Scouts Group / Org</td>
+                  </tr>
+                  <tr>
+                    <td class="py-2.5 px-3 font-medium text-obsidian">Linus Evans</td>
+                    <td class="py-2.5 px-3">Austin Evans</td>
+                    <td class="py-2.5 px-3">Scouts Group B</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Placeholder Tags Card -->
+          <div class="bg-concrete p-8 sm:p-10 rounded-cards border border-silver/50 shadow-subtle">
+            <h3 class="font-inter font-medium text-subheading text-obsidian mb-4">Recognized Placeholder Tokens</h3>
+            <p class="font-inter-display font-medium text-body text-graphite mb-6 leading-relaxed">
+              Place any of the following tags inside text boxes in your PowerPoint layout:
+            </p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 font-inter">
+              {templateTags.map((item) => (
+                <div class="p-3 bg-paper-white rounded-cards border border-silver/40">
+                  <span class="font-mono text-xs font-bold text-obsidian block mb-1">{item.tag}</span>
+                  <span class="text-caption text-graphite block">{item.desc}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tech Stack Section -->
+    <section class="py-24 px-8 sm:px-12 md:px-24 border-t border-silver/30 bg-concrete flex flex-col items-center text-center">
+      <div class="w-full max-w-[1200px] flex flex-col items-center">
+        <!-- Section Title Block -->
+        <div class="flex flex-col items-center mb-16">
+          <span class="font-caveat text-graphite text-[28px] tracking-tight mb-2 select-none">
+            Under the Hood
+          </span>
+          <h2 class="text-obsidian font-reddit-sans-condensed font-black text-display leading-none tracking-tighter uppercase select-none">
+            TECH STACK
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 w-full">
+          {["Python 3.9+", "Tkinter GUI", "python-pptx", "Pillow (PIL)", "openpyxl", "PyInstaller"].map((tech) => (
+            <div class="bg-paper-white p-6 rounded-cards border border-silver/50 text-center shadow-subtle hover:border-silver transition-colors duration-300">
+              <span class="font-inter font-medium text-subheading text-obsidian block">
+                {tech}
+              </span>
+            </div>
+          ))}
+        </div>
+
+        <div class="mt-16 flex flex-wrap gap-4 justify-center">
+          <a
+            href="https://github.com/shraman-c/CertifyGo"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="px-6 py-2.5 bg-solar-beam text-black border border-solar-beam rounded-buttons font-inter font-medium text-body-sm hover:bg-obsidian hover:text-concrete hover:border-obsidian transition-colors duration-200 cursor-pointer flex items-center justify-center gap-2"
+          >
+            <span>View Source on GitHub</span>
+            <svg class="w-5 h-5 shrink-0" fill="currentColor" viewBox="0 0 24 24">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
+            </svg>
+          </a>
+          <a
+            href="/"
+            class="px-6 py-2.5 bg-paper-white text-obsidian border border-silver/50 rounded-buttons font-inter font-medium text-body-sm hover:bg-solar-beam hover:text-black hover:border-solar-beam transition-colors duration-200 cursor-pointer"
+          >
+            Back to Portfolio
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <Footer />
+    <ThemeToggle />
+  </body>
+</html>

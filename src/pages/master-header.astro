@@ -1,0 +1,251 @@
+---
+import { siteConfig } from "../config";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import ThemeToggle from "../components/ThemeToggle.astro";
+import "../styles/global.css";
+
+const headerCategories = [
+  {
+    title: "I/O & Memory Management",
+    headers: ["<stdio.h>", "<stdlib.h>", "<stddef.h>", "<stdint.h>", "<stdbool.h>"],
+    description: "Dynamic memory allocation, formatted stream input/output, fixed-width integer types, and boolean definitions."
+  },
+  {
+    title: "String & Character Utilities",
+    headers: ["<string.h>", "<ctype.h>", "<wchar.h>", "<wctype.h>"],
+    description: "Buffer manipulation, null-terminated ASCII string operations, wide-character support, and character class validation."
+  },
+  {
+    title: "Mathematics & Arithmetic",
+    headers: ["<math.h>", "<complex.h>", "<float.h>", "<limits.h>"],
+    description: "Trigonometric functions, power routines, complex number arithmetic, and platform architecture numeric boundaries."
+  },
+  {
+    title: "System & Filesystem (POSIX/Win32)",
+    headers: ["<fcntl.h>", "<unistd.h>", "<dirent.h>", "<sys/stat.h>", "<sys/types.h>"],
+    description: "File descriptor operations, directory traversal, file metadata inspection, and low-level system call wrappers."
+  },
+  {
+    title: "Threading & Process Control",
+    headers: ["<pthread.h>", "<signal.h>", "<sys/wait.h>"],
+    description: "POSIX threads, signal handling, process creation and fork synchronization routines."
+  },
+  {
+    title: "Cross-Platform Networking",
+    headers: ["<sys/socket.h>", "<netinet/in.h>", "<arpa/inet.h>", "<winsock2.h>"],
+    description: "Conditional socket includes seamlessly bridging Berkeley sockets on Unix/Linux/macOS with Winsock2 on Windows."
+  }
+];
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Master-Header-File-for-C — A consolidated master.h header unifying standard and platform-specific C libraries for rapid prototyping across Linux, macOS, and Windows."
+    />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="icon" href="/favicon.svg" />
+    <link rel="canonical" href="https://shramanc.pages.dev/master-header" />
+    <title>Master Header for C — Cross-Platform master.h</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Inter:wght@500&family=Reddit+Sans+Condensed:wght@900&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="Master Header for C — Cross-Platform master.h" />
+    <meta property="og:description" content="A unified master.h header consolidating the most frequently used C standard and platform-specific headers." />
+    <meta property="og:url" content="https://shramanc.pages.dev/master-header/" />
+  </head>
+  <body class="bg-concrete text-obsidian">
+    <Header />
+
+    <!-- Hero Section -->
+    <main class="relative py-32 flex items-center justify-center min-h-[70vh]">
+      <!-- Diagonal wash of light -->
+      <div
+        class="absolute top-0 right-0 w-[60%] h-full -z-10 pointer-events-none"
+        style="background: radial-gradient(circle at 100% 0%, var(--color-solar-beam) 0%, transparent 60%); opacity: 0.25; filter: blur(40px);"
+      ></div>
+
+      <div class="mx-auto max-w-4xl px-6 lg:px-8 text-center flex flex-col items-center">
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 bg-paper-white border border-silver/50 rounded-buttons mb-8 select-none shadow-subtle">
+          <span class="relative flex h-2 w-2">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-solar-beam opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-solar-beam"></span>
+          </span>
+          <span class="font-inter font-medium text-caption text-graphite">C Prototyping Framework</span>
+        </div>
+        
+        <h1 class="text-obsidian font-reddit-sans-condensed font-black text-display leading-none tracking-tighter uppercase select-none mb-6">
+          MASTER.H FOR C
+        </h1>
+        
+        <p class="font-inter-display font-medium text-body text-graphite mb-10 leading-relaxed max-w-2xl">
+          Consolidates frequently used standard and platform-specific C headers into a single cohesive library. Designed for rapid prototyping, systems programming, and competitive problem solving across Linux, macOS, and Windows.
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+          <a 
+            href="https://github.com/shraman-c/Master-Header-File-for-C" 
+            target="_blank"
+            rel="noopener noreferrer"
+            class="px-6 py-2.5 bg-solar-beam text-black border border-solar-beam rounded-buttons font-inter font-medium text-body-sm hover:bg-obsidian hover:text-concrete hover:border-obsidian transition-colors duration-200 cursor-pointer flex items-center justify-center gap-2"
+          >
+            <span>View on GitHub</span>
+            <svg class="w-5 h-5 shrink-0" fill="currentColor" viewBox="0 0 24 24">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
+            </svg>
+          </a>
+          <a 
+            href="#categories" 
+            class="px-6 py-2.5 bg-paper-white text-obsidian border border-silver/50 rounded-buttons font-inter font-medium text-body-sm hover:bg-solar-beam hover:text-black hover:border-solar-beam transition-colors duration-200 cursor-pointer"
+          >
+            Included Headers
+          </a>
+          <a 
+            href="/" 
+            class="px-6 py-2.5 bg-paper-white text-obsidian border border-silver/50 rounded-buttons font-inter font-medium text-body-sm hover:bg-solar-beam hover:text-black hover:border-solar-beam transition-colors duration-200 cursor-pointer flex items-center justify-center gap-2"
+          >
+            <span>Back to Portfolio</span>
+          </a>
+        </div>
+      </div>
+    </main>
+
+    <!-- Included Headers Section -->
+    <section id="categories" class="py-24 px-8 sm:px-12 md:px-24 border-t border-silver/30 bg-concrete flex flex-col items-center text-center">
+      <div class="w-full max-w-[1200px] flex flex-col items-center">
+        <!-- Section Title Block -->
+        <div class="flex flex-col items-center mb-16">
+          <span class="font-caveat text-graphite text-[28px] tracking-tight mb-2 select-none">
+            Consolidated Modules
+          </span>
+          <h2 class="text-obsidian font-reddit-sans-condensed font-black text-display leading-none tracking-tighter uppercase select-none">
+            HEADER DOMAINS
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full text-left">
+          {headerCategories.map((cat, i) => (
+            <div class="group bg-paper-white p-8 sm:p-10 rounded-cards border border-silver/50 shadow-subtle hover:border-silver transition-all duration-300">
+              <span class="font-inter font-medium text-caption text-ash block mb-4">0{i + 1}</span>
+              <h3 class="font-inter font-medium text-subheading text-obsidian mb-3">
+                {cat.title}
+              </h3>
+              <p class="font-inter-display font-medium text-body text-graphite mb-5 leading-relaxed">
+                {cat.description}
+              </p>
+              <div class="flex flex-wrap gap-1.5">
+                {cat.headers.map((h) => (
+                  <span class="px-2.5 py-1 bg-concrete text-obsidian rounded font-mono text-xs border border-silver/40">
+                    {h}
+                  </span>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Code Architecture Section -->
+    <section class="py-24 px-8 sm:px-12 md:px-24 border-t border-silver/30 bg-paper-white flex flex-col items-center text-center">
+      <div class="w-full max-w-[1200px] flex flex-col items-center">
+        <!-- Section Title Block -->
+        <div class="flex flex-col items-center mb-16">
+          <span class="font-caveat text-graphite text-[28px] tracking-tight mb-2 select-none">
+            Zero Redundancy
+          </span>
+          <h2 class="text-obsidian font-reddit-sans-condensed font-black text-display leading-none tracking-tighter uppercase select-none">
+            IMPLEMENTATION
+          </h2>
+        </div>
+
+        <div class="w-full text-left bg-concrete p-8 sm:p-10 rounded-cards border border-silver/50 shadow-subtle">
+          <h3 class="font-inter font-medium text-subheading text-obsidian mb-4">Cross-Platform Socket &amp; System Guarding</h3>
+          <p class="font-inter-display font-medium text-body text-graphite mb-6 leading-relaxed">
+            The header uses preprocessor macros to detect host operating systems, automatically providing Windows Sockets (<code class="font-mono text-xs bg-paper-white px-2 py-0.5 rounded text-obsidian">&lt;winsock2.h&gt;</code>) or POSIX networking (<code class="font-mono text-xs bg-paper-white px-2 py-0.5 rounded text-obsidian">&lt;sys/socket.h&gt;</code>) without breaking portability:
+          </p>
+          <pre class="bg-paper-white p-6 rounded-cards border border-silver/40 font-mono text-xs text-obsidian overflow-x-auto leading-relaxed"><code>#ifndef MASTER_H
+#define MASTER_H
+
+// Standard I/O, Strings & Math
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+#include &lt;math.h&gt;
+#include &lt;stdbool.h&gt;
+
+// Cross-Platform Networking Guards
+#ifdef _WIN32
+    #include &lt;winsock2.h&gt;
+    #include &lt;ws2tcpip.h&gt;
+    #pragma comment(lib, "ws2_32.lib")
+#else
+    #include &lt;sys/socket.h&gt;
+    #include &lt;netinet/in.h&gt;
+    #include &lt;arpa/inet.h&gt;
+    #include &lt;unistd.h&gt;
+#endif
+
+#endif // MASTER_H</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tech Stack Section -->
+    <section class="py-24 px-8 sm:px-12 md:px-24 border-t border-silver/30 bg-concrete flex flex-col items-center text-center">
+      <div class="w-full max-w-[1200px] flex flex-col items-center">
+        <!-- Section Title Block -->
+        <div class="flex flex-col items-center mb-16">
+          <span class="font-caveat text-graphite text-[28px] tracking-tight mb-2 select-none">
+            Environment &amp; Toolchains
+          </span>
+          <h2 class="text-obsidian font-reddit-sans-condensed font-black text-display leading-none tracking-tighter uppercase select-none">
+            SUPPORTED PLATFORMS
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 w-full">
+          {["C99 / C11", "GCC / Clang", "MSVC", "Linux POSIX", "macOS Darwin", "Windows Win32"].map((tech) => (
+            <div class="bg-paper-white p-6 rounded-cards border border-silver/50 text-center shadow-subtle hover:border-silver transition-colors duration-300">
+              <span class="font-inter font-medium text-subheading text-obsidian block">
+                {tech}
+              </span>
+            </div>
+          ))}
+        </div>
+
+        <div class="mt-16 flex flex-wrap gap-4 justify-center">
+          <a
+            href="https://github.com/shraman-c/Master-Header-File-for-C"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="px-6 py-2.5 bg-solar-beam text-black border border-solar-beam rounded-buttons font-inter font-medium text-body-sm hover:bg-obsidian hover:text-concrete hover:border-obsidian transition-colors duration-200 cursor-pointer flex items-center justify-center gap-2"
+          >
+            <span>View Source on GitHub</span>
+            <svg class="w-5 h-5 shrink-0" fill="currentColor" viewBox="0 0 24 24">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
+            </svg>
+          </a>
+          <a
+            href="/"
+            class="px-6 py-2.5 bg-paper-white text-obsidian border border-silver/50 rounded-buttons font-inter font-medium text-body-sm hover:bg-solar-beam hover:text-black hover:border-solar-beam transition-colors duration-200 cursor-pointer"
+          >
+            Back to Portfolio
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <Footer />
+    <ThemeToggle />
+  </body>
+</html>

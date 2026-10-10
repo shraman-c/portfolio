@@ -1,0 +1,266 @@
+---
+import { siteConfig } from "../config";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import ThemeToggle from "../components/ThemeToggle.astro";
+import "../styles/global.css";
+
+const features = [
+  {
+    title: "Deterministic Code Fact Extraction",
+    description: "AST and regex parsing extracts verifiable ground truths—Next.js & Express routes, package.json scripts, .env keys, ports, and Node engine constraints."
+  },
+  {
+    title: "Two-Layer Verification Engine",
+    description: "Instant deterministic matching flags OK and STALE claims in milliseconds, escalating only ambiguous SUSPECT claims to the AI Judge to save latency and token costs."
+  },
+  {
+    title: "Multimodal Screenshot Auditing",
+    description: "Integrates Gemma 4 Vision to OCR and semantically inspect terminal screenshots and UI captures in docs, detecting outdated CLI flags or broken endpoints."
+  },
+  {
+    title: "Automated Self-Healing Patches",
+    description: "When drift is confirmed, codeCanon synthesizes clean, deterministic unified git apply patches to auto-repair documentation without human intervention."
+  },
+  {
+    title: "Desktop Streamer GUI",
+    description: "Includes a native desktop Tkinter interface (scripts/gui.py) with real-time terminal logging, file tree drift inspection, and one-click patching."
+  },
+  {
+    title: "Autonomous Agent Skill",
+    description: "Packaged as a plug-and-play agent skill allowing autonomous AI coding agents to verify markdown accuracy before committing pull requests."
+  }
+];
+
+const supportedStacks = [
+  { name: "Next.js", desc: "App Router & Pages Router route detection" },
+  { name: "Express.js", desc: "REST endpoint verbs & middleware parameter mapping" },
+  { name: "Vite & React", desc: "Build commands, dev ports & client environment variables" },
+  { name: "Node.js Ecosystem", desc: "package.json scripts, dependencies & engines" }
+];
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="codeCanon — Docs-Drift-Detector that mathematically proves whether your documentation matches your JS/TS codebase using deterministic AST parsing and Gemma 4 Vision."
+    />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="icon" href="/favicon.svg" />
+    <link rel="canonical" href="https://shramanc.pages.dev/codecanon" />
+    <title>codeCanon — Docs-Drift-Detector</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Inter:wght@500&family=Reddit+Sans+Condensed:wght@900&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="codeCanon — Docs-Drift-Detector" />
+    <meta property="og:description" content="Mathematically proves whether your documentation matches your codebase with deterministic AST facts and multimodal Gemma 4 Vision." />
+    <meta property="og:url" content="https://shramanc.pages.dev/codecanon/" />
+    <meta property="og:image" content="/images/codecanon/hero.png" />
+  </head>
+  <body class="bg-concrete text-obsidian">
+    <Header />
+
+    <!-- Hero Section -->
+    <main class="relative py-32 flex items-center justify-center min-h-[70vh]">
+      <!-- Diagonal wash of light -->
+      <div
+        class="absolute top-0 right-0 w-[60%] h-full -z-10 pointer-events-none"
+        style="background: radial-gradient(circle at 100% 0%, var(--color-solar-beam) 0%, transparent 60%); opacity: 0.25; filter: blur(40px);"
+      ></div>
+
+      <div class="mx-auto max-w-4xl px-6 lg:px-8 text-center flex flex-col items-center">
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 bg-paper-white border border-silver/50 rounded-buttons mb-8 select-none shadow-subtle">
+          <span class="relative flex h-2 w-2">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-solar-beam opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-solar-beam"></span>
+          </span>
+          <span class="font-inter font-medium text-caption text-graphite">Autonomous Docs-Drift Detector</span>
+        </div>
+        
+        <h1 class="text-obsidian font-reddit-sans-condensed font-black text-display leading-none tracking-tighter uppercase select-none mb-6">
+          CODECANON
+        </h1>
+        
+        <p class="font-inter-display font-medium text-body text-graphite mb-10 leading-relaxed max-w-2xl">
+          Code evolves fast. Documentation rots quietly. codeCanon mathematically proves whether your README files, API docs, and embedded screenshots match your JS/TS codebase—and auto-generates git patches to fix them.
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+          <a 
+            href="https://github.com/shraman-c/codeCanon" 
+            target="_blank"
+            rel="noopener noreferrer"
+            class="px-6 py-2.5 bg-solar-beam text-black border border-solar-beam rounded-buttons font-inter font-medium text-body-sm hover:bg-obsidian hover:text-concrete hover:border-obsidian transition-colors duration-200 cursor-pointer flex items-center justify-center gap-2"
+          >
+            <span>View on GitHub</span>
+            <svg class="w-5 h-5 shrink-0" fill="currentColor" viewBox="0 0 24 24">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
+            </svg>
+          </a>
+          <a 
+            href="#pipeline" 
+            class="px-6 py-2.5 bg-paper-white text-obsidian border border-silver/50 rounded-buttons font-inter font-medium text-body-sm hover:bg-solar-beam hover:text-black hover:border-solar-beam transition-colors duration-200 cursor-pointer"
+          >
+            Verification Pipeline
+          </a>
+          <a 
+            href="/" 
+            class="px-6 py-2.5 bg-paper-white text-obsidian border border-silver/50 rounded-buttons font-inter font-medium text-body-sm hover:bg-solar-beam hover:text-black hover:border-solar-beam transition-colors duration-200 cursor-pointer flex items-center justify-center gap-2"
+          >
+            <span>Back to Portfolio</span>
+          </a>
+        </div>
+
+        <!-- Featured Screenshot Card -->
+        <div class="mt-16 w-full max-w-4xl bg-paper-white p-3 rounded-cards border border-silver/50 shadow-subtle overflow-hidden">
+          <img
+            src="/images/codecanon/hero.png"
+            alt="codeCanon CLI and GUI architecture diagram"
+            class="w-full h-auto rounded-images object-cover border border-silver/30"
+            loading="lazy"
+          />
+          <div class="p-4 text-left">
+            <span class="font-caveat text-graphite text-lg block">Visual Architecture</span>
+            <p class="font-inter text-caption text-graphite">Deterministic extraction pipeline combined with Gemma 4 Vision multimodal verification.</p>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Key Capabilities -->
+    <section id="features" class="py-24 px-8 sm:px-12 md:px-24 border-t border-silver/30 bg-concrete flex flex-col items-center text-center">
+      <div class="w-full max-w-[1200px] flex flex-col items-center">
+        <!-- Section Title Block -->
+        <div class="flex flex-col items-center mb-16">
+          <span class="font-caveat text-graphite text-[28px] tracking-tight mb-2 select-none">
+            Mathematical Precision
+          </span>
+          <h2 class="text-obsidian font-reddit-sans-condensed font-black text-display leading-none tracking-tighter uppercase select-none">
+            ENGINE CAPABILITIES
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full text-left">
+          {features.map((feature, i) => (
+            <div class="group bg-paper-white p-8 sm:p-10 rounded-cards border border-silver/50 shadow-subtle hover:border-silver transition-all duration-300">
+              <span class="font-inter font-medium text-caption text-ash block mb-4">0{i + 1}</span>
+              <h3 class="font-inter font-medium text-subheading text-obsidian mb-3">
+                {feature.title}
+              </h3>
+              <p class="font-inter-display font-medium text-body text-graphite leading-relaxed">
+                {feature.description}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Pipeline Architecture -->
+    <section id="pipeline" class="py-24 px-8 sm:px-12 md:px-24 border-t border-silver/30 bg-paper-white flex flex-col items-center text-center">
+      <div class="w-full max-w-[1200px] flex flex-col items-center">
+        <!-- Section Title Block -->
+        <div class="flex flex-col items-center mb-16">
+          <span class="font-caveat text-graphite text-[28px] tracking-tight mb-2 select-none">
+            Two-Layer Defense
+          </span>
+          <h2 class="text-obsidian font-reddit-sans-condensed font-black text-display leading-none tracking-tighter uppercase select-none">
+            VERIFICATION FLOW
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 w-full text-left">
+          <!-- Layer 1 -->
+          <div class="bg-concrete p-8 sm:p-10 rounded-cards border border-silver/50 shadow-subtle">
+            <span class="font-mono text-xs text-ash uppercase font-semibold">Layer 01</span>
+            <h3 class="font-inter font-medium text-subheading text-obsidian mt-2 mb-4">Deterministic Fact Extractor</h3>
+            <p class="font-inter-display font-medium text-body text-graphite leading-relaxed mb-4">
+              Scans your source tree in milliseconds using AST visitors and regex parsers. It builds a canonical table of truth containing active endpoints, scripts, environment variables, and ports.
+            </p>
+            <div class="p-4 bg-paper-white rounded border border-silver/30 font-mono text-xs text-obsidian">
+              <code>Deterministic Matcher &rarr; Classifies claims into OK or STALE immediately with zero token costs.</code>
+            </div>
+          </div>
+
+          <!-- Layer 2 -->
+          <div class="bg-concrete p-8 sm:p-10 rounded-cards border border-silver/50 shadow-subtle">
+            <span class="font-mono text-xs text-ash uppercase font-semibold">Layer 02</span>
+            <h3 class="font-inter font-medium text-subheading text-obsidian mt-2 mb-4">Multimodal AI Judge (Gemma 4)</h3>
+            <p class="font-inter-display font-medium text-body text-graphite leading-relaxed mb-4">
+              Only claims flagged as SUSPECT or referencing embedded terminal images are sent to Gemma 4. It performs visual semantic verification and generates ready-to-apply patch diffs.
+            </p>
+            <div class="p-4 bg-paper-white rounded border border-silver/30 font-mono text-xs text-obsidian">
+              <code>Gemma 4 Vision OCR &rarr; Validates screenshots and outputs unified git apply diffs.</code>
+            </div>
+          </div>
+        </div>
+
+        <!-- Supported Stacks Matrix -->
+        <div class="mt-12 w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-left">
+          {supportedStacks.map((stack) => (
+            <div class="p-6 bg-concrete rounded-cards border border-silver/40 shadow-subtle">
+              <h4 class="font-inter font-medium text-subheading text-obsidian mb-2">{stack.name}</h4>
+              <p class="font-inter text-caption text-graphite">{stack.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Tech Stack Section -->
+    <section class="py-24 px-8 sm:px-12 md:px-24 border-t border-silver/30 bg-concrete flex flex-col items-center text-center">
+      <div class="w-full max-w-[1200px] flex flex-col items-center">
+        <!-- Section Title Block -->
+        <div class="flex flex-col items-center mb-16">
+          <span class="font-caveat text-graphite text-[28px] tracking-tight mb-2 select-none">
+            Technologies &amp; AI Frameworks
+          </span>
+          <h2 class="text-obsidian font-reddit-sans-condensed font-black text-display leading-none tracking-tighter uppercase select-none">
+            TECH STACK
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 w-full">
+          {["TypeScript", "Gemma 4 Vision", "Node.js AST", "Python Tkinter", "Git Engine", "Agent Skills"].map((tech) => (
+            <div class="bg-paper-white p-6 rounded-cards border border-silver/50 text-center shadow-subtle hover:border-silver transition-colors duration-300">
+              <span class="font-inter font-medium text-subheading text-obsidian block">
+                {tech}
+              </span>
+            </div>
+          ))}
+        </div>
+
+        <div class="mt-16 flex flex-wrap gap-4 justify-center">
+          <a
+            href="https://github.com/shraman-c/codeCanon"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="px-6 py-2.5 bg-solar-beam text-black border border-solar-beam rounded-buttons font-inter font-medium text-body-sm hover:bg-obsidian hover:text-concrete hover:border-obsidian transition-colors duration-200 cursor-pointer flex items-center justify-center gap-2"
+          >
+            <span>View Source on GitHub</span>
+            <svg class="w-5 h-5 shrink-0" fill="currentColor" viewBox="0 0 24 24">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
+            </svg>
+          </a>
+          <a
+            href="/"
+            class="px-6 py-2.5 bg-paper-white text-obsidian border border-silver/50 rounded-buttons font-inter font-medium text-body-sm hover:bg-solar-beam hover:text-black hover:border-solar-beam transition-colors duration-200 cursor-pointer"
+          >
+            Back to Portfolio
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <Footer />
+    <ThemeToggle />
+  </body>
+</html>
