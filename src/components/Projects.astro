@@ -6,7 +6,7 @@ const hasProjects = siteConfig.projects && siteConfig.projects.length > 0;
 
 {
   hasProjects && (
-    <section id="projects" class="py-20 sm:py-24 px-6 sm:px-12 md:px-24 bg-concrete flex flex-col items-center text-center">
+    <section id="projects" class="py-20 sm:py-24 px-8 sm:px-12 md:px-24 bg-concrete flex flex-col items-center text-center">
       <div class="w-full max-w-[1200px] flex flex-col items-center">
         <!-- Section Title Block -->
         <div class="flex flex-col items-center mb-16">
@@ -34,12 +34,12 @@ const hasProjects = siteConfig.projects && siteConfig.projects.length > 0;
               <div class="group relative">
                 <Component
                   {...linkProps}
-                  class={`block relative overflow-hidden p-8 sm:p-10 bg-paper-white rounded-cards border border-silver/50 transition-all duration-300 shadow-subtle ${
+                  class={`block relative overflow-hidden p-6 sm:p-10 bg-paper-white rounded-cards border border-silver/50 transition-all duration-300 shadow-subtle ${
                     project.link ? "hover:-translate-y-1 hover:border-silver" : ""
                   }`}
                 >
                   {project.link && (
-                    <div class="absolute top-8 right-8 w-10 h-10 flex items-center justify-center bg-black text-white dark:bg-white dark:text-black rounded-full transition-all duration-200 group-hover:!bg-solar-beam group-hover:!text-black">
+                    <div class="absolute top-6 right-6 sm:top-8 sm:right-8 w-10 h-10 flex items-center justify-center bg-black text-white dark:bg-white dark:text-black rounded-full transition-all duration-200 group-hover:!bg-solar-beam group-hover:!text-black">
                       <svg
                         class="w-5 h-5 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
                         fill="none"

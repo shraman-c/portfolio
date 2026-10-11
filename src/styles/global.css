@@ -151,7 +151,7 @@ body {
 .bento-grid {
   display: grid;
   grid-template-columns: repeat(1, minmax(0, 1fr));
-  gap: 1.5rem;
+  gap: 1.75rem;
   grid-auto-rows: minmax(0, auto);
   grid-auto-flow: row dense;
 }
