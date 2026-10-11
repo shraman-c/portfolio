@@ -86,7 +86,7 @@ const features = [
 
         <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
           <a 
-            href="https://cataylst.vercel.app/" 
+            href="https://cataylst-sih.vercel.app/" 
             target="_blank"
             rel="noopener noreferrer"
             class="px-6 py-2.5 bg-solar-beam text-black rounded-buttons font-inter font-medium text-body-sm border border-solar-beam hover:bg-obsidian hover:text-concrete hover:border-obsidian transition-colors duration-200 cursor-pointer flex items-center justify-center gap-2"
@@ -170,8 +170,19 @@ const features = [
           </p>
           <div class="flex flex-col sm:flex-row gap-4 justify-center">
             <a 
+              href="https://cataylst-sih.vercel.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="px-6 py-2.5 bg-solar-beam text-black border border-solar-beam rounded-buttons font-inter font-medium text-body-sm hover:bg-obsidian hover:text-concrete hover:border-obsidian transition-colors duration-200 cursor-pointer flex items-center justify-center gap-2"
+            >
+              <span>Launch Catalyst</span>
+              <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+              </svg>
+            </a>
+            <a 
               href={siteConfig.social.email ? `mailto:${siteConfig.social.email}?subject=Catalyst Inquiry` : "#"}
-              class="px-6 py-2.5 bg-solar-beam text-black border border-solar-beam rounded-buttons font-inter font-medium text-body-sm hover:bg-obsidian hover:text-concrete hover:border-obsidian transition-colors duration-200 cursor-pointer"
+              class="px-6 py-2.5 bg-concrete text-obsidian border border-silver/50 rounded-buttons font-inter font-medium text-body-sm hover:bg-solar-beam hover:text-black hover:border-solar-beam transition-colors duration-200 cursor-pointer"
             >
               Get in Touch
             </a>
