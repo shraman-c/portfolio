@@ -86,8 +86,8 @@
   --text-heading-sm: 26px;
   --text-heading: 30px;
   --text-heading-lg: 36px;
-  --text-display: 88px;
-  --text-display-xl: 246px;
+  --text-display: clamp(40px, 9vw, 88px);
+  --text-display-xl: clamp(64px, 15vw, 246px);
 
   /* Spacing */
   --spacing-4: 4px;
@@ -111,6 +111,12 @@
 
   /* Shadows */
   --shadow-subtle: var(--shadow-val);
+}
+
+html, body {
+  overflow-x: hidden;
+  max-width: 100vw;
+  width: 100%;
 }
 
 body {

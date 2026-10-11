@@ -7,7 +7,7 @@ const hasEducation = siteConfig.education && siteConfig.education.length > 0;
 
 <!-- Desktop Floating Nav Capsule (visible on md: screens and above) -->
 <header
-  id="header"
+  id="desktop-header"
   class="fixed top-0 left-0 right-0 z-50 hidden md:flex justify-center pt-6 pointer-events-none"
 >
   <nav class="flex items-center p-1.5 bg-[#1f1f1f] text-white rounded-navcapsule font-inter text-body-sm transition-all duration-300 ease-in-out shadow-none border border-white/10 pointer-events-auto">
@@ -83,82 +83,91 @@ const hasEducation = siteConfig.education && siteConfig.education.length > 0;
   </nav>
 </header>
 
-<!-- Mobile Simple Hamburger Menu (visible on screens smaller than md) -->
-<div class="md:hidden fixed top-4 right-4 z-50">
+<!-- Mobile Top Bar (visible on screens smaller than md) -->
+<div class="md:hidden fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-4 pointer-events-none">
+  <!-- Brand link on left -->
+  <a
+    href="/"
+    class="px-3.5 py-1.5 rounded-full bg-[#1f1f1f] text-white border border-white/10 font-reddit-sans-condensed font-black tracking-tight uppercase text-sm pointer-events-auto shadow-subtle hover:text-solar-beam transition-colors"
+  >
+    {siteConfig.name}
+  </a>
+
+  <!-- Mobile Hamburger Menu Button on right -->
   <button
     id="mobile-menu-btn"
-    class="w-11 h-11 rounded-full bg-[#1f1f1f] text-white border border-white/15 flex items-center justify-center shadow-lg cursor-pointer hover:text-solar-beam transition-colors focus:outline-none"
+    class="w-11 h-11 rounded-full bg-[#1f1f1f] text-white border border-white/10 flex items-center justify-center shadow-subtle cursor-pointer hover:text-solar-beam transition-colors focus:outline-none pointer-events-auto"
     aria-label="Toggle navigation menu"
     aria-expanded="false"
   >
-    <svg id="hamburger-icon" class="w-5 h-5 block" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+    <svg id="hamburger-icon" class="w-6 h-6 block" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
       <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5M3.75 17.25h16.5" />
     </svg>
-    <svg id="close-icon" class="w-5 h-5 hidden" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+    <svg id="close-icon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
       <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
     </svg>
   </button>
-
-  <!-- Mobile Dropdown Menu -->
-  <nav
-    id="mobile-menu-dropdown"
-    class="hidden absolute top-14 right-0 w-48 p-2 bg-[#1f1f1f]/95 backdrop-blur-md text-white rounded-2xl border border-white/15 shadow-2xl flex-col gap-1 transition-all duration-200"
-  >
-    <a 
-      href="/" 
-      class="mobile-nav-link px-4 py-2.5 rounded-buttons text-gray-300 hover:text-solar-beam hover:bg-white/10 text-sm font-medium transition-colors"
-      id="mobile-link-home"
-    >
-      Home
-    </a>
-    <a 
-      href="/#about" 
-      class="mobile-nav-link px-4 py-2.5 rounded-buttons text-gray-300 hover:text-solar-beam hover:bg-white/10 text-sm font-medium transition-colors"
-      id="mobile-link-about"
-    >
-      About
-    </a>
-    { hasProjects && (
-      <a 
-        href="/#projects" 
-        class="mobile-nav-link px-4 py-2.5 rounded-buttons text-gray-300 hover:text-solar-beam hover:bg-white/10 text-sm font-medium transition-colors"
-        id="mobile-link-projects"
-      >
-        Work
-      </a>
-    )}
-    { hasEducation && (
-      <a 
-        href="/#education" 
-        class="mobile-nav-link px-4 py-2.5 rounded-buttons text-gray-300 hover:text-solar-beam hover:bg-white/10 text-sm font-medium transition-colors"
-        id="mobile-link-education"
-      >
-        Education
-      </a>
-    )}
-    <a 
-      href="/#classroom-notes" 
-      class="mobile-nav-link px-4 py-2.5 rounded-buttons text-gray-300 hover:text-solar-beam hover:bg-white/10 text-sm font-medium transition-colors"
-      id="mobile-link-classroom-notes"
-    >
-      Notes
-    </a>
-    <a 
-      href="/resume" 
-      class="mobile-nav-link px-4 py-2.5 rounded-buttons text-gray-300 hover:text-solar-beam hover:bg-white/10 text-sm font-medium transition-colors"
-      id="mobile-link-resume"
-    >
-      Resume
-    </a>
-    <a 
-      href="/connect" 
-      class="mobile-nav-link px-4 py-2.5 rounded-buttons text-gray-300 hover:text-solar-beam hover:bg-white/10 text-sm font-medium transition-colors"
-      id="mobile-link-connect"
-    >
-      Connect
-    </a>
-  </nav>
 </div>
+
+<!-- Mobile Dropdown Menu -->
+<nav
+  id="mobile-menu-dropdown"
+  class="md:hidden hidden fixed top-[68px] right-6 w-56 p-2 bg-[#1f1f1f]/95 backdrop-blur-md text-white rounded-2xl border border-white/15 shadow-2xl flex-col gap-1 transition-all duration-200 z-50 pointer-events-auto"
+>
+  <a 
+    href="/" 
+    class="mobile-nav-link px-4 py-2.5 rounded-buttons text-gray-300 hover:text-solar-beam hover:bg-white/10 text-sm font-medium transition-colors"
+    id="mobile-link-home"
+  >
+    Home
+  </a>
+  <a 
+    href="/#about" 
+    class="mobile-nav-link px-4 py-2.5 rounded-buttons text-gray-300 hover:text-solar-beam hover:bg-white/10 text-sm font-medium transition-colors"
+    id="mobile-link-about"
+  >
+    About
+  </a>
+  { hasProjects && (
+    <a 
+      href="/#projects" 
+      class="mobile-nav-link px-4 py-2.5 rounded-buttons text-gray-300 hover:text-solar-beam hover:bg-white/10 text-sm font-medium transition-colors"
+      id="mobile-link-projects"
+    >
+      Work
+    </a>
+  )}
+  { hasEducation && (
+    <a 
+      href="/#education" 
+      class="mobile-nav-link px-4 py-2.5 rounded-buttons text-gray-300 hover:text-solar-beam hover:bg-white/10 text-sm font-medium transition-colors"
+      id="mobile-link-education"
+    >
+      Education
+    </a>
+  )}
+  <a 
+    href="/#classroom-notes" 
+    class="mobile-nav-link px-4 py-2.5 rounded-buttons text-gray-300 hover:text-solar-beam hover:bg-white/10 text-sm font-medium transition-colors"
+    id="mobile-link-classroom-notes"
+  >
+    Notes
+  </a>
+  <a 
+    href="/resume" 
+    class="mobile-nav-link px-4 py-2.5 rounded-buttons text-gray-300 hover:text-solar-beam hover:bg-white/10 text-sm font-medium transition-colors"
+    id="mobile-link-resume"
+  >
+    Resume
+  </a>
+  <a 
+    href="/connect" 
+    class="mobile-nav-link px-4 py-2.5 rounded-buttons text-gray-300 hover:text-solar-beam hover:bg-white/10 text-sm font-medium transition-colors"
+    id="mobile-link-connect"
+  >
+    Connect
+  </a>
+</nav>
 
 <script>
   // @ts-nocheck
@@ -283,5 +292,10 @@ const hasEducation = siteConfig.education && siteConfig.education.length > 0;
 <style>
   html {
     scroll-behavior: smooth;
+  }
+  @media (max-width: 767px) {
+    #desktop-header {
+      display: none !important;
+    }
   }
 </style>

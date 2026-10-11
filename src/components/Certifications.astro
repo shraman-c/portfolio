@@ -6,7 +6,7 @@ const hasCerts = siteConfig.certifications && siteConfig.certifications.length >
 
 {
   hasCerts && (
-    <section id="certifications" class="py-24 px-8 sm:px-12 md:px-24 bg-concrete flex flex-col items-center text-center">
+    <section id="certifications" class="py-20 sm:py-24 px-6 sm:px-12 md:px-24 bg-concrete flex flex-col items-center text-center">
       <div class="w-full max-w-[1200px] flex flex-col items-center">
         <!-- Section Title Block -->
         <div class="flex flex-col items-center mb-16">
@@ -25,7 +25,7 @@ const hasCerts = siteConfig.certifications && siteConfig.certifications.length >
               <div class="block relative overflow-hidden p-8 sm:p-10 bg-paper-white rounded-cards border border-silver/50 transition-all duration-300 shadow-subtle hover:border-silver">
                 <div class="flex flex-col gap-6">
                   <div class="flex items-baseline justify-between w-full">
-                    <span class="font-inter font-medium text-caption text-ash">{`0${idx + 1}`}</span>
+                    <span class="font-inter font-medium text-caption text-ash">{String(idx + 1).padStart(2, "0")}</span>
                     {c.date && <span class="font-inter font-medium text-caption text-ash">{c.date}</span>}
                   </div>
                   
