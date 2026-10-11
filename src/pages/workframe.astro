@@ -55,7 +55,7 @@ const techStack = ["Next.js", "React", "TypeScript", "Tailwind CSS", "Prisma", "
       property="og:description"
       content="WorkFrame is a full-stack Human Resource Management System built with Next.js, Prisma, and PostgreSQL for secure attendance, leave, payroll, and employee workflows."
     />
-    <meta property="og:image" content="https://shramanc.pages.dev/images/avt.png" />
+    <meta property="og:image" content="https://shramanc.pages.dev/images/workframe/workframe-employees.png" />
 
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:url" content="https://shramanc.pages.dev/workframe" />
@@ -64,7 +64,7 @@ const techStack = ["Next.js", "React", "TypeScript", "Tailwind CSS", "Prisma", "
       property="twitter:description"
       content="WorkFrame is a full-stack Human Resource Management System built with Next.js, Prisma, and PostgreSQL for secure attendance, leave, payroll, and employee workflows."
     />
-    <meta property="twitter:image" content="https://shramanc.pages.dev/images/avt.png" />
+    <meta property="twitter:image" content="https://shramanc.pages.dev/images/workframe/workframe-employees.png" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -76,8 +76,6 @@ const techStack = ["Next.js", "React", "TypeScript", "Tailwind CSS", "Prisma", "
     <meta property="og:title" content="WorkFrame — Human Resource Management System" />
     <meta property="og:description" content="WorkFrame is a full-stack Human Resource Management System built with Next.js, Prisma, and PostgreSQL for secure attendance, leave, payroll, and employee workflows." />
     <meta property="og:url" content="https://shramanc.pages.dev/workframe/" />
-    <!-- Optional: Add a screenshot link if you have one -->
-    <!-- <meta property="og:image" content="https://shramanc.pages.dev/workframe/preview.png" /> -->
     </head>
   <body class="bg-concrete text-obsidian">
     <Header />
@@ -118,6 +116,12 @@ const techStack = ["Next.js", "React", "TypeScript", "Tailwind CSS", "Prisma", "
             </svg>
           </a>
           <a
+            href="#gallery"
+            class="px-6 py-2.5 bg-paper-white text-obsidian rounded-buttons font-inter font-medium text-body-sm border border-silver/50 hover:bg-solar-beam hover:text-black hover:border-solar-beam transition-colors duration-200 cursor-pointer"
+          >
+            App Previews
+          </a>
+          <a
             href="#features"
             class="px-6 py-2.5 bg-paper-white text-obsidian rounded-buttons font-inter font-medium text-body-sm border border-silver/50 hover:bg-solar-beam hover:text-black hover:border-solar-beam transition-colors duration-200 cursor-pointer"
           >
@@ -137,6 +141,115 @@ const techStack = ["Next.js", "React", "TypeScript", "Tailwind CSS", "Prisma", "
         </div>
       </div>
     </main>
+
+    <!-- App Previews / Screenshot Gallery Section -->
+    <section id="gallery" class="py-24 px-8 sm:px-12 md:px-24 border-t border-silver/30 bg-concrete flex flex-col items-center text-center">
+      <div class="w-full max-w-[1200px] flex flex-col items-center">
+        <div class="flex flex-col items-center mb-16">
+          <span class="font-caveat text-graphite text-[28px] tracking-tight mb-2 select-none">
+            Interface Walkthrough
+          </span>
+          <h2 class="text-obsidian font-reddit-sans-condensed font-black text-display leading-none tracking-tighter uppercase select-none">
+            APP PREVIEWS
+          </h2>
+        </div>
+
+        <!-- Featured Primary Screenshot: Employee Management -->
+        <div class="w-full mb-8">
+          <div class="bg-paper-white rounded-cards border border-silver/50 shadow-subtle overflow-hidden">
+            <div class="p-5 border-b border-silver/30 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-left">
+              <div>
+                <span class="font-inter font-medium text-caption text-solar-beam uppercase tracking-wider block">Admin &amp; HR Portal</span>
+                <h3 class="font-inter font-medium text-subheading text-obsidian">Employee Directory &amp; Headcount Management</h3>
+              </div>
+              <span class="inline-flex items-center px-3 py-1 bg-concrete text-graphite rounded-buttons text-caption font-inter font-medium border border-silver/40 self-start sm:self-auto">
+                Live Overview
+              </span>
+            </div>
+            <img
+              src="/images/workframe/workframe-employees.png"
+              alt="WorkFrame employee directory with active department filters, headcount summary, and employee roster cards"
+              class="w-full h-auto object-cover"
+              loading="lazy"
+            />
+            <p class="font-inter-display font-medium text-body-sm text-graphite py-4 px-6 italic text-left">
+              Role-based employee roster with live attendance counts, department filtering, and quick actions.
+            </p>
+          </div>
+        </div>
+
+        <!-- Secondary Grid of Screenshots (2 columns) -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full text-left">
+          <!-- Time Off / Leave Calendar -->
+          <div class="bg-paper-white rounded-cards border border-silver/50 shadow-subtle overflow-hidden flex flex-col">
+            <div class="p-5 border-b border-silver/30">
+              <span class="font-inter font-medium text-caption text-solar-beam uppercase tracking-wider block">Leave Workflows</span>
+              <h3 class="font-inter font-medium text-subheading text-obsidian">Annual Leave &amp; Time Off Calendar</h3>
+            </div>
+            <img
+              src="/images/workframe/workframe-time-off.png"
+              alt="WorkFrame annual leave calendar showing validated, pending, and refused time off requests"
+              class="w-full h-auto object-cover"
+              loading="lazy"
+            />
+            <p class="font-inter-display font-medium text-body-sm text-graphite py-4 px-6 italic mt-auto">
+              12-month interactive leave calendar with paid and sick day balance tracking and color-coded statuses.
+            </p>
+          </div>
+
+          <!-- Activity Log / Audit Trail -->
+          <div class="bg-paper-white rounded-cards border border-silver/50 shadow-subtle overflow-hidden flex flex-col">
+            <div class="p-5 border-b border-silver/30">
+              <span class="font-inter font-medium text-caption text-solar-beam uppercase tracking-wider block">Security &amp; Compliance</span>
+              <h3 class="font-inter font-medium text-subheading text-obsidian">Admin Activity Audit Trail</h3>
+            </div>
+            <img
+              src="/images/workframe/workframe-activity-log.png"
+              alt="WorkFrame admin activity log tracking user sign-ins, leave approvals, salary structure changes, and payslips"
+              class="w-full h-auto object-cover"
+              loading="lazy"
+            />
+            <p class="font-inter-display font-medium text-body-sm text-graphite py-4 px-6 italic mt-auto">
+              Real-time audit log recording every actor event, payslip download, login attempt, and leave change.
+            </p>
+          </div>
+
+          <!-- Employee Clock-In View -->
+          <div class="bg-paper-white rounded-cards border border-silver/50 shadow-subtle overflow-hidden flex flex-col">
+            <div class="p-5 border-b border-silver/30">
+              <span class="font-inter font-medium text-caption text-solar-beam uppercase tracking-wider block">Employee Self-Service</span>
+              <h3 class="font-inter font-medium text-subheading text-obsidian">Daily Clock-In &amp; Attendance Status</h3>
+            </div>
+            <img
+              src="/images/workframe/workframe-attendance-clockin.png"
+              alt="WorkFrame employee clock in view with live check-in confirmation and check-out drawer"
+              class="w-full h-auto object-cover"
+              loading="lazy"
+            />
+            <p class="font-inter-display font-medium text-body-sm text-graphite py-4 px-6 italic mt-auto">
+              Personalized employee dashboard with active session timer, daily status badge, and monthly summary.
+            </p>
+          </div>
+
+          <!-- Admin Attendance Tracking -->
+          <div class="bg-paper-white rounded-cards border border-silver/50 shadow-subtle overflow-hidden flex flex-col">
+            <div class="p-5 border-b border-silver/30">
+              <span class="font-inter font-medium text-caption text-solar-beam uppercase tracking-wider block">Managerial Overview</span>
+              <h3 class="font-inter font-medium text-subheading text-obsidian">Attendance Log &amp; Hours Tracking</h3>
+            </div>
+            <img
+              src="/images/workframe/workframe-attendance-admin.png"
+              alt="WorkFrame centralized attendance monitoring table showing daily work hours and check-out logs"
+              class="w-full h-auto object-cover"
+              loading="lazy"
+            />
+            <p class="font-inter-display font-medium text-body-sm text-graphite py-4 px-6 italic mt-auto">
+              Comprehensive attendance tracking table with date ranges, work hours calculation, and status indicators.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <section id="features" class="py-24 px-8 sm:px-12 md:px-24 border-t border-silver/30 bg-concrete flex flex-col items-center text-center">
       <div class="w-full max-w-[1200px] flex flex-col items-center">

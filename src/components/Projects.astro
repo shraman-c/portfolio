@@ -57,16 +57,16 @@ const hasProjects = siteConfig.projects && siteConfig.projects.length > 0;
                   )}
 
                   <div class="flex flex-col gap-6">
-                    <div class="flex items-center gap-3">
-                      <span class="font-inter font-medium text-caption text-ash">
+                    <div class={`flex items-start gap-3 ${project.link ? "pr-14 sm:pr-16" : ""}`}>
+                      <span class="font-inter font-medium text-caption text-ash mt-0.5 shrink-0">
                         {String(index + 1).padStart(2, "0")}
                       </span>
-                      <h3 class="font-inter font-medium text-subheading text-obsidian">
+                      <h3 class="font-inter font-medium text-subheading text-obsidian leading-snug">
                         {project.name}
                       </h3>
                     </div>
 
-                    <p class={`font-inter-display font-medium text-body text-graphite leading-relaxed ${project.link ? "pr-12" : ""}`}>
+                    <p class={`font-inter-display font-medium text-body text-graphite leading-relaxed ${project.link ? "pr-14 sm:pr-16" : ""}`}>
                       {project.description}
                     </p>
 

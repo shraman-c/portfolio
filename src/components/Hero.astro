@@ -5,7 +5,7 @@ import { siteConfig } from "../config";
 
 <div
   id="hero"
-  class="relative isolate overflow-hidden bg-concrete min-h-screen flex items-center"
+  class="relative isolate overflow-hidden bg-concrete min-h-screen flex items-center mb-16 sm:mb-20"
 >
   <!-- Solar Beam Gradient cutting from upper-right to lower-left -->
   <div
@@ -17,7 +17,7 @@ import { siteConfig } from "../config";
     style="background: linear-gradient(225deg, rgba(255, 213, 0, 0.15) 0%, transparent 50%);"
   ></div>
 
-  <div class="w-full max-w-none mx-auto p-8 sm:p-12 md:p-24 relative z-10 pt-28 pb-24 md:py-32">
+  <div class="w-full max-w-none mx-auto px-10 sm:px-14 md:px-24 pt-40 pb-32 md:py-32 relative z-10">
     <div class="flex flex-col items-start gap-4">
       <!-- Lead Paragraph -->
       <p 
@@ -29,7 +29,7 @@ import { siteConfig } from "../config";
       <!-- Display Name -->
       <h1
         class="text-obsidian font-reddit-sans-condensed font-black leading-none uppercase tracking-tighter animate-fade-in animation-delay-200 select-none cursor-default"
-        style="font-size: clamp(44px, 13vw, 246px); letter-spacing: -0.028em; line-height: 0.95;"
+        style="font-size: clamp(40px, 12vw, 246px); letter-spacing: -0.028em; line-height: 0.95;"
       >
         {siteConfig.name}
       </h1>
@@ -38,7 +38,7 @@ import { siteConfig } from "../config";
 
   <!-- Social Icons at bottom left, styled flat -->
   <div
-    class="hero-action-row absolute bottom-0 left-0 p-8 sm:p-12 md:p-24 flex gap-x-6 text-obsidian/80 animate-fade-in animation-delay-600 z-10"
+    class="hero-action-row absolute bottom-0 left-0 px-10 pb-10 sm:px-14 sm:pb-12 md:px-24 md:pb-24 flex gap-x-6 text-obsidian/80 animate-fade-in animation-delay-600 z-10"
   >
     {
       siteConfig.social?.email && (
