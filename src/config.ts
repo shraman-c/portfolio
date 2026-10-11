@@ -154,6 +154,13 @@ export const siteConfig = {
       link: "/codecanon",
       skills: ["TypeScript", "Gemma 4 Vision", "Node.js AST", "Python Tkinter", "Git Engine"],
     },
+    {
+      name: "PhishAnalyser: Phishing Email Analyser",
+      description:
+        "A privacy-first, client-side educational triage tool for detecting and learning to identify phishing indicators in emails with zero network leakage and explainable scoring.",
+      link: "/phish-analyser",
+      skills: ["Cybersecurity", "JavaScript", "Email Security", "Heuristics", "Privacy"],
+    },
   ],
   // experience removed
   education: [

@@ -16,6 +16,7 @@
 - /30secbenchmark: 30SecPrimeBenchmark project showcase (30 Seconds Prime Numbers Benchmark for Arduino, ESP32, and RISC-V microcontrollers).
 - /master-header: Master Header for C project showcase (Consolidated master.h header unifying standard and platform-specific C libraries).
 - /codecanon: codeCanon project showcase (Autonomous Docs-Drift-Detector mathematically verifying documentation using AST fact extraction and multimodal Gemma 4 Vision).
+- /phish-analyser: PhishAnalyser project showcase (Privacy-first phishing email triage tool with 100% client-side analysis and explainable scoring).
 - /bsg_notes: Bharat Scouts and Guides notes.
 - /resume: Link to view or download the latest resume via Google Drive.
 
