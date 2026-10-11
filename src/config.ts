@@ -15,6 +15,11 @@ export const siteConfig = {
       description: "Classroom notes and resources for learning the basics of DAA programming.",
       link: "https://github.com/shraman-c/DAA-lab"
     },
+    {
+      name: "Object-Oriented Programming Lab Notes - Java",
+      description: "Classroom notes and resources for learning the basics of Java programming.",
+      link: "https://github.com/shraman-c/OOPs-Lab"
+    },
   ],
   name: "Shraman Chaudhuri",
   title: "Student",
