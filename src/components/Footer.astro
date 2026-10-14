@@ -9,20 +9,55 @@ const hasEducation = siteConfig.education && siteConfig.education.length > 0;
   <div class="mx-auto max-w-[1200px]">
     <div class="flex flex-col items-center text-center gap-6">
       <div class="space-y-1">
-        <h3 class="font-reddit-sans-condensed font-black text-heading text-obsidian tracking-tight uppercase">{siteConfig.name}</h3>
-        <p class="font-inter-display font-medium text-body-sm text-graphite">{siteConfig.title}</p>
+        <h3
+          class="font-reddit-sans-condensed font-black text-heading text-obsidian tracking-tight uppercase"
+        >
+          {siteConfig.name}
+        </h3>
+        <p class="font-inter-display font-medium text-body-sm text-graphite">
+          {siteConfig.title}
+        </p>
       </div>
 
       <!-- Navigation Links -->
       <nav class="footer-nav w-full">
-        <div class="footer-items flex flex-wrap justify-center gap-x-8 gap-y-3 font-inter font-medium text-body-sm text-graphite">
+        <div
+          class="footer-items flex flex-wrap justify-center gap-x-8 gap-y-3 font-inter font-medium text-body-sm text-graphite"
+        >
           <a href="/" class="hover:text-obsidian transition-colors">Home</a>
-          <a href="/#about" class="hover:text-obsidian transition-colors">About me</a>
-          { hasProjects && <a href="/#projects" class="hover:text-obsidian transition-colors">Work</a> }
-          { hasEducation && <a href="/#education" class="hover:text-obsidian transition-colors">Education</a> }
-          <a href="/#classroom-notes" class="hover:text-obsidian transition-colors">Learning Process</a>
-          <a href="/coming-soon" class="hover:text-obsidian transition-colors">Resume</a>
-          <a href="/connect" class="hover:text-obsidian transition-colors">Connect</a>
+          <a href="/#about" class="hover:text-obsidian transition-colors"
+            >About me</a
+          >
+          {
+            hasProjects && (
+              <a
+                href="/#projects"
+                class="hover:text-obsidian transition-colors"
+              >
+                Work
+              </a>
+            )
+          }
+          {
+            hasEducation && (
+              <a
+                href="/#education"
+                class="hover:text-obsidian transition-colors"
+              >
+                Education
+              </a>
+            )
+          }
+          <a
+            href="/#classroom-notes"
+            class="hover:text-obsidian transition-colors">Learning Process</a
+          >
+          <a href="/coming-soon" class="hover:text-obsidian transition-colors"
+            >Resume</a
+          >
+          <a href="/connect" class="hover:text-obsidian transition-colors"
+            >Connect</a
+          >
         </div>
 
         <div class="footer-columns hidden sm:hidden" aria-hidden="true">
@@ -35,81 +70,117 @@ const hasEducation = siteConfig.education && siteConfig.education.length > 0;
       <!-- JS: on small screens distribute footer items into three columns so side columns fill first
            and a single leftover is placed in the center column for visual balance. -->
       <script type="module">
-      /* @ts-nocheck */
-      (function(){
-        const BREAKPOINT = 640; // px - match CSS mobile breakpoint
-        const arrange = () => {
-          const nav = document.querySelector('.footer-nav');
-          if (!nav) return;
-          const itemsContainer = nav.querySelector('.footer-items');
-          const cols = {
-            left: nav.querySelector('.footer-col-left'),
-            center: nav.querySelector('.footer-col-center'),
-            right: nav.querySelector('.footer-col-right')
+        /* @ts-nocheck */
+        (function () {
+          const BREAKPOINT = 640; // px - match CSS mobile breakpoint
+          const arrange = () => {
+            const nav = document.querySelector(".footer-nav");
+            if (!nav) return;
+            const itemsContainer = nav.querySelector(".footer-items");
+            const cols = {
+              left: nav.querySelector(".footer-col-left"),
+              center: nav.querySelector(".footer-col-center"),
+              right: nav.querySelector(".footer-col-right"),
+            };
+            const footerColsContainer = nav.querySelector(".footer-columns");
+            if (
+              !itemsContainer ||
+              !cols.left ||
+              !cols.center ||
+              !cols.right ||
+              !footerColsContainer
+            )
+              return;
+
+            const anchors = Array.from(itemsContainer.querySelectorAll("a"));
+            // On large screens show the inline items and hide the columns
+            if (window.innerWidth > BREAKPOINT) {
+              itemsContainer.style.display = "flex";
+              footerColsContainer.style.display = "none";
+              // move any anchors back into the itemsContainer in original order
+              anchors
+                .concat(
+                  Array.from(cols.left.children),
+                  Array.from(cols.center.children),
+                  Array.from(cols.right.children),
+                )
+                .forEach((a) => {
+                  if (a && a.tagName === "A") itemsContainer.appendChild(a);
+                });
+              return;
+            }
+
+            // Mobile: hide the original inline list and use the three columns
+            itemsContainer.style.display = "none";
+            footerColsContainer.style.display = "grid";
+            footerColsContainer.className =
+              "footer-columns grid grid-cols-3 gap-2 font-inter font-medium text-caption sm:text-body-sm text-graphite";
+
+            // Clear columns
+            cols.left.innerHTML = "";
+            cols.center.innerHTML = "";
+            cols.right.innerHTML = "";
+
+            const n = anchors.length;
+            if (n === 0) return;
+
+            if (n % 2 === 1) {
+              // odd count: assign all except last to left/right alternating, last -> center
+              for (let i = 0; i < n - 1; i++) {
+                const a = anchors[i];
+                if (i % 2 === 0) cols.left.appendChild(a);
+                else cols.right.appendChild(a);
+              }
+              cols.center.appendChild(anchors[n - 1]);
+            } else {
+              // even: alternate left/right
+              for (let i = 0; i < n; i++) {
+                const a = anchors[i];
+                if (i % 2 === 0) cols.left.appendChild(a);
+                else cols.right.appendChild(a);
+              }
+            }
           };
-          const footerColsContainer = nav.querySelector('.footer-columns');
-          if (!itemsContainer || !cols.left || !cols.center || !cols.right || !footerColsContainer) return;
 
-          const anchors = Array.from(itemsContainer.querySelectorAll('a'));
-          // On large screens show the inline items and hide the columns
-          if (window.innerWidth > BREAKPOINT) {
-            itemsContainer.style.display = 'flex';
-            footerColsContainer.style.display = 'none';
-            // move any anchors back into the itemsContainer in original order
-            anchors.concat(Array.from(cols.left.children), Array.from(cols.center.children), Array.from(cols.right.children)).forEach(a => {
-              if (a && a.tagName === 'A') itemsContainer.appendChild(a);
+          if (typeof window !== "undefined") {
+            window.addEventListener("DOMContentLoaded", arrange);
+            window.addEventListener("resize", () => {
+              requestAnimationFrame(arrange);
             });
-            return;
+            arrange(); // run immediately
           }
-
-          // Mobile: hide the original inline list and use the three columns
-          itemsContainer.style.display = 'none';
-          footerColsContainer.style.display = 'grid';
-          footerColsContainer.className = 'footer-columns grid grid-cols-3 gap-2 font-inter font-medium text-caption sm:text-body-sm text-graphite';
-
-          // Clear columns
-          cols.left.innerHTML = '';
-          cols.center.innerHTML = '';
-          cols.right.innerHTML = '';
-
-          const n = anchors.length;
-          if (n === 0) return;
-
-          if (n % 2 === 1) {
-            // odd count: assign all except last to left/right alternating, last -> center
-            for (let i = 0; i < n - 1; i++) {
-              const a = anchors[i];
-              if (i % 2 === 0) cols.left.appendChild(a);
-              else cols.right.appendChild(a);
-            }
-            cols.center.appendChild(anchors[n - 1]);
-          } else {
-            // even: alternate left/right
-            for (let i = 0; i < n; i++) {
-              const a = anchors[i];
-              if (i % 2 === 0) cols.left.appendChild(a);
-              else cols.right.appendChild(a);
-            }
-          }
-        };
-
-        if (typeof window !== 'undefined') {
-          window.addEventListener('DOMContentLoaded', arrange);
-          window.addEventListener('resize', () => { requestAnimationFrame(arrange); });
-          arrange(); // run immediately
-        }
-      })();
+        })();
       </script>
 
       <div class="w-full h-[1px] bg-silver/50 my-2"></div>
 
-      <div class="flex flex-col sm:flex-row sm:justify-between w-full font-system-sans text-caption text-ash gap-2">
-        <p>© {new Date().getFullYear()} {siteConfig.name}. All rights reserved.</p>
+      <div
+        class="flex flex-col sm:flex-row sm:justify-between w-full font-system-sans text-caption text-ash gap-2"
+      >
+        <p>
+          © {new Date().getFullYear()}
+          {siteConfig.name}. All rights reserved.
+        </p>
         <p class="footer-made-with">
-          Powered by 
-          <a class="hover:text-obsidian underline transition-colors" href="https://astro.build" target="_blank" rel="noopener noreferrer">Astro</a> · 
-          <a class="hover:text-obsidian underline transition-colors" href="https://tailwindcss.com" target="_blank" rel="noopener noreferrer">Tailwind CSS</a> · 
-          <a class="hover:text-obsidian underline transition-colors" href="https://react.dev" target="_blank" rel="noopener noreferrer">React</a>
+          Powered by
+          <a
+            class="hover:text-obsidian underline transition-colors"
+            href="https://astro.build"
+            target="_blank"
+            rel="noopener noreferrer">Astro</a
+          > ·
+          <a
+            class="hover:text-obsidian underline transition-colors"
+            href="https://tailwindcss.com"
+            target="_blank"
+            rel="noopener noreferrer">Tailwind CSS</a
+          > ·
+          <a
+            class="hover:text-obsidian underline transition-colors"
+            href="https://react.dev"
+            target="_blank"
+            rel="noopener noreferrer">React</a
+          >
         </p>
       </div>
     </div>

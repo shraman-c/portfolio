@@ -26,6 +26,7 @@ export const siteConfig = {
   description: "Portfolio website of Shraman Chaudhuri",
   accentColor: "#1d4ed8",
   resumeLink: "https://drive.google.com/file/d/1JLOCaVGXC22OKfyjSRbcvNLJZiapisRa/preview",
+  cvLink: "#", // Add your CV link here (e.g. Google Drive, direct PDF download link)
   // Typewriter phrases shown before the real name in the hero.
   // Edit these strings to change what appears in the typewriter effect.
   typewriterPhrases: [
