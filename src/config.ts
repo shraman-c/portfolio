@@ -35,9 +35,17 @@ export const siteConfig = {
   ],
   achievements: [
     {
+      title: "Finalist: MLH x Cycoders - Hackday",
+      date: "October - 2026",
+      description:"Secured the Finalist position in the MLH x Cycoders - Hackday, showcasing innovative problem-solving skills and teamwork.",
+      link:"https://lnkd.in/p/dmMPWtY7"
+    },
+    {
       title: "Finalist - Oddo x Adamas University Hackathon 2026",
       date: "2026",
       description: "Secured the Finalist position in the Oddo x Adamas University Hackathon 2026, showcasing innovative problem-solving skills and teamwork.",
+      link:""
+      
     },
     {
       title: "Adamas University - Smart India Hackathon 2025 (Internal) - Runner Up (Software Edition)",
